@@ -28,7 +28,7 @@ The window is counted in ledger sequence numbers, which advance by exactly one p
 
 `SYWrapper.deposit` and `PrincipalManager.mint` report to `RiskControl` themselves, so direct calls are limited like `Router` calls, and a one-step deposit-and-split counts at both. Only registered contracts may report, so no outsider can use up the allowance. `SYWrapper` also caps what one address can have deposited, net of withdrawals; a cap of `0` means no cap.
 
-On the Testnet market these limits are currently off: both circuit-breaker limits and the per-address cap are set to `0`. The market page's Safety card shows the live values. The pause still applies.
+On the Testnet market these limits are currently off: both circuit-breaker limits and the per-address cap are set to `0`. The **Safety** tab on the market page shows the live values. The pause still applies.
 
 ## Oracle freshness guard
 
@@ -36,7 +36,7 @@ On the Testnet market these limits are currently off: both circuit-breaker limit
 
 A value is fresh when it is at most 3,600 seconds (one hour) old by the ledger clock. Mint, recombine, claim yield, every swap, single-sided liquidity, the first liquidity deposit, and the observation that freezes the YT yield index at maturity all require a fresh value, or revert with `OracleStale`. A stale feed pauses these operations but leaves exits open: unwrapping SY and removing liquidity never read the oracle, and once one fresh value has been taken at or after maturity (by `settle_all` or the first redemption), redemption and yield claims no longer need it. Until that first fresh value, PT and YT cannot be redeemed.
 
-On Testnet, the app's keeper pushes the value with the oracle's admin key. More in [The oracle](/how-it-works/oracle).
+On Testnet, the app's keeper pushes the value with the oracle's admin key. More in [Oracle](/how-it-works/oracle).
 
 ## Compliance recovery
 
@@ -66,6 +66,6 @@ At or after maturity, the issuer settles what is still held with `finalize_recor
 - **Flash-redeem cannot leave the pool short.** Selling YT reverts with `InsufficientLiquidity` if the recombined SY does not cover the PT the pool gives up.
 - **Spot price is not an oracle.** A trade can move `pt_price` and `implied_rate` within a ledger.
 
-`MarketConfig` caps the fees: 1 % tokenization, 50 % YT fee, 5 % swap Fee Tier, with the effective swap fee capped at 10 %. See [Fees](/how-it-works/fees).
+`MarketConfig` caps the fees: 1% tokenization, 50% YT fee, 5% swap Fee Tier, with the effective swap fee capped at 10%. See [Fees](/how-it-works/fees).
 
 **Next:** [Developers](/technical/developers). Related: [Risks](/guide/risks), [Compliance](/how-it-works/compliance).

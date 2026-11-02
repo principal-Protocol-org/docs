@@ -21,7 +21,7 @@ Principal runs on Stellar Testnet, with one market on one test asset. This page 
 
 Its dollar value comes from a test oracle, which Principal's own keeper raises at a set yearly rate on a regular schedule. That value follows no real Treasury yield and no price of Ondo's USDY, so the returns you see on Testnet say nothing about real ones.
 
-The test asset behaves like a regulated one. Its issuer requires authorization for every account that holds it, can revoke that authorization, and can claw balances back. Principal's compliance rules therefore apply on Testnet as they would on a real asset: an account needs the issuer's authorization before it can hold USDY (test), SY, PT or YT, and a place on the market's allow-list before it can hold SY, PT or YT. On Testnet, those issuer powers sit with Principal's test accounts, and the test asset's issuer account runs the allow-list.
+The test asset behaves like a regulated one. Its issuer requires authorization for every account that holds it, can revoke that authorization, and can claw balances back. Principal's compliance rules therefore apply on Testnet as they would on a real asset: an account needs the issuer's authorization before it can hold USDY (test), SY, PT or YT, and a place on Principal's shared allow-list before it can hold SY, PT or YT. On Testnet, those issuer powers sit with Principal's test accounts, and the test asset's issuer account runs the allow-list.
 
 You do not have to arrange any of this yourself: **Get test tokens** in the app sets up your account, has it authorized, adds it to the allow-list and sends you test USDY. [Getting started](/using-the-app/) walks you through it.
 
@@ -47,6 +47,4 @@ The Principal website lists two real assets as coming soon:
 
 Ondo's USDY, a tokenized note backed by US Treasuries, is the asset Principal targets first. It is not live on Testnet: the Testnet market uses the test asset above. BENJI is listed, with no market yet.
 
-## Next
-
-Read [Risks](/guide/risks) before you start. Then follow [Getting started](/using-the-app/) to connect a wallet and get test tokens, or see the market in [Markets](/using-the-app/markets).
+**Next:** [Risks](/guide/risks), what to know before you start. Then follow [Getting started](/using-the-app/) to connect a wallet and get test tokens, or see the market in [Markets](/using-the-app/markets).

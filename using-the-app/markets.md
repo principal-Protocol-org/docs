@@ -52,7 +52,7 @@ Under the chart, a card has three tabs.
 
 **Compliance** has two parts. **Underlying asset** shows the issuer's settings for USDY: authorization required, authorization revocable, clawback enabled, and its administrator. **Your account**, once your wallet is connected, checks whether you can use this market: your account exists, you have a trustline to USDY, the issuer has authorized it, and Principal's permissioning allows your account, and allows it to hold this market's PT and YT. Each check reads **OK**, **Action needed**, **Blocked** or **Unavailable**, with the fix. Where the fix is the faucet, a **Get test tokens** button opens the dialog described in [Getting started](/using-the-app/). See [Compliance](/how-it-works/compliance).
 
-**Safety** shows whether the SY wrapper, the market pool and risk control are paused, whether the oracle is fresh ("updated within the last hour"), the room left in the protocol-wide and USDY circuit breakers (or "No limit (disabled)" when one is off), and the room left under your own deposit cap (or "No cap (disabled)"). On the Testnet market these limits are currently off, so those rows read disabled; the card always shows the live values. See [Security](/technical/security).
+**Safety** shows whether the SY wrapper, the market pool and risk control are paused, whether the oracle is fresh ("updated within the last hour"), the room left in the protocol-wide and USDY circuit breakers (or "No limit (disabled)" when one is off), and the room left under your own deposit cap (or "No cap (disabled)"). On the Testnet market these limits are currently off, so those rows read disabled; the card always shows the live values. See [Safety controls](/technical/security).
 
 The Compliance and Safety tabs carry a small number: how many problems they report for you. Zero means nothing needs your attention. Compliance shows its number once your wallet is connected.
 
@@ -60,4 +60,4 @@ The Compliance and Safety tabs carry a small number: how many problems they repo
 
 On a wide screen the **Trade** panel stays on the right while you scroll; on a phone it comes after the chart. It holds the PT, YT and LP tabs and the Quick actions menu.
 
-Next: [Trade PT and YT](/using-the-app/trade).
+**Next:** [Trade PT and YT](/using-the-app/trade).

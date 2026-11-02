@@ -33,7 +33,7 @@ The `Permissioning` admin, on Testnet the test asset's issuer account, keeps the
 
 The other three are what users hold and trade: `PTToken` and `YTToken` (SEP-41-style tokens, YT with its `1/rate` yield index) and `MarketPool`, the PT/SY yield-curve AMM with its LP positions. A second maturity on the same asset is a second set of seven, with its own SY.
 
-Addresses change with each deployment, so these pages do not list them. The Testnet addresses of the shared contracts and the first market are listed in the app's network manifest, `config/manifests/testnet.json` in the public `principal-Protocol-org/dapp` repository; the app adds markets created later from on-chain events.
+Addresses change with each deployment, so these pages do not list them. The Testnet addresses of the shared contracts and the first market are listed in the app's network manifest, `config/manifests/testnet.json` on the `testnet` branch of the public `principal-Protocol-org/dapp` repository; the app adds markets created later from on-chain events.
 
 ## One market's wiring
 
@@ -69,6 +69,6 @@ The factory has no admin and no storage. The underlying's issuer authority signs
 
 A few steps stay outside the factory. The shared contracts' admin registers `SYWrapper` and `PrincipalManager` with `RiskControl` (until then, deposits and mints revert) and lists the pool in the `Router`. And the new contracts, the treasury and the creator's payee must be authorized on the underlying, the issuer's decision, and allowed in `Permissioning`.
 
-The Testnet market was not created through the factory: a deployment script in the app's repository, `scripts/dev-stack/deploy.sh`, deployed and wired its seven contracts one by one, and deployed `MarketFactory` after them.
+The Testnet market was deployed contract by contract, not through the factory: its seven contracts were deployed and wired one by one, and `MarketFactory` was deployed after them.
 
 **Next:** [Safety controls](/technical/security). Related: [Pricing and the AMM](/how-it-works/pricing-and-amm), [Compliance](/how-it-works/compliance).

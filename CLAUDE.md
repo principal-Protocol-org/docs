@@ -22,7 +22,7 @@ No tests or linter. `pnpm build` is the check. After a build: `.vitepress/dist` 
 ## Structure
 
 ```
-.vitepress/config.ts    site config: base /docs/, nav from SECTIONS, SEO tags, Launch app button
+.vitepress/config.ts    site config: base /docs/, nav from SECTIONS, SEO tags, Launch app button, title as H1
 .vitepress/sidebar.ts   SECTIONS and sidebar(), read from the files with gray-matter
 .vitepress/site.ts      origin per environment (siteOrigin, docsUrl, appUrl)
 .vitepress/theme/       the landing's theme: fonts, colours, light by default
@@ -35,7 +35,7 @@ vercel.json             outputDirectory, cleanUrls, /docs/:path* rewrite
 
 ## Rules
 
-**Sidebar and frontmatter.** Every page in a section has `title`, `description` (required; meta description and `og:description`) and a numeric `order`; `sidebarTitle` is optional. The sidebar reads the files at build time, so a new page needs no change in `config.ts`. A section directory must exist (the sidebar throws on a missing one). Adding a section means: a directory, an entry in `SECTIONS` (`sidebar.ts`) and a collection in `.pages.yml`. Check frontmatter with `node .superpowers/sdd/0003-public-docs-site/check-frontmatter.mjs` when present (git-ignored).
+**Sidebar and frontmatter.** Every page in a section has `title`, `description` (required; meta description and `og:description`) and a numeric `order`; `sidebarTitle` is optional. The sidebar reads the files at build time, so a new page needs no change in `config.ts`. A section directory must exist (the sidebar throws on a missing one). Adding a section means: a directory, an entry in `SECTIONS` (`sidebar.ts`) and a collection in `.pages.yml`. Every frontmatter key must be one that `.pages.yml` declares for that file: Pages CMS rewrites the frontmatter from its schema on save and drops any other key. The `title` is the page's heading: `config.ts` renders it as the H1 of every section page, so a body never starts with a level-1 heading (`#`).
 
 **Pages CMS constraints.** The rich-text editor keeps headings, paragraphs, lists, links, images, inline code, code blocks and tables. Pages must not use `:::` containers, Vue components, `{{ }}`, raw HTML or Mermaid. Home keys are only those `.pages.yml` declares: `layout`, `hero` (name, text, tagline, actions), `features` (title, details, link), `body`. Filenames come from the title at creation; never rename a file without fixing the links to it first. No "Edit this page" link (private repository).
 

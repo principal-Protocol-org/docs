@@ -49,9 +49,9 @@ You do not have to redeem YT to collect its yield: a yield claim after maturity 
 
 ## Example
 
-From Principal's README, rounded: you split USDY worth 100 USDC into a 3-month market, and USDY yields 4% a year. At maturity, PT pays USDY worth 100 USDC. YT has earned about 1 USDC of yield over the period, less the YT fee.
+In round numbers: you split USDY worth 100 USDC into a 3-month market, and USDY yields 4% a year. At maturity, PT pays USDY worth 100 USDC. YT has earned about 1 USDC of yield over the period, less the YT fee.
 
-The exact version, from Principal's yield guide (no fees): 100 SY split at a rate of 1.05 gives 105 PT + 105 YT. The settlement rate is 1.10.
+The exact version (no fees): 100 SY split at a rate of 1.05 gives 105 PT + 105 YT. The settlement rate is 1.10.
 
 | Leg | Formula | Underlying tokens |
 |---|---|---|

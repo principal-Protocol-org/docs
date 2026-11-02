@@ -16,7 +16,7 @@ Principal's contract source is public, under the Apache 2.0 licence stated in it
 | [Contributing](https://github.com/principal-Protocol-org/principal/blob/main/docs/CONTRIBUTING.md) | Prerequisites, build and test commands, code style and the pull-request checklist. |
 | [Full technical documentation](https://github.com/principal-Protocol-org/principal/tree/main/docs) | Everything else: the protocol specification, architecture and call sequences, yield math and fees, AMM design, compliance (SAC, SEP-8, SEP-57), security, market creation and deployment. |
 
-A few conventions help when you read them. Amounts are raw `i128` integers at `SCALE = 10_000_000` (seven decimals), and rates are USDC per unit of the underlying at the same scale. Errors surface as `Error(Contract, #n)`; when one contract calls another and the callee reverts, the code you see is the callee's.
+A few conventions help when you read them. Amounts are raw `i128` integers in the token's smallest unit (seven decimals for the Testnet tokens), and rates are USDC per unit of the underlying at `SCALE = 10_000_000`. Errors surface as `Error(Contract, #n)`; when one contract calls another and the callee reverts, the code you see is the callee's.
 
 ## Build and test
 
@@ -41,6 +41,6 @@ Start with the [Architecture](/technical/) page for the twelve contracts and how
 
 - Most user flows go through the `Router`, which takes the market's `MarketPool` address and finds the other contracts from it; a plain deposit calls `SYWrapper.deposit` directly. Each `Router` flow that trades or moves liquidity takes a `deadline` and a minimum output.
 - Every call is made as the user, and every contract checks the user's compliance on the underlying, on both sides of a transfer. Simulate a call before you ask the user to sign it: a deauthorized account fails in simulation.
-- Contract addresses change with each deployment. The Principal app lists the Testnet addresses of the shared contracts and the first market in its network manifest, `config/manifests/testnet.json` in the public `principal-Protocol-org/dapp` repository.
+- Contract addresses change with each deployment. The Principal app lists the Testnet addresses of the shared contracts and the first market in its network manifest, `config/manifests/testnet.json` on the `testnet` branch of the public `principal-Protocol-org/dapp` repository.
 
 **Next:** back to [Architecture](/technical/). Related: [Safety controls](/technical/security), [How it works](/how-it-works/).

@@ -39,11 +39,13 @@ Open the section, open the page, edit, save. Fields: `title`, `sidebarTitle` (op
 2. Fill in `title` and `description`, set `order` (the position in the sidebar; `1` is first), then write the body.
 3. Save. The page appears in the sidebar by itself; nothing else is edited.
 
-The filename is made from the title when the page is created, and it becomes the URL (`Fix a yield` gives `fix-a-yield.md`, so `/docs/<section>/fix-a-yield`). Choose the title with care at creation. Editing the title later is meant not to rename the file (to confirm on the first use, see [Still to verify](#still-to-verify)). Pages without `order` come after the ordered ones, sorted by title.
+When you add a page, Pages CMS shows a filename field, pre-filled from the title (`Fix a yield` gives `fix-a-yield.md`). Keep it as lowercase words joined by hyphens, ending in `.md`. The filename becomes the page's permanent URL (`/docs/<section>/fix-a-yield`), and the editor does not show it again after creation, so check it before the first save. Editing the title later is meant not to rename the file (to confirm on the first use, see [Still to verify](#still-to-verify)). Pages without `order` come after the ordered ones, sorted by title.
 
 ### Rename or delete a page
 
-Fix the links first: open every page that links to it and change or remove the link, then save those pages, then rename or delete. A link to a page that no longer exists makes the build fail. A failed build is not published, the previous version stays online, and the writer's change waits until the link is fixed. The site never goes down, but nothing new goes live until the link is repaired. Vercel reports the failure to the developer.
+Fix the links first: open every page that links to it and change or remove the link, then save those pages, then rename or delete. A link in a page's body to a page that no longer exists makes the build fail. A failed build is not published, the previous version stays online, and the writer's change waits until the link is fixed. The site never goes down, but nothing new goes live until the link is repaired. Vercel reports the failure to the developer.
+
+Never rename or delete a section's first page (What is Principal, Getting started, Tokenization, Architecture): the navigation bar and the home page link to it. The home page's buttons and cards are not checked by the build: fix their links by hand.
 
 ### Images
 
@@ -53,6 +55,8 @@ Upload through the media library. Files go to `public/images/` and are inserted 
 
 Use: headings, paragraphs, bold and italic, lists, links, images, inline code, code blocks and tables.
 
+The Title field is the page's heading: the site shows it at the top of the page. Do not start the body with a level-1 heading (`#`); start sections at level 2 (`##`).
+
 Avoid, because the rich-text editor does not keep it or the site does not support it:
 
 - `::: tip` and other `:::` containers (VitePress-only);
@@ -61,7 +65,7 @@ Avoid, because the rich-text editor does not keep it or the site does not suppor
 - raw HTML;
 - Mermaid diagrams (draw an SVG and upload it instead).
 
-Link to other pages with absolute paths without the base, for example `/guide/core-concepts` or `/using-the-app/trade`. Link to the app with the full URL `https://principalmarket.fi/app`. The "Launch app" button on the home page and in the nav is added by the site; do not add it in the hero buttons.
+Link to other pages with absolute paths without the base, for example `/guide/core-concepts` or `/using-the-app/trade`. Do not link to the app from a page: its address differs between the production and Testnet sites. Point readers to the **Launch app** button at the top of the site. The "Launch app" button on the home page and in the nav is added by the site; do not add it in the hero buttons.
 
 ### Wording
 
@@ -84,7 +88,7 @@ pnpm preview    # serves the built site
 
 ## How it is built
 
-- `.vitepress/config.ts`: `base: '/docs/'`, `cleanUrls`, `lastUpdated`, local search, sitemap, canonical and Open Graph tags, the nav, the footer and the "Launch app" button.
+- `.vitepress/config.ts`: `base: '/docs/'`, `cleanUrls`, `lastUpdated`, local search, sitemap, canonical and Open Graph tags, the nav, the footer, the "Launch app" button, and a markdown rule that renders each section page's `title` as its H1 (skipped when the body has one).
 - `.vitepress/sidebar.ts`: reads each section directory at build time with `gray-matter`. Label: `sidebarTitle`, else `title`. Order: numeric `order` ascending; pages without one come after, by label.
 - `.vitepress/site.ts`: the origin per environment.
 - `.vitepress/theme/`: the landing's theme (fonts, colours, logo), light by default.
@@ -104,12 +108,7 @@ That origin gives "Launch app" (`<origin>/app`), the canonical links, the sitema
 
 ### Serving under /docs
 
-The docs are a Vercel project of their own on `principal-Protocol-org/docs`. To appear at `principalmarket.fi/docs`, the app's Vercel project adds a rewrite `/docs/:path*` to the docs deployment, and the landing's `links.docs` (`org/dapp/lib/content.ts`) points to `/docs`. That change belongs to the dApp and comes later. It must keep the origins paired:
-
-- `principalmarket.fi/docs` proxies to the docs production deployment;
-- `testnet.principalmarket.fi/docs` proxies to a docs preview deployment (a stable branch alias),
-
-so each one's "Launch app" stays on its own domain.
+The docs are a Vercel project of their own on `principal-Protocol-org/docs`. To appear at `principalmarket.fi/docs`, the app's Vercel project adds a rewrite `/docs/:path*` to the docs deployment, and the landing's `links.docs` (`org/dapp/lib/content.ts`) points to `/docs`. That change belongs to the dApp and comes later. `principalmarket.fi/docs` proxies to the docs production deployment. What `testnet.principalmarket.fi/docs` proxies to is not decided yet: see [Open decision: the Testnet docs](#open-decision-the-testnet-docs).
 
 ## Where the facts come from
 
@@ -125,3 +124,16 @@ Before go-live, the developer checks:
 - [ ] The Vercel project builds and serves `/docs/...` on its own domain.
 - [ ] Once `feat/tranche-1-mvp` is merged into `main` in `org/principal`: every GitHub link in the site answers 200 (VitePress checks internal links only).
 - [ ] Each figure in the pages is checked against the code (done for the first draft at `be2a1a5`; repeat after protocol changes).
+- [ ] Home page round trip: in Pages CMS, save the home page once without changes, then diff (`layout`, hero buttons, feature cards).
+- [ ] "Last updated" on the first Vercel build after a few saves: if pages show a wrong date (a shallow clone gives older pages the clone's oldest commit date), set `lastUpdated: false` or make the build fetch the full history.
+- [ ] The Testnet docs: choose how `testnet.principalmarket.fi/docs` is built (below).
+
+### Open decision: the Testnet docs
+
+Every writer save is a commit on `main`, and `main` deploys to production with `VERCEL_ENV=production`, so that build's links and tags use `https://principalmarket.fi`. `testnet.principalmarket.fi/docs` needs a deployment built with the Testnet origin that also gets those saves. Nothing provides it yet. Options:
+
+- (a) An origin override in `.vitepress/site.ts`: an environment variable read before `VERCEL_ENV`, set per Vercel environment or branch.
+- (b) A branch kept in sync with `main` (for example a fast-forward on every push), built as a preview with the Testnet origin.
+- (c) Proxy `testnet.principalmarket.fi/docs` to the production docs, and accept that its **Launch app** goes to `principalmarket.fi/app`.
+
+A Vercel branch preview URL sits behind Vercel Authentication unless a custom domain is attached to the branch, so a proxy to a preview deployment needs that domain first.

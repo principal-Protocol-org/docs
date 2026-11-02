@@ -4,7 +4,7 @@ description: "What can go wrong when you use Principal: the contracts, the oracl
 order: 5
 ---
 
-Read this page before you use Principal. The controls that limit these risks are described in [Security](/technical/security).
+Read this page before you use Principal. The controls that limit these risks are described in [Safety controls](/technical/security).
 
 ## Testnet only
 
@@ -50,7 +50,7 @@ The issuer can then recover a frozen account's positions. SY is turned back into
 
 Each market also checks a shared allow-list, and every account must be on it. Only the list's admin can change it; on Testnet, that is the test asset's issuer account. If your account is removed from the list, the same actions are refused.
 
-The issuer also creates each market on its asset and sets its fees, up to fixed caps: 1 % for the tokenization fee, 50 % for the YT fee, 5 % for the swap fee tier. A fee change takes effect at once, with no delay.
+The issuer also creates each market on its asset and sets its fees, up to fixed caps: 1% for the tokenization fee, 50% for the YT fee, 5% for the swap fee tier. A fee change takes effect at once, with no delay.
 
 On Testnet, the issuer of USDY (test) and the market's administrator are Principal's own test accounts.
 
@@ -64,6 +64,4 @@ A circuit breaker can limit total deposits over a window that resets on its own,
 
 PT and YT are claims on the underlying asset. If the asset loses value or its issuer fails, they lose value with it.
 
-## Next
-
-See the controls in [Security](/technical/security), and how the oracle and compliance work in [Oracle](/how-it-works/oracle) and [Compliance](/how-it-works/compliance). To try Principal on Testnet, start with [Getting started](/using-the-app/).
+**Next:** [Getting started](/using-the-app/), to try Principal on Testnet. See the controls in [Safety controls](/technical/security), and how the oracle and compliance work in [Oracle](/how-it-works/oracle) and [Compliance](/how-it-works/compliance).

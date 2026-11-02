@@ -52,7 +52,7 @@ Click **Review Withdraw liquidity**.
 
 Adding liquidity closes at maturity. The Deposit side then reads "Adding liquidity closed at maturity: the pool takes no new PT or SY. You can still withdraw your liquidity: choose Withdraw." After maturity the LP tab opens on Withdraw.
 
-Withdrawing stays open. Your PT is then redeemed instead of sold: the details show **Your PT: Redeemed, not sold** and no fee, since redeeming takes no fee and nothing moves the pool's price. The redeemed part is paid in USDY even when you choose to receive SY. It is still three signatures to USDY, two to SY. Until the market is settled, the redeem step needs a fresh oracle price, as **Redeem at maturity** does (see [Portfolio and history](/using-the-app/portfolio)). See [Maturity](/how-it-works/maturity).
+Withdrawing stays open. Your PT is then redeemed instead of sold: the details show **Your PT: Redeemed, not sold** and no fee, since redeeming takes no fee and nothing moves the pool's price. The redeemed part is paid in USDY even when you choose to receive SY. It is still three signatures to USDY, two to SY. Until the market is settled, the redeem step can need a fresh oracle price, as **Redeem at maturity** does (see [Portfolio and history](/using-the-app/portfolio)). See [Maturity](/how-it-works/maturity).
 
 ## Review and sign
 
@@ -60,4 +60,4 @@ Deposits and withdrawals are reviewed and signed one step at a time, like trades
 
 Your LP position, its share of the pool's PT and SY and its estimated value appear in the [Portfolio](/using-the-app/portfolio).
 
-Next: [Quick actions](/using-the-app/quick-actions).
+**Next:** [Quick actions](/using-the-app/quick-actions).

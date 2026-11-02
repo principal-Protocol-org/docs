@@ -37,7 +37,7 @@ PT minted  = YT minted = notional
 
 Here `n` is the SY you split and `fee_bps` is the market's tokenization fee (see [Fees](/how-it-works/fees)).
 
-**Example** (from Principal's yield guide). You split 100 SY when the rate is 1.05. With no fee you receive 105 PT and 105 YT. With a 5 bps tokenization fee, 0.05 SY is withheld and you receive 104.9475 PT and 104.9475 YT.
+**Example.** You split 100 SY when the rate is 1.05. With no fee you receive 105 PT and 105 YT. With a 5 bps tokenization fee, 0.05 SY is withheld and you receive 104.9475 PT and 104.9475 YT.
 
 Splitting needs the market to be open (not matured, not paused), a fresh oracle value (updated within the last hour), and an account that passes the [compliance checks](/how-it-works/compliance): authorized on the underlying and on the allow-list. The SY you split stays in the PrincipalManager contract as the backing for your PT and YT.
 
@@ -58,7 +58,7 @@ Before maturity you can burn equal amounts of PT and YT to get SY back (`Princip
 shares_returned = amount × SCALE / r
 ```
 
-**Example** (from the contracts' tests, no fees). You split 100 SY at a rate of 1.0 and receive 100 PT + 100 YT. Later the rate is 1.25. Recombining the 100 PT + 100 YT returns 80 SY. The other 20 SY back the yield your YT has already earned: it stays yours, and you collect it with a yield claim.
+**Example** (no fees). You split 100 SY at a rate of 1.0 and receive 100 PT + 100 YT. Later the rate is 1.25. Recombining the 100 PT + 100 YT returns 80 SY. The other 20 SY back the yield your YT has already earned: it stays yours, and you collect it with a yield claim.
 
 Recombining charges no fee. It needs a fresh oracle and is closed once the market matures; after that you redeem instead.
 

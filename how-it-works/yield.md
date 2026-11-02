@@ -38,7 +38,7 @@ total              N / r₀  =  the SY you split
 
 So PT and YT together never claim more than the SY backing them, whatever the rate was at minting and however many times it moved.
 
-**Example** (from Principal's yield guide, no fees). You split 100 SY at a rate of 1.05 and receive 105 PT + 105 YT. At maturity the rate is 1.10. PT pays `105 / 1.10 = 95.4545` tokens and YT pays `105 × (1/1.05 − 1/1.10) = 4.5455` tokens: 100 in total, less one raw unit of rounding.
+**Example** (no fees). You split 100 SY at a rate of 1.05 and receive 105 PT + 105 YT. At maturity the rate is 1.10. PT pays `105 / 1.10 = 95.4545` tokens and YT pays `105 × (1/1.05 − 1/1.10) = 4.5455` tokens: 100 in total, less one raw unit of rounding.
 
 ## When the index moves
 
@@ -70,7 +70,7 @@ paid  = gross − fee
 
 The fee is kept as SY and split between Principal and the market creator (see [Fees](/how-it-works/fees)). The Testnet market's YT fee is 10%.
 
-**Example** (from Principal's yield guide, 10% YT fee). You hold 104.9475 YT minted at 1.05. The rate reaches 1.10 and you claim:
+**Example** (10% YT fee). You hold 104.9475 YT minted at 1.05. The rate reaches 1.10 and you claim:
 
 ```
 gross  = 104.9475 × (1/1.05 − 1/1.10)  ≈ 4.5432

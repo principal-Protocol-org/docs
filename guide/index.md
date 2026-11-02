@@ -48,6 +48,4 @@ The asset's issuer creates each market on its asset and sets the market's fees. 
 
 [Strategies](/guide/strategies) walks through each of these with an example.
 
-## Next
-
-Read [Core concepts](/guide/core-concepts), then [Strategies](/guide/strategies). To try Principal on Testnet, go to [Getting started](/using-the-app/).
+**Next:** [Core concepts](/guide/core-concepts), then [Strategies](/guide/strategies). To try Principal on Testnet, go to [Getting started](/using-the-app/).

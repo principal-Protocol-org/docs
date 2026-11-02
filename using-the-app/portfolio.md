@@ -33,7 +33,7 @@ Once the maturity date has passed, the **Redeem at maturity** shortcut opens the
 2. Read the preview: **From PT** and **From YT (net of the YT fee)**, and under **Settlement**, the **Settlement rate**.
 3. Click **Review Redeem at maturity**, then sign. It is one transaction.
 
-If the market has not settled yet, the first redemption settles it for everyone, at the oracle rate of that moment, and the form says so. Until the market is settled, redeeming therefore needs a fresh oracle price, as Claim yield does: if the oracle has not been updated in the last hour, signing stays off until the next update. While the rate can still move, it also warns that the PT amount depends on the oracle rate when your transaction lands, and can only be lower than shown. A redemption sets no minimum. See [Maturity](/how-it-works/maturity).
+If the market has not settled yet, the first redemption settles it for everyone, at the oracle rate of that moment, and the form says so. Until the market is settled, redeeming can need a fresh oracle price, as Claim yield does: if the oracle has not been updated in the last hour and the yield index is not yet frozen, signing stays off until the next update. While the rate can still move, it also warns that the PT amount depends on the oracle rate when your transaction lands, and can only be lower than shown. A redemption sets no minimum. See [Maturity](/how-it-works/maturity).
 
 ## History
 
@@ -43,4 +43,4 @@ The table has five columns: **Time** (UTC), **Action**, **Details**, **Status** 
 
 A multi-step route is one row, such as "Buy PT · 2 steps", with a **Steps** list you can open to see each step's status and hash. Its status reads **Completed**, **Returned to USDY**, **Waiting for the network**, **Interrupted** or **Stopped**. When an **Interrupted** or **Waiting for the network** route still holds your funds, the row says what you hold and offers **Continue**, which reopens the route on its market page where you left it. The app keeps routes in your browser, so Continue appears in the browser you used.
 
-Next: [How it works](/how-it-works/), for the mechanics behind these screens, or [Risks](/guide/risks) before you trade.
+**Next:** [How it works](/how-it-works/), for the mechanics behind these screens, or [Risks](/guide/risks) before you trade.

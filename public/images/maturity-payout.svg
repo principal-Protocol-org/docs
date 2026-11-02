@@ -36,7 +36,7 @@
   <text x="620" y="300" font-size="18" fill="#0a1626">no new yield once settled</text>
 
   <rect x="585" y="346" width="335" height="126" rx="10" fill="rgba(184,134,43,0.14)" stroke="#b8862b"/>
-  <text x="600" y="372" font-size="17" font-weight="700" fill="#85601a">Example (from the README)</text>
+  <text x="600" y="372" font-size="17" font-weight="700" fill="#85601a">Example, rounded</text>
   <text x="600" y="396" font-size="17" fill="#0a1626">100 USDC of USDY, 3 months,</text>
   <text x="600" y="418" font-size="17" fill="#0a1626">yielding 4% annualized:</text>
   <text x="600" y="440" font-size="17" fill="#0a1626">PT redeems 100 USDC of value;</text>

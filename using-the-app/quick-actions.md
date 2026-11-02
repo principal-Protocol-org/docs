@@ -17,7 +17,7 @@ SY, PT and YT are explained in [Core concepts](/guide/core-concepts), and wrappi
 
 ## Deposit
 
-The form is titled **Deposit**: "Wrap USDY into SY, the token the pool trades and PT + YT are minted from." Enter the **USDY to deposit**. The preview shows the **SY received**. A **Market (indicative)** block adds the **SY exchange rate** (USDY per SY), **Your deposit cap left**, and the room left in each circuit breaker that is on. On the Testnet market these limits are currently off, so the cap reads "No cap" and no circuit-breaker row shows; the market page's Safety card shows the live values. Click **Review Deposit**.
+The form is titled **Deposit**: "Wrap USDY into SY, the token the pool trades and PT + YT are minted from." Enter the **USDY to deposit**. The preview shows the **SY received**. A **Market (indicative)** block adds the **SY exchange rate** (USDY per SY), **Your deposit cap left**, and the room left in each circuit breaker that is on. On the Testnet market these limits are currently off, so the cap reads "No cap" and no circuit-breaker row shows; the **Safety** tab on the market page shows the live values. Click **Review Deposit**.
 
 ## Withdraw
 
@@ -64,4 +64,4 @@ The review is valid for 60 seconds; after that the app prepares it again with th
 
 The result appears as a notice and under the form, with the transaction hash and a **View on stellar.expert** link. A confirmed deposit, for example, reads "You deposited … USDY and received … SY." Once a transaction is confirmed or sent, the form clears. If you reject the signature, the app says the action "was not sent". If it fails on-chain, only the network fee is charged. In both cases your amounts stay, to correct and try again. If the result is "not known yet", look the transaction up by its hash before trying again.
 
-Next: [Portfolio and history](/using-the-app/portfolio).
+**Next:** [Portfolio and history](/using-the-app/portfolio).

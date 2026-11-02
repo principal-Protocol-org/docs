@@ -48,12 +48,10 @@ Each market has one pool, which trades PT against SY. Liquidity providers deposi
 
 The **fixed APY** is the yield you lock in if you buy PT at the pool's current price and hold it to maturity, expressed per year. The market page shows it as "PT fixed APY", and the trade forms as "Fixed APY". It compounds the pool's simple annual rate (APR) over the time left; on the market page, its tooltip shows the APR too.
 
-Example: one year before maturity, a PT costs 0.96 dollars' worth of SY. You pay 0.96 and receive 1.00 at maturity, a fixed APY of about 4.17 %.
+Example: one year before maturity, a PT costs 0.96 dollars' worth of SY. You pay 0.96 and receive 1.00 at maturity, a fixed APY of about 4.17%.
 
 The **implied yield** is the yield the market expects from the underlying until maturity, read from the prices of PT and YT. In Principal's pool it is the same rate as the fixed APY. PT buyers lock it in; YT buyers come out ahead only if the underlying earns more. For a given YT purchase, the YT trade form shows **Break-even APY**: the rate the underlying has to beat for your YT to do better than simply holding the asset.
 
 **Underlying APY (7 d)**, on the market page, is what the underlying actually earned: the growth of the oracle rate over the last seven days, expressed per year. Compare it with the fixed APY to see whether the market prices in more or less yield than the asset has been earning.
 
-## Next
-
-Put these together in [Strategies](/guide/strategies). For the mechanics behind them, read [Tokenization](/how-it-works/) and [Yield](/how-it-works/yield).
+**Next:** [Strategies](/guide/strategies), which puts these together. For the mechanics behind them, read [Tokenization](/how-it-works/) and [Yield](/how-it-works/yield).

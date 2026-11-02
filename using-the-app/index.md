@@ -64,4 +64,4 @@ Every action in the app follows the same path:
 
 Some actions take several transactions, one signature each: [Trade PT and YT](/using-the-app/trade) explains these routes and what happens when a step is refused. If a contract's data has expired on the network, the app first offers a restore: "Some contract data has expired — restore it first (one extra signature)."
 
-Next: [Markets and the market page](/using-the-app/markets). New to PT and YT? Read [Core concepts](/guide/core-concepts) first.
+**Next:** [Markets and the market page](/using-the-app/markets). New to PT and YT? Read [Core concepts](/guide/core-concepts) first.

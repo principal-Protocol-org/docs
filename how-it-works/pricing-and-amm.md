@@ -35,7 +35,7 @@ PT trades below par (`p` below 1) while the pool holds more PT value than SY val
 implied_rate = (1 / p − 1) × year / τ
 ```
 
-**Example** (from Principal's yield guide, 4-year stretch, 180 days to maturity). The pool holds 999.5 PT and SY worth 950. The exponent is `a = 1 − (180/365)/4 = 0.8767`, so `p = (950 / 999.5)^0.1233 = 0.99376`. Buying PT at that price and holding to maturity earns `(1/0.99376 − 1) × 365/180`, about **1.27% a year**.
+**Example** (4-year stretch, 180 days to maturity). The pool holds 999.5 PT and SY worth 950. The exponent is `a = 1 − (180/365)/4 = 0.8767`, so `p = (950 / 999.5)^0.1233 = 0.99376`. Buying PT at that price and holding to maturity earns `(1/0.99376 − 1) × 365/180`, about **1.27% a year**.
 
 The app compounds it over the time left and shows it as the **Fixed APY**, about 1.28% in this example.
 
@@ -70,7 +70,7 @@ To buy YT, the Router does two things in one transaction, as you:
 
 You keep the YT and the SY the PT fetched. Your net cost for the YT is `sy_in − sy_back`. Nothing is borrowed and the Router holds nothing.
 
-**Example** (from Principal's yield guide: the fee-free pool above, rate 1.0). 100 SY splits into 100 PT + 100 YT. The 100 PT sell for 98.1284 SY. The 100 YT cost 1.8716 SY, under 2 cents each. On Testnet the tokenization fee and the swap fee on the PT sale also apply.
+**Example** (the fee-free pool above, rate 1.0). 100 SY splits into 100 PT + 100 YT. The 100 PT sell for 98.1284 SY. The 100 YT cost 1.8716 SY, under 2 cents each. On Testnet the tokenization fee and the swap fee on the PT sale also apply.
 
 ## Selling YT: flash-redeem
 

@@ -76,4 +76,4 @@ Closing a route that holds funds asks you to confirm. It then stays in History w
 
 The PT tab reads "This market has matured: redeem your PT" and shows the **Redeem at maturity** form. The YT tab reads "YT trading has closed": a YT earns nothing more, and redeeming it pays the yield it earned. See [Portfolio and history](/using-the-app/portfolio) and [Maturity](/how-it-works/maturity).
 
-Next: [Add and remove liquidity](/using-the-app/liquidity).
+**Next:** [Add and remove liquidity](/using-the-app/liquidity).
