@@ -19,6 +19,8 @@ export default defineConfig({
   base: '/docs/',
   cleanUrls: true,
   lastUpdated: true,
+  // Light unless the visitor chose dark (VitePress's own 'auto' would follow the OS)
+  appearance: { initialValue: 'light' },
   srcExclude: ['README.md', 'AGENTS.md', 'CLAUDE.md', '.claude/**'],
 
   sitemap: { hostname: `${docs}/` },
@@ -53,9 +55,22 @@ export default defineConfig({
     ['meta', { property: 'og:type', content: 'website' }],
     ['meta', { property: 'og:site_name', content: 'Principal' }],
     ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
+    ['link', { rel: 'icon', type: 'image/svg+xml', href: '/docs/favicon.svg' }],
+    ['link', { rel: 'preconnect', href: 'https://fonts.googleapis.com' }],
+    ['link', { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' }],
+    [
+      'link',
+      {
+        rel: 'stylesheet',
+        href: 'https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap',
+      },
+    ],
   ],
 
   themeConfig: {
+    logo: { light: '/logo-light.svg', dark: '/logo-dark.svg', alt: 'Principal' },
+    siteTitle: false,
+
     nav: [
       ...SECTIONS.map(({ dir, text }) => ({ text, link: `/${dir}/` })),
       { text: 'Launch app', link: app },

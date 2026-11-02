@@ -1,0 +1,128 @@
+/* Principal docs theme: the dApp's tokens (org/dapp/app/globals.css), mapped onto VitePress. */
+:root {
+  --ground: #f3f5f8;
+  --surface: #ffffff;
+  --surface-sunk: #e8ecf1;
+  --line: #d3dae3;
+  --line-strong: #7d8a9c;
+  --ink: #0a1626;
+  --ink-muted: #4a5668;
+  --par: #0f2a4a;
+  --on-par: #ffffff;
+  --coupon: #b8862b;
+  --coupon-ink: #85601a;
+  --on-coupon: #0a1626;
+  --coupon-wash: rgba(184, 134, 43, 0.14);
+  --positive: #1d7457;
+  --negative: #b4442e;
+  --focus: #1f5fbf;
+  --shadow-raise: 0 1px 0 rgba(10, 22, 38, 0.04), 0 12px 32px -16px rgba(10, 22, 38, 0.22);
+}
+
+.dark {
+  --ground: #07101c;
+  --surface: #0d1928;
+  --surface-sunk: #050c16;
+  --line: #1f2d40;
+  --line-strong: #5a6d86;
+  --ink: #e9edf2;
+  --ink-muted: #9aa6b6;
+  --par: #dce4ee;
+  --on-par: #0a1626;
+  --coupon: #d9a845;
+  --coupon-ink: #e2b65a;
+  --coupon-wash: rgba(217, 168, 69, 0.14);
+  --positive: #4cc59a;
+  --negative: #f08a72;
+  --focus: #7fb0ff;
+  --shadow-raise: 0 0 0 1px rgba(233, 237, 242, 0.04), 0 16px 40px -16px rgba(0, 0, 0, 0.7);
+
+  color-scheme: dark;
+}
+
+/* ─── Tokens → VitePress ─────────────────────────────────────────────── */
+:root {
+  --vp-font-family-base: 'Hanken Grotesk', 'Helvetica Neue', Arial, sans-serif;
+  --vp-font-family-mono: 'IBM Plex Mono', ui-monospace, Menlo, monospace;
+  --pt-font-display: 'Newsreader', 'Iowan Old Style', Georgia, serif;
+
+  --vp-c-brand-1: var(--par);
+  --vp-c-brand-2: color-mix(in srgb, var(--par) 82%, var(--ink-muted));
+  --vp-c-brand-3: color-mix(in srgb, var(--par) 70%, var(--surface));
+  --vp-c-brand-soft: color-mix(in srgb, var(--par) 10%, transparent);
+
+  --vp-c-bg: var(--ground);
+  --vp-c-bg-alt: var(--surface);
+  --vp-c-bg-elv: var(--surface);
+  --vp-c-bg-soft: var(--surface-sunk);
+  --vp-nav-bg-color: var(--surface);
+  --vp-sidebar-bg-color: var(--surface);
+
+  --vp-c-text-1: var(--ink);
+  --vp-c-text-2: var(--ink-muted);
+  --vp-c-text-3: var(--ink-muted);
+  --vp-c-divider: var(--line);
+  --vp-c-border: var(--line);
+  --vp-c-gutter: var(--line);
+
+  --vp-c-tip-1: var(--positive);
+  --vp-c-tip-2: var(--positive);
+  --vp-c-tip-3: var(--positive);
+  --vp-c-tip-soft: color-mix(in srgb, var(--positive) 12%, transparent);
+  --vp-c-danger-1: var(--negative);
+  --vp-c-danger-2: var(--negative);
+  --vp-c-danger-3: var(--negative);
+  --vp-c-danger-soft: color-mix(in srgb, var(--negative) 12%, transparent);
+  --vp-c-warning-1: var(--coupon-ink);
+  --vp-c-warning-2: var(--coupon-ink);
+  --vp-c-warning-3: var(--coupon);
+  --vp-c-warning-soft: var(--coupon-wash);
+
+  --vp-button-brand-bg: var(--par);
+  --vp-button-brand-text: var(--on-par);
+  --vp-button-brand-hover-bg: var(--vp-c-brand-2);
+  --vp-button-brand-hover-text: var(--on-par);
+  --vp-button-brand-active-bg: var(--vp-c-brand-3);
+  --vp-button-brand-active-text: var(--on-par);
+
+  --vp-code-block-bg: var(--surface-sunk);
+  --vp-code-copy-code-bg: var(--surface);
+  --vp-c-focus: var(--focus);
+  --vp-nav-logo-height: 26px;
+
+  --vp-home-hero-name-color: var(--par);
+  --vp-home-hero-name-background: none;
+}
+
+/* Fonts */
+h1, h2, h3,
+.VPHero .name, .VPHero .text {
+  font-family: var(--pt-font-display);
+  font-optical-sizing: auto;
+  letter-spacing: -0.01em;
+}
+.vp-doc h1, .vp-doc h2, .vp-doc h3 { font-weight: 500; }
+.vp-doc h2 { border-top-color: var(--line); }
+.vp-doc a { text-decoration-color: color-mix(in srgb, var(--par) 40%, transparent); }
+.vp-doc :not(pre) > code { color: var(--vp-c-text-1); }
+.VPHero .name { -webkit-text-fill-color: var(--par); }
+:focus-visible { outline-color: var(--focus); }
+
+/* Images */
+.vp-doc img { display: block; margin: 24px auto; border-radius: 12px; max-width: 100%; height: auto; }
+
+/* "docs" badge after the logo */
+.VPNavBarTitle .title::after {
+  content: 'docs';
+  margin-left: 8px;
+  padding: 2px 7px;
+  border-radius: 6px;
+  background: var(--par);
+  color: var(--on-par);
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: 0.04em;
+  text-transform: lowercase;
+  vertical-align: middle;
+}
