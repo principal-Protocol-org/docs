@@ -25,7 +25,7 @@ No tests or linter. `pnpm build` is the check. After a build: `.vitepress/dist` 
 .vitepress/config.ts    site config: base /docs/, nav from SECTIONS, SEO tags, Launch app button, title as H1
 .vitepress/sidebar.ts   SECTIONS and sidebar(), read from the files with gray-matter
 .vitepress/site.ts      origin per environment (siteOrigin, docsUrl, appUrl)
-.vitepress/theme/       the landing's theme: fonts, colours, light by default
+.vitepress/theme/       the landing's theme: fonts, colours, light by default; app-link.ts (Launch app on the reading domain)
 .pages.yml              Pages CMS: media public/images -> /images, one collection per section, home file
 public/                 logos, favicon, og-image.png, images/*.svg (diagrams)
 vercel.json             outputDirectory, cleanUrls, /docs/:path* rewrite
@@ -39,7 +39,7 @@ vercel.json             outputDirectory, cleanUrls, /docs/:path* rewrite
 
 **Pages CMS constraints.** The rich-text editor keeps headings, paragraphs, lists, links, images, inline code, code blocks and tables. Pages must not use `:::` containers, Vue components, `{{ }}`, raw HTML or Mermaid. Home keys are only those `.pages.yml` declares: `layout`, `hero` (name, text, tagline, actions), `features` (title, details, link), `body`. Filenames come from the title at creation; never rename a file without fixing the links to it first. No "Edit this page" link (private repository).
 
-**Origin helper.** `siteOrigin()` returns `https://principalmarket.fi` when `VERCEL_ENV === 'production'`, else `https://testnet.principalmarket.fi`. It feeds "Launch app" (`<origin>/app`), canonical links, sitemap hostname and `og:image`. Never hard-code an origin in `config.ts` or a page, and never use a `*.vercel.app` host. The home page's hero must not declare "Launch app": `transformPageData` appends it once. It also sets the hero image (the landing's split coin, `public/hero-coin-light.svg` and `hero-coin-dark.svg`), so `index.md` never declares `hero.image`.
+**Origin helper.** `siteOrigin()` returns `https://principalmarket.fi` when `VERCEL_ENV === 'production'`, else `https://testnet.principalmarket.fi`. It feeds "Launch app" (`<origin>/app`), canonical links, sitemap hostname and `og:image`. Never hard-code an origin in `config.ts` or a page, and never use a `*.vercel.app` host. Both landings (`principalmarket.fi`, `testnet.principalmarket.fi`) proxy `/docs` to the one production build (`principalmarket-docs.vercel.app`, rewrite in `org/dapp/next.config.ts`), so in the browser `.vitepress/theme/app-link.ts` (mounted by the `Layout` wrapper in `theme/index.ts`) points "Launch app" to `/app` of the domain the page is read on, for `principalmarket.fi` and its subdomains only. The home page's hero must not declare "Launch app": `transformPageData` appends it once. It also sets the hero image (the landing's split coin, `public/hero-coin-light.svg` and `hero-coin-dark.svg`), so `index.md` never declares `hero.image`.
 
 **Sources rule.** The code wins over every document. Facts come from `org/principal` at `be2a1a5` and from `org/dapp` on its `testnet` branch (and `config/manifests/testnet.json`), not from the mdBook, README or older docs, which are wrong in places (see `../../.rness/docs/docs-site.md`). Describe only what runs today on Testnet; leave out the held wizard screens. The wallet is Varial (formerly Freighter). No SCF, tranche, grant, audit-process or deployment-evidence content; no grant amounts.
 

@@ -104,11 +104,13 @@ The docs link to the app on its own domain. `.vitepress/site.ts` picks the origi
 | `VERCEL_ENV=production` | `https://principalmarket.fi` |
 | anything else (Vercel preview, local) | `https://testnet.principalmarket.fi` |
 
-That origin gives "Launch app" (`<origin>/app`), the canonical links, the sitemap hostname and the `og:image` URL (`<origin>/docs/...`). A Vercel branch URL sits behind Vercel Authentication, so it is never used as an origin. This is the same rule as the app (`org/dapp/lib/app/site.ts`). Check it with `VERCEL_ENV=production pnpm build` against a plain `pnpm build`.
+That origin gives "Launch app" (`<origin>/app`, see below), the canonical links, the sitemap hostname and the `og:image` URL (`<origin>/docs/...`). A Vercel branch URL sits behind Vercel Authentication, so it is never used as an origin. This is the same rule as the app (`org/dapp/lib/app/site.ts`). Check it with `VERCEL_ENV=production pnpm build` against a plain `pnpm build`.
 
 ### Serving under /docs
 
-The docs are a Vercel project of their own on `principal-Protocol-org/docs`. To appear at `principalmarket.fi/docs`, the app's Vercel project adds a rewrite `/docs/:path*` to the docs deployment, and the landing's `links.docs` (`org/dapp/lib/content.ts`) points to `/docs`. That change belongs to the dApp and comes later. `principalmarket.fi/docs` proxies to the docs production deployment. What `testnet.principalmarket.fi/docs` proxies to is not decided yet: see [Open decision: the Testnet docs](#open-decision-the-testnet-docs).
+The docs are a Vercel project of their own on `principal-Protocol-org/docs`: `main` deploys to `principalmarket-docs.vercel.app` as production. The dApp (`org/dapp/next.config.ts`) rewrites `/docs/:path*` to the root of that host, with `skipTrailingSlashRedirect`, and the landing's `links.docs` (`org/dapp/lib/content.ts`) is `/docs`. On the docs host itself a path under `/docs` with a trailing slash (`/docs/guide/`) answers 404, the same path at the root answers 200, so the proxy targets the root.
+
+Both landings, `principalmarket.fi` and `testnet.principalmarket.fi`, proxy `/docs` to that one production build. Its canonical links, sitemap and `og:image` use `https://principalmarket.fi`. In the browser, `.vitepress/theme/app-link.ts` points "Launch app" to `/app` of the domain the page is read on, when that domain is `principalmarket.fi` or one of its subdomains: `testnet.principalmarket.fi/docs` opens the Testnet app, `principalmarket.fi/docs` opens `principalmarket.fi/app`. On any other host (the docs' own Vercel host, local) the built link stays.
 
 ## Where the facts come from
 
@@ -126,14 +128,8 @@ Before go-live, the developer checks:
 - [ ] Each figure in the pages is checked against the code (done for the first draft at `be2a1a5`; repeat after protocol changes).
 - [ ] Home page round trip: in Pages CMS, save the home page once without changes, then diff (`layout`, hero buttons, feature cards).
 - [ ] "Last updated" on a Vercel build once the history is longer (matched git on the first builds, 2026-11-02): if pages show a wrong date (a shallow clone gives older pages the clone's oldest commit date), set `lastUpdated: false` or make the build fetch the full history.
-- [ ] The Testnet docs: choose how `testnet.principalmarket.fi/docs` is built (below).
+- [x] The Testnet docs: one production build behind both landings, "Launch app" on the reading domain (below).
 
-### Open decision: the Testnet docs
+### Testnet docs (decided 2026-11-02)
 
-Every writer save is a commit on `main`, and `main` deploys to production with `VERCEL_ENV=production`, so that build's links and tags use `https://principalmarket.fi`. `testnet.principalmarket.fi/docs` needs a deployment built with the Testnet origin that also gets those saves. Nothing provides it yet. Options:
-
-- (a) An origin override in `.vitepress/site.ts`: an environment variable read before `VERCEL_ENV`, set per Vercel environment or branch.
-- (b) A branch kept in sync with `main` (for example a fast-forward on every push), built as a preview with the Testnet origin.
-- (c) Proxy `testnet.principalmarket.fi/docs` to the production docs, and accept that its **Launch app** goes to `principalmarket.fi/app`.
-
-A Vercel branch preview URL sits behind Vercel Authentication unless a custom domain is attached to the branch, so a proxy to a preview deployment needs that domain first.
+There is one docs build, the production one from `main`, where every writer save lands. `testnet.principalmarket.fi/docs` proxies to it like `principalmarket.fi/docs`, and "Launch app" follows the domain the page is read on (see [Serving under /docs](#serving-under-docs)). A separate Testnet build is not needed.
