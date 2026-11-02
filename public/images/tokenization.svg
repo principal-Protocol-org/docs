@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 396" width="960" height="396" role="img" aria-labelledby="tok-title tok-desc" font-family="'Hanken Grotesk', 'Helvetica Neue', Arial, sans-serif">
   <title id="tok-title">Tokenization: wrap, split and recombine</title>
-  <desc id="tok-desc">The underlying asset is wrapped into SY shares. SY is split into a fixed Principal Token (PT) and a variable Yield Token (YT). Before maturity, PT and YT merge and recombine one to one into SY, and SY unwraps back to the underlying.</desc>
+  <desc id="tok-desc">The underlying asset is wrapped into SY shares. SY is split into a fixed Principal Token (PT) and a variable Yield Token (YT). Before maturity, equal amounts of PT and YT recombine into SY, and SY unwraps back to the underlying.</desc>
   <defs>
     <marker id="tok-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#4a5668"/></marker>
   </defs>
@@ -37,6 +37,6 @@
   <path d="M805 244 V300" fill="none" stroke="#4a5668" stroke-width="2.5"/>
   <path d="M805 300 H480 V194" fill="none" stroke="#4a5668" stroke-width="2.5" marker-end="url(#tok-arrow)"/>
   <circle cx="805" cy="300" r="7" fill="#4a5668"/>
-  <text x="642" y="332" text-anchor="middle" font-size="18" font-weight="600" fill="#0a1626">recombine PT + YT, 1:1</text>
+  <text x="642" y="332" text-anchor="middle" font-size="18" font-weight="600" fill="#0a1626">recombine equal PT + YT</text>
   <text x="642" y="356" text-anchor="middle" font-size="18" fill="#4a5668">before maturity</text>
 </svg>
