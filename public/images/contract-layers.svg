@@ -1,61 +1,55 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 560" width="960" height="560" role="img" aria-labelledby="lay-title lay-desc" font-family="'Hanken Grotesk', 'Helvetica Neue', Arial, sans-serif">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 448" width="960" height="448" role="img" aria-labelledby="lay-title lay-desc" font-family="'Hanken Grotesk', 'Helvetica Neue', Arial, sans-serif">
   <title id="lay-title">Principal contract layers</title>
-  <desc id="lay-desc">Three layers. Infrastructure is shared across all markets: OracleAdapter, Permissioning, RiskControl, MarketFactory and the principal_compliance library. Tokenization is per underlying asset: SYWrapper, PrincipalManager, MarketConfig and RecoveryEscrow. Market is per maturity: PTToken, YTToken, MarketPool and Router.</desc>
+  <desc id="lay-desc">Two groups. Shared infrastructure is reused by every market: OracleAdapter, Permissioning, RiskControl, Router, MarketFactory, and the principal_compliance library. One market, for one asset and one maturity and deployed by MarketFactory, has seven contracts: SYWrapper, PrincipalManager, MarketConfig, PTToken, YTToken, MarketPool and RecoveryEscrow.</desc>
   <style>
     .mono { font-family: ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace; font-size: 17px; font-weight: 700; fill: #0a1626; }
     .role { font-size: 17px; fill: #4a5668; }
     .band { font-size: 21px; font-weight: 700; fill: #0a1626; }
     .sub { font-size: 17px; fill: #4a5668; }
   </style>
-  <rect x="0.5" y="0.5" width="959" height="559" rx="12" fill="#ffffff" stroke="#d3dae3"/>
+  <rect x="0.5" y="0.5" width="959" height="447" rx="12" fill="#ffffff" stroke="#d3dae3"/>
 
-  <!-- Infrastructure -->
   <rect x="30" y="24" width="900" height="156" rx="10" fill="#e8ecf1"/>
   <rect x="30" y="24" width="8" height="156" rx="4" fill="#7d8a9c"/>
-  <text x="58" y="92" class="band">Infrastructure</text>
-  <text x="58" y="118" class="sub">shared across all markets</text>
+  <text x="58" y="82" class="band">Shared</text>
+  <text x="58" y="108" class="band">infrastructure</text>
+  <text x="58" y="134" class="sub">reused by every market</text>
   <g>
-    <rect x="270" y="40" width="208" height="58" rx="8" fill="#fff" stroke="#d3dae3"/>
-    <text x="284" y="63" class="mono">OracleAdapter</text><text x="284" y="86" class="role">reference-value feed</text>
-    <rect x="490" y="40" width="208" height="58" rx="8" fill="#fff" stroke="#d3dae3"/>
-    <text x="504" y="63" class="mono">Permissioning</text><text x="504" y="86" class="role">optional eligibility</text>
-    <rect x="710" y="40" width="208" height="58" rx="8" fill="#fff" stroke="#d3dae3"/>
-    <text x="724" y="63" class="mono">RiskControl</text><text x="724" y="86" class="role">pause, circuit breaker</text>
-    <rect x="270" y="108" width="208" height="58" rx="8" fill="#fff" stroke="#d3dae3"/>
-    <text x="284" y="131" class="mono">MarketFactory</text><text x="284" y="154" class="role">atomic market creation</text>
-    <rect x="490" y="108" width="240" height="58" rx="8" fill="#fff" stroke="#d3dae3"/>
-    <text x="504" y="131" class="mono">principal_compliance</text><text x="504" y="154" class="role">compliance library</text>
+    <rect x="262" y="40" width="208" height="58" rx="8" fill="#fff" stroke="#d3dae3"/>
+    <text x="276" y="63" class="mono">OracleAdapter</text><text x="276" y="86" class="role">reference-value feed</text>
+    <rect x="482" y="40" width="208" height="58" rx="8" fill="#fff" stroke="#d3dae3"/>
+    <text x="496" y="63" class="mono">Permissioning</text><text x="496" y="86" class="role">optional eligibility</text>
+    <rect x="702" y="40" width="208" height="58" rx="8" fill="#fff" stroke="#d3dae3"/>
+    <text x="716" y="63" class="mono">RiskControl</text><text x="716" y="86" class="role">pause, circuit breaker</text>
+    <rect x="262" y="108" width="240" height="58" rx="8" fill="#fff" stroke="#7d8a9c" stroke-dasharray="6 4" stroke-width="1.5"/>
+    <text x="276" y="131" class="mono">principal_compliance</text><text x="276" y="154" class="role">library, not a contract</text>
+    <rect x="514" y="108" width="196" height="58" rx="8" fill="#fff" stroke="#d3dae3"/>
+    <text x="528" y="131" class="mono">Router</text><text x="528" y="154" class="role">one-transaction flows</text>
+    <rect x="722" y="108" width="196" height="58" rx="8" fill="#fff" stroke="#d3dae3"/>
+    <text x="736" y="131" class="mono">MarketFactory</text><text x="736" y="154" class="role">creates markets</text>
   </g>
 
-  <!-- Tokenization -->
-  <rect x="30" y="198" width="900" height="156" rx="10" fill="#e8ecf1"/>
-  <rect x="30" y="198" width="8" height="156" rx="4" fill="#0f2a4a"/>
-  <text x="58" y="266" class="band">Tokenization</text>
-  <text x="58" y="292" class="sub">one per underlying asset</text>
+  <rect x="30" y="198" width="900" height="226" rx="10" fill="rgba(15,42,74,0.08)"/>
+  <rect x="30" y="198" width="8" height="226" rx="4" fill="#0f2a4a"/>
+  <text x="58" y="262" class="band">One market</text>
+  <text x="58" y="288" class="sub">one asset and</text>
+  <text x="58" y="310" class="sub">one maturity,</text>
+  <text x="58" y="332" class="sub">deployed by</text>
+  <text x="58" y="354" class="sub">MarketFactory</text>
   <g>
-    <rect x="270" y="214" width="316" height="58" rx="8" fill="#fff" stroke="#d3dae3"/>
-    <text x="284" y="237" class="mono">SYWrapper</text><text x="284" y="260" class="role">wraps the underlying into SY shares</text>
-    <rect x="598" y="214" width="316" height="58" rx="8" fill="#fff" stroke="#d3dae3"/>
-    <text x="612" y="237" class="mono">PrincipalManager</text><text x="612" y="260" class="role">mint, recombine, settle, redeem</text>
-    <rect x="270" y="282" width="316" height="58" rx="8" fill="#fff" stroke="#d3dae3"/>
-    <text x="284" y="305" class="mono">MarketConfig</text><text x="284" y="328" class="role">maturity and fees</text>
-    <rect x="598" y="282" width="316" height="58" rx="8" fill="#fff" stroke="#d3dae3"/>
-    <text x="612" y="305" class="mono">RecoveryEscrow</text><text x="612" y="328" class="role">compliance recovery</text>
-  </g>
-
-  <!-- Market -->
-  <rect x="30" y="372" width="900" height="156" rx="10" fill="rgba(184,134,43,0.14)"/>
-  <rect x="30" y="372" width="8" height="156" rx="4" fill="#b8862b"/>
-  <text x="58" y="440" class="band">Market</text>
-  <text x="58" y="466" class="sub">one per maturity</text>
-  <g>
-    <rect x="270" y="388" width="316" height="58" rx="8" fill="#fff" stroke="#d3dae3"/>
-    <text x="284" y="411" class="mono">PTToken</text><text x="284" y="434" class="role">Principal Token (SEP-41-style)</text>
-    <rect x="598" y="388" width="316" height="58" rx="8" fill="#fff" stroke="#d3dae3"/>
-    <text x="612" y="411" class="mono">YTToken</text><text x="612" y="434" class="role">Yield Token (SEP-41-style)</text>
-    <rect x="270" y="456" width="316" height="58" rx="8" fill="#fff" stroke="#d3dae3"/>
-    <text x="284" y="479" class="mono">MarketPool</text><text x="284" y="502" class="role">PT/SY yield-curve AMM</text>
-    <rect x="598" y="456" width="316" height="58" rx="8" fill="#fff" stroke="#d3dae3"/>
-    <text x="612" y="479" class="mono">Router</text><text x="612" y="502" class="role">single-transaction user flows</text>
+    <rect x="262" y="214" width="208" height="58" rx="8" fill="#fff" stroke="#d3dae3"/>
+    <text x="276" y="237" class="mono">SYWrapper</text><text x="276" y="260" class="role">wraps the underlying</text>
+    <rect x="482" y="214" width="208" height="58" rx="8" fill="#fff" stroke="#d3dae3"/>
+    <text x="496" y="237" class="mono">PrincipalManager</text><text x="496" y="260" class="role">mint, settle, redeem</text>
+    <rect x="702" y="214" width="208" height="58" rx="8" fill="#fff" stroke="#d3dae3"/>
+    <text x="716" y="237" class="mono">MarketConfig</text><text x="716" y="260" class="role">maturity and fees</text>
+    <rect x="262" y="282" width="208" height="58" rx="8" fill="#fff" stroke="#d3dae3"/>
+    <text x="276" y="305" class="mono">PTToken</text><text x="276" y="328" class="role">Principal Token</text>
+    <rect x="482" y="282" width="208" height="58" rx="8" fill="#fff" stroke="#d3dae3"/>
+    <text x="496" y="305" class="mono">YTToken</text><text x="496" y="328" class="role">Yield Token</text>
+    <rect x="702" y="282" width="208" height="58" rx="8" fill="#fff" stroke="#d3dae3"/>
+    <text x="716" y="305" class="mono">MarketPool</text><text x="716" y="328" class="role">PT/SY yield-curve AMM</text>
+    <rect x="262" y="350" width="208" height="58" rx="8" fill="#fff" stroke="#d3dae3"/>
+    <text x="276" y="373" class="mono">RecoveryEscrow</text><text x="276" y="396" class="role">compliance recovery</text>
   </g>
 </svg>
