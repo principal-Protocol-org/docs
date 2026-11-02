@@ -4,7 +4,7 @@ description: The asset you can use with Principal on Stellar Testnet today, USDY
 order: 4
 ---
 
-Principal runs on Stellar Testnet, with one market on one test asset. This page lists it, and the real assets announced as coming soon.
+Principal runs on Stellar Testnet, with one market on one test asset. This page lists it, and the real assets listed as coming soon.
 
 ## On Testnet: USDY (test)
 
@@ -21,9 +21,9 @@ Principal runs on Stellar Testnet, with one market on one test asset. This page 
 
 Its dollar value comes from a test oracle, which Principal's own keeper raises at a set yearly rate on a regular schedule. That value follows no real Treasury yield and no price of Ondo's USDY, so the returns you see on Testnet say nothing about real ones.
 
-The test asset behaves like a regulated one. Its issuer requires authorization for every account that holds it, can revoke that authorization, and can claw balances back. Principal's compliance rules therefore apply on Testnet as they would on a real asset: an account needs the issuer's authorization before it can hold USDY (test), SY, PT or YT. On Testnet, those issuer powers sit with Principal's test accounts.
+The test asset behaves like a regulated one. Its issuer requires authorization for every account that holds it, can revoke that authorization, and can claw balances back. Principal's compliance rules therefore apply on Testnet as they would on a real asset: an account needs the issuer's authorization before it can hold USDY (test), SY, PT or YT, and a place on the market's allow-list before it can hold SY, PT or YT. On Testnet, those issuer powers sit with Principal's test accounts, and the test asset's issuer account runs the allow-list.
 
-You do not have to arrange any of this yourself: **Get test tokens** in the app sets up your account, has it authorized and sends you test USDY. [Getting started](/using-the-app/) walks you through it.
+You do not have to arrange any of this yourself: **Get test tokens** in the app sets up your account, has it authorized, adds it to the allow-list and sends you test USDY. [Getting started](/using-the-app/) walks you through it.
 
 ## What the maturity date means
 
@@ -31,7 +31,7 @@ Until 31 January 2027, 00:45:35 UTC, you can split SY into PT and YT, trade in t
 
 - the pool stops trading, and no new PT or YT can be minted;
 - PT redeems for one dollar's worth of USDY (test) each, at the market's settlement rate;
-- YT stops earning and pays out any yield it still holds;
+- YT stops earning, and redeeming it pays out any yield it has not paid out yet;
 - liquidity providers can still withdraw their share of the pool.
 
 The app shows the same date on the market page, with a countdown. [Maturity](/how-it-works/maturity) explains settlement in detail.

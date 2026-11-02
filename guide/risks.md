@@ -38,7 +38,7 @@ Liquidity providers earn no swap fees, and they end up holding more of whichever
 
 ## YT decays to zero
 
-A YT is worth the yield still ahead of it. As maturity nears there is less of it left, and the YT price falls toward zero. At maturity a YT is worth only the yield it has earned and not yet paid out. If the underlying earns less than the Break-even APY the app showed when you bought, you come out behind; if the oracle rate does not rise at all, the YT pays nothing.
+A YT is worth the yield still ahead of it. As maturity nears there is less of it left, and the YT price falls toward zero. At maturity a YT is worth only the yield it has earned and not yet paid out. If the underlying earns less than the Break-even APY the app showed when you bought, you end up behind where holding the asset would have left you; if it earns much less, you lose part of what you paid. If the oracle rate does not rise at all, the YT pays nothing.
 
 Close to maturity, selling YT can fail: the pool refuses the sale when the YT no longer covers the PT the pool has to put in. You then hold it and collect what it has earned.
 
@@ -46,7 +46,9 @@ Close to maturity, selling YT can fail: the pool refuses the sale when the YT no
 
 The issuer's controls on the underlying asset reach every position in Principal. If the issuer revokes your authorization on the asset, you can no longer send, receive, trade, split, recombine, claim or redeem SY, PT, YT or LP positions.
 
-The issuer can then recover a frozen account's positions. SY is turned back into the underlying at once. An LP position is withdrawn into its PT and SY. PT and YT are held until maturity, then settled into the underlying. From there, the issuer can claw it back with the asset's own controls. Only accounts the issuer has already deauthorized can be targeted, and other holders are not affected.
+The issuer can then recover a frozen account's positions. SY is turned back into the underlying at once. An LP position is withdrawn: its SY part is turned into the underlying at once, and its PT part is held like other PT. PT and YT are held until maturity, then settled into the underlying. From there, the issuer can claw it back with the asset's own controls. Only accounts the issuer has already deauthorized can be targeted, and other holders are not affected.
+
+Each market also checks a shared allow-list, and every account must be on it. Only the list's admin can change it; on Testnet, that is the test asset's issuer account. If your account is removed from the list, the same actions are refused.
 
 The issuer also creates each market on its asset and sets its fees, up to fixed caps: 1 % for the tokenization fee, 50 % for the YT fee, 5 % for the swap fee tier. A fee change takes effect at once, with no delay.
 
@@ -54,9 +56,9 @@ On Testnet, the issuer of USDY (test) and the market's administrator are Princip
 
 ## Pauses and limits
 
-The market's administrator can pause its contracts. While paused, the market refuses new deposits, splits, trades, yield claims and redemptions. Withdrawing liquidity is blocked during a pause before maturity, never after it. Recovery by the issuer keeps working during a pause.
+The market's administrator can pause its contracts. While paused, the market refuses new deposits, splits, recombining, trades, yield claims and redemptions. Withdrawing liquidity is blocked by the pool's pause before maturity, not after it, though the SY it pays out still needs the SY wrapper unpaused. Seizure of a frozen account's positions by the issuer keeps working during a pause; redeeming seized PT and YT at maturity waits until the market is unpaused.
 
-A circuit breaker limits total deposits over a window that resets on its own, across the protocol and per asset, and the wrapper can also cap each address's deposits. A deposit over a limit fails. The **Safety** tab on each market page shows whether the market is paused, whether the oracle is fresh, and how much room the limits have left.
+A circuit breaker can limit total deposits over a window that resets on its own, across the protocol and per asset, and the wrapper can also cap each address's deposits. A deposit over a set limit fails. On the Testnet market these limits are currently off; the **Safety** tab on the market page shows the live values. The tab also shows whether the market is paused and whether the oracle is fresh.
 
 ## The underlying asset
 

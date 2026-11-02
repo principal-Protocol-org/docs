@@ -35,7 +35,11 @@ The app splits your SY into PT and YT, sells the PT into the pool and leaves you
 | 2 % | about 500 | about −500 |
 | 0 % | 0 | −1,000 |
 
-**What you gain.** A large exposure to the asset's yield for a small outlay, with no borrowing.
+These figures are in dollars. For this purchase the app's **Break-even APY** reads about 4.17 %: the rate at which your YT does as well as simply holding the asset, which would have earned too.
+
+**What the trade moves.** To buy these 25,000 YT, your wallet must hold about 25,000 dollars' worth of SY or USDY at the start, not only the 1,000 you spend. The trade splits that whole amount into PT and YT and sells the 25,000 PT straight back, so about 24,000 comes back to you and about 1,000 is spent. The trade form shows this as **Moves**, **Spends** and **Comes back**, and **Max** allows for it. The tokenization fee is charged on the whole amount split and the swap fee on the whole PT sale, so together they are larger than the 1,000 suggests.
+
+**What you gain.** A large exposure to the asset's yield for a small net outlay, with no borrowing.
 
 **What you risk.**
 
@@ -45,16 +49,17 @@ The app splits your SY into PT and YT, sells the PT into the pool and leaves you
 
 ## Earn as a liquidity provider
 
-You deposit PT and SY in the pool's current proportion, or SY alone, and receive an LP position.
+You pay USDY. The app splits part of it into PT and YT, puts the PT and the rest (as SY) into the pool at its current ratio, and gives you an LP position plus the YT. Adding SY alone is not available in this release.
 
 **Where your return comes from.** The PT in the pool rises toward par as maturity approaches, with no trading needed. The SY in the pool is the underlying, so its dollar value moves with the asset. In the protocol's worked example, a pool 180 days from maturity prices PT at 0.99376. With no trades at all, the price reaches 0.99997 by day 179 and par at maturity, while the implied yield stays at about 1.27 % a year. Time alone raises the value of the PT you hold in the pool.
 
-**What you do not earn.** Swap fees. They are split between Principal and the market's creator, the asset's issuer. Liquidity providers receive none.
+**What you do not earn.** Swap fees. They are split between Principal and the market's creator, the asset's issuer; on Testnet, where Principal is also the creator, both shares go to Principal. Liquidity providers receive none.
 
 **What you risk.**
 
 - When the market's implied yield moves, traders rebalance the pool, and you end up holding more of whichever side lost value, as in any AMM.
-- You can withdraw before or after maturity. Before maturity, a market pause blocks withdrawals until it is lifted.
+- You also hold the YT from the split, which loses value as maturity nears (see the YT strategy above).
+- You can withdraw before or after maturity. Before maturity, the app sells the PT you take out back into the pool, which pays the swap fee and moves the price; after maturity it redeems that PT instead. A pause of the pool blocks withdrawals before maturity, not after it; a pause of the SY wrapper, or of redemptions, still holds them up after maturity. See [Risks](/guide/risks).
 
 ## Sell your future yield: split, then sell YT
 
@@ -71,7 +76,7 @@ You split SY into PT and YT, sell the YT, and keep the PT.
 
 ## Fees in every strategy
 
-Splitting SY costs the tokenization fee, and buying YT includes a split. Yield paid to YT holders carries the YT fee. Every pool trade pays a swap fee that falls to zero at maturity. Each market shows its current fees on its page, under **Details**. [Fees](/how-it-works/fees) explains how each one is computed.
+Splitting SY costs the tokenization fee, and buying YT includes a split of the whole amount moved. Adding liquidity in the app includes a split, so it pays the tokenization fee on that part. Yield paid to YT holders carries the YT fee. Every pool trade pays a swap fee that falls to zero at maturity. Each market shows its current fees on its page, under **Details**. [Fees](/how-it-works/fees) explains how each one is computed.
 
 ## Next
 

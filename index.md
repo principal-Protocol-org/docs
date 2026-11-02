@@ -19,7 +19,7 @@ features:
     details: A Yield Token (YT) collects the asset's yield until maturity. Buy it to take a view on that yield, or sell yours to get paid for it now.
     link: /guide/core-concepts
   - title: Compliance from the asset
-    details: Every SY, PT, YT and liquidity position checks the underlying issuer's own authorization. Only accounts the issuer allows can hold or trade them.
+    details: Every SY, PT, YT and liquidity position checks the underlying issuer's own authorization, live. An account the issuer has not authorized cannot hold or trade them.
     link: /how-it-works/compliance
   - title: Try it on Testnet
     details: Principal runs on Stellar Testnet with a test USDY market. Connect the Varial wallet (formerly Freighter), get test tokens and make your first trade.

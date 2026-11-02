@@ -6,7 +6,7 @@ order: 2
 
 Principal turns one yield-bearing asset into a few tokens, each with one job. This page defines them in the order you meet them.
 
-![The underlying asset wraps into SY; SY splits into a fixed Principal Token (PT) and a variable Yield Token (YT); before maturity, PT and YT recombine one to one into SY, which unwraps into the underlying.](/images/tokenization.svg)
+![The underlying asset wraps into SY; SY splits into a fixed Principal Token (PT) and a variable Yield Token (YT); before maturity, equal amounts of PT and YT recombine into SY, which unwraps into the underlying.](/images/tokenization.svg)
 
 ## Underlying asset
 
@@ -28,7 +28,7 @@ At maturity, each PT redeems for one dollar's worth of the underlying, priced at
 
 ## YT (Yield Token)
 
-Each YT collects the yield on one dollar's worth of the underlying, counted from the time you get it until maturity. That yield is the rise in the oracle rate. You can claim it at any time, in the underlying, and the market keeps its YT fee from each payout. When a YT changes hands, the yield earned so far stays with the seller and the buyer earns from then on. If the oracle rate does not rise, YT earns nothing.
+Each YT collects the yield on one dollar's worth of the underlying, counted from the time you get it until maturity. That yield is the rise in the oracle rate. You can claim it as it accrues, in the underlying, and the market keeps its YT fee from each payout. When a YT changes hands, the yield earned so far stays with the seller and the buyer earns from then on. If the oracle rate does not rise, YT earns nothing.
 
 YT stops earning at maturity, so its price falls toward zero as maturity nears. In the app, the YT price is one dollar minus the PT price, and **YT leverage** is one divided by the YT price: how many YT one dollar buys. With PT at 0.96, a YT costs about 0.04 and the leverage is 25x.
 
@@ -42,7 +42,7 @@ Each market has one maturity date, fixed when the market is created. Until then 
 
 ## LP (liquidity position)
 
-Each market has one pool, which trades PT against SY. Liquidity providers deposit PT and SY, or SY alone, and receive an LP position: their share of the pool, recorded by the pool itself rather than issued as a separate token. YT has no pool of its own. Buying YT splits SY and sells the PT into the pool in one transaction; selling YT does the reverse. See [Pricing and the AMM](/how-it-works/pricing-and-amm).
+Each market has one pool, which trades PT against SY. Liquidity providers deposit PT and SY at the pool's ratio and receive an LP position: their share of the pool, recorded by the pool itself rather than issued as a separate token (the app calls it your LP tokens). In the app you pay USDY: part of it is split into PT and YT, the PT and the rest (as SY) go into the pool, and you keep the YT. YT has no pool of its own. Buying YT splits SY and sells the PT into the pool in one transaction; selling YT does the reverse. See [Pricing and the AMM](/how-it-works/pricing-and-amm).
 
 ## Fixed APY and implied yield
 
@@ -50,7 +50,7 @@ The **fixed APY** is the yield you lock in if you buy PT at the pool's current p
 
 Example: one year before maturity, a PT costs 0.96 dollars' worth of SY. You pay 0.96 and receive 1.00 at maturity, a fixed APY of about 4.17 %.
 
-The **implied yield** is the yield the market expects from the underlying until maturity, read from the prices of PT and YT. In Principal's pool it is the same number as the fixed APY. PT buyers lock it in; YT buyers come out ahead only if the underlying earns more. For a given YT purchase, the YT trade form shows the rate the underlying has to beat as **Break-even APY**.
+The **implied yield** is the yield the market expects from the underlying until maturity, read from the prices of PT and YT. In Principal's pool it is the same rate as the fixed APY. PT buyers lock it in; YT buyers come out ahead only if the underlying earns more. For a given YT purchase, the YT trade form shows **Break-even APY**: the rate the underlying has to beat for your YT to do better than simply holding the asset.
 
 **Underlying APY (7 d)**, on the market page, is what the underlying actually earned: the growth of the oracle rate over the last seven days, expressed per year. Compare it with the fixed APY to see whether the market prices in more or less yield than the asset has been earning.
 
