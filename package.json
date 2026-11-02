@@ -1,0 +1,17 @@
+{
+  "name": "principal-docs",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Principal public documentation.",
+  "scripts": {
+    "dev": "vitepress dev",
+    "build": "vitepress build",
+    "preview": "vitepress preview"
+  },
+  "devDependencies": {
+    "@types/node": "26.6.5",
+    "gray-matter": "^4.0.3",
+    "vitepress": "1.6.4"
+  }
+}
