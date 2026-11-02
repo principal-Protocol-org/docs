@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 500" width="960" height="500" role="img" aria-labelledby="mat-title mat-desc" font-family="'Hanken Grotesk', 'Helvetica Neue', Arial, sans-serif">
+  <title id="mat-title">What PT and YT do before and at maturity</title>
+  <desc id="mat-desc">Before maturity, PT trades below par and rises toward par, while YT collects yield and decays toward zero. At maturity, PT redeems for the principal's value and YT holds the yield it already earned. The example uses 100 USDC of USDY over three months at 4 percent annualized.</desc>
+  <rect x="0.5" y="0.5" width="959" height="499" rx="12" fill="#ffffff" stroke="#d3dae3"/>
+
+  <text x="40" y="52" font-size="22" font-weight="700" fill="#0a1626">Before maturity</text>
+  <text x="600" y="52" font-size="22" font-weight="700" fill="#0a1626">At maturity</text>
+  <line x1="565" y1="36" x2="565" y2="470" stroke="#d3dae3" stroke-width="2"/>
+
+  <!-- chart -->
+  <line x1="90" y1="350" x2="520" y2="350" stroke="#7d8a9c" stroke-width="2"/>
+  <line x1="90" y1="90" x2="90" y2="350" stroke="#7d8a9c" stroke-width="2"/>
+  <line x1="90" y1="120" x2="520" y2="120" stroke="#7d8a9c" stroke-width="1.5" stroke-dasharray="6 6"/>
+  <text x="80" y="127" text-anchor="end" font-size="18" fill="#4a5668">par</text>
+  <text x="80" y="357" text-anchor="end" font-size="18" fill="#4a5668">0</text>
+  <text x="90" y="380" text-anchor="start" font-size="18" fill="#4a5668">issue</text>
+  <text x="520" y="380" text-anchor="end" font-size="18" fill="#4a5668">maturity</text>
+  <path d="M90 190 C 250 170, 400 140, 520 120" fill="none" stroke="#0f2a4a" stroke-width="4" stroke-linecap="round"/>
+  <path d="M90 280 C 250 300, 400 330, 520 350" fill="none" stroke="#b8862b" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="520" cy="120" r="6" fill="#0f2a4a"/>
+  <circle cx="520" cy="350" r="6" fill="#b8862b"/>
+
+  <line x1="40" y1="426" x2="76" y2="426" stroke="#0f2a4a" stroke-width="4" stroke-linecap="round"/>
+  <text x="86" y="432" font-size="18" fill="#0a1626">PT trades below par and rises to it</text>
+  <line x1="40" y1="458" x2="76" y2="458" stroke="#b8862b" stroke-width="4" stroke-linecap="round"/>
+  <text x="86" y="464" font-size="18" fill="#0a1626">YT collects yield and decays to zero</text>
+
+  <rect x="600" y="80" width="320" height="110" rx="10" fill="#0f2a4a"/>
+  <text x="620" y="116" font-size="24" font-weight="700" fill="#ffffff">PT</text>
+  <text x="620" y="146" font-size="18" fill="#ffffff">Redeems for the principal's</text>
+  <text x="620" y="170" font-size="18" fill="#ffffff">value</text>
+
+  <rect x="600" y="210" width="320" height="110" rx="10" fill="#b8862b"/>
+  <text x="620" y="246" font-size="24" font-weight="700" fill="#0a1626">YT</text>
+  <text x="620" y="276" font-size="18" fill="#0a1626">Holds the yield it earned;</text>
+  <text x="620" y="300" font-size="18" fill="#0a1626">no new yield accrues</text>
+
+  <rect x="585" y="346" width="335" height="126" rx="10" fill="rgba(184,134,43,0.14)" stroke="#b8862b"/>
+  <text x="600" y="372" font-size="17" font-weight="700" fill="#85601a">Example (from the README)</text>
+  <text x="600" y="396" font-size="17" fill="#0a1626">100 USDC of USDY, 3 months,</text>
+  <text x="600" y="418" font-size="17" fill="#0a1626">yielding 4% annualized:</text>
+  <text x="600" y="440" font-size="17" fill="#0a1626">PT redeems 100 USDC of value;</text>
+  <text x="600" y="462" font-size="17" fill="#0a1626">YT earns about 1 USDC of yield</text>
+</svg>
