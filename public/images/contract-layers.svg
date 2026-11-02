@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 448" width="960" height="448" role="img" aria-labelledby="lay-title lay-desc" font-family="'Hanken Grotesk', 'Helvetica Neue', Arial, sans-serif">
-  <title id="lay-title">Principal contract layers</title>
-  <desc id="lay-desc">Two groups. Shared infrastructure is reused by every market: OracleAdapter, Permissioning, RiskControl, Router, MarketFactory, and the principal_compliance library. One market, for one asset and one maturity and deployed by MarketFactory, has seven contracts: SYWrapper, PrincipalManager, MarketConfig, PTToken, YTToken, MarketPool and RecoveryEscrow.</desc>
+  <title id="lay-title">Principal's contracts, shared and per market</title>
+  <desc id="lay-desc">Two groups. Shared infrastructure is reused by every market: OracleAdapter, Permissioning (an allow-list, always checked), RiskControl, Router and MarketFactory. The principal_compliance library is compiled into each market contract. One market, for one asset and one maturity, has seven contracts: SYWrapper, PrincipalManager, MarketConfig, PTToken, YTToken, MarketPool and RecoveryEscrow.</desc>
   <style>
     .mono { font-family: ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace; font-size: 17px; font-weight: 700; fill: #0a1626; }
     .role { font-size: 17px; fill: #4a5668; }
@@ -15,27 +15,25 @@
   <text x="58" y="108" class="band">infrastructure</text>
   <text x="58" y="134" class="sub">reused by every market</text>
   <g>
-    <rect x="262" y="40" width="208" height="58" rx="8" fill="#fff" stroke="#d3dae3"/>
+    <rect x="262" y="40" width="200" height="58" rx="8" fill="#fff" stroke="#d3dae3"/>
     <text x="276" y="63" class="mono">OracleAdapter</text><text x="276" y="86" class="role">reference-value feed</text>
-    <rect x="482" y="40" width="208" height="58" rx="8" fill="#fff" stroke="#d3dae3"/>
-    <text x="496" y="63" class="mono">Permissioning</text><text x="496" y="86" class="role">optional eligibility</text>
-    <rect x="702" y="40" width="208" height="58" rx="8" fill="#fff" stroke="#d3dae3"/>
-    <text x="716" y="63" class="mono">RiskControl</text><text x="716" y="86" class="role">pause, circuit breaker</text>
-    <rect x="262" y="108" width="240" height="58" rx="8" fill="#fff" stroke="#7d8a9c" stroke-dasharray="6 4" stroke-width="1.5"/>
-    <text x="276" y="131" class="mono">principal_compliance</text><text x="276" y="154" class="role">library, not a contract</text>
-    <rect x="514" y="108" width="196" height="58" rx="8" fill="#fff" stroke="#d3dae3"/>
-    <text x="528" y="131" class="mono">Router</text><text x="528" y="154" class="role">one-transaction flows</text>
-    <rect x="722" y="108" width="196" height="58" rx="8" fill="#fff" stroke="#d3dae3"/>
-    <text x="736" y="131" class="mono">MarketFactory</text><text x="736" y="154" class="role">creates markets</text>
+    <rect x="474" y="40" width="232" height="58" rx="8" fill="#fff" stroke="#d3dae3"/>
+    <text x="488" y="63" class="mono">Permissioning</text><text x="488" y="86" class="role">allow-list, always checked</text>
+    <rect x="718" y="40" width="200" height="58" rx="8" fill="#fff" stroke="#d3dae3"/>
+    <text x="732" y="63" class="mono">RiskControl</text><text x="732" y="86" class="role">pause, circuit breaker</text>
+    <rect x="262" y="108" width="268" height="58" rx="8" fill="#fff" stroke="#7d8a9c" stroke-dasharray="6 4" stroke-width="1.5"/>
+    <text x="276" y="131" class="mono">principal_compliance</text><text x="276" y="154" class="role">library in each market contract</text>
+    <rect x="542" y="108" width="198" height="58" rx="8" fill="#fff" stroke="#d3dae3"/>
+    <text x="556" y="131" class="mono">Router</text><text x="556" y="154" class="role">one-transaction flows</text>
+    <rect x="752" y="108" width="166" height="58" rx="8" fill="#fff" stroke="#d3dae3"/>
+    <text x="766" y="131" class="mono">MarketFactory</text><text x="766" y="154" class="role">creates markets</text>
   </g>
 
   <rect x="30" y="198" width="900" height="226" rx="10" fill="rgba(15,42,74,0.08)"/>
   <rect x="30" y="198" width="8" height="226" rx="4" fill="#0f2a4a"/>
-  <text x="58" y="262" class="band">One market</text>
-  <text x="58" y="288" class="sub">one asset and</text>
-  <text x="58" y="310" class="sub">one maturity,</text>
-  <text x="58" y="332" class="sub">deployed by</text>
-  <text x="58" y="354" class="sub">MarketFactory</text>
+  <text x="58" y="290" class="band">One market</text>
+  <text x="58" y="316" class="sub">one asset and</text>
+  <text x="58" y="338" class="sub">one maturity</text>
   <g>
     <rect x="262" y="214" width="208" height="58" rx="8" fill="#fff" stroke="#d3dae3"/>
     <text x="276" y="237" class="mono">SYWrapper</text><text x="276" y="260" class="role">wraps the underlying</text>

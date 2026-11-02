@@ -4,35 +4,37 @@ description: "The pause switches, the deposit circuit breaker, the oracle freshn
 order: 2
 ---
 
-This page lists the safety controls in Principal's contracts, who can use each one and what it stops, all enforced on-chain on Stellar Testnet.
+This page lists the safety controls in Principal's contracts, who can use each one and what it stops, all enforced by the contracts deployed on Stellar Testnet.
 
 ## Pause
 
-**Protocol pause.** On `RiskControl`, the admin or any registered pauser can call `pause`; only the admin can `unpause`, so a pauser key cannot toggle the switch to let chosen transactions through. While it is on, every deposit into `SYWrapper` and every mint in `PrincipalManager` reverts with `Paused`, in every market connected to that `RiskControl`. Trades, withdrawals, recombining and redemption continue.
+**Protocol pause.** On `RiskControl`, the admin or any registered pauser can call `pause`; only the admin can `unpause`, so a pauser key cannot toggle the switch to let chosen transactions through. While it is on, every deposit into `SYWrapper` and every mint in `PrincipalManager` reverts with `Paused`, in every market connected to that `RiskControl`, so splitting and buying YT (which mints) stop too. PT trades, selling YT, liquidity, withdrawals, recombining, yield claims and redemption continue.
 
 **Market pauses.** `SYWrapper`, `PrincipalManager` and `MarketPool` each have their own `set_paused`, for that contract's admin only. A market's admin is the underlying's issuer authority at creation and can be handed over with `transfer_admin`.
 
 | Contract | While paused |
 |---|---|
 | `SYWrapper` | Deposits stop, and so do withdrawals and SY transfers unless the market's `RecoveryEscrow` is a party. Minting, swaps, liquidity and redemption all move SY, so they stop too. |
-| `PrincipalManager` | Mint, recombine, claim yield and redeem stop. `settle_all` still works. |
+| `PrincipalManager` | Mint, recombine, claim yield and redeem stop, so buying and selling YT stop too. `settle_all` still works. |
 | `MarketPool` | Swaps, adding liquidity and LP transfers stop. Removing liquidity stops only before maturity. |
 
 `PTToken` and `YTToken` have no pause.
 
 ## Circuit breaker
 
-`RiskControl` limits how much underlying can be deposited within a window: a protocol-wide limit across all assets, and an optional limit per asset. A limit of `0` switches it off. A deposit or mint that would exceed either limit reverts (`CircuitBreakerTripped` or `AssetLimitTripped`) inside its own transaction.
+`RiskControl` limits how much underlying can be deposited within a window: a protocol-wide limit across all assets, and a limit per asset. A limit of `0` switches that limit off. A deposit or mint that would exceed either limit reverts (`CircuitBreakerTripped` or `AssetLimitTripped`) inside its own transaction.
 
 The window is counted in ledger sequence numbers, which advance by exactly one per ledger and, unlike a timestamp, cannot be nudged by a validator. The default is 17,280 ledgers, about 24 hours at roughly 5 seconds per ledger; the admin can change it and the limits, and each change emits an event.
 
-`SYWrapper.deposit` and `PrincipalManager.mint` report to `RiskControl` themselves, so direct calls are limited like `Router` calls, and a one-step deposit-and-split counts at both. Only registered contracts may report, so no outsider can use up the allowance. `SYWrapper` also caps what one address can have deposited, net of withdrawals.
+`SYWrapper.deposit` and `PrincipalManager.mint` report to `RiskControl` themselves, so direct calls are limited like `Router` calls, and a one-step deposit-and-split counts at both. Only registered contracts may report, so no outsider can use up the allowance. `SYWrapper` also caps what one address can have deposited, net of withdrawals; a cap of `0` means no cap.
+
+On the Testnet market these limits are currently off: both circuit-breaker limits and the per-address cap are set to `0`. The market page's Safety card shows the live values. The pause still applies.
 
 ## Oracle freshness guard
 
 `OracleAdapter` stores one reference value and its timestamp. Only its admin can push a value, and the contract refuses a value of zero or less, a value lower than the current one, a timestamp not later than the stored one, and a timestamp ahead of the ledger clock.
 
-A value is fresh when it is at most 3,600 seconds (one hour) old by the ledger clock. Mint, recombine, claim yield, every swap, and the observation that freezes the YT yield index at maturity all require a fresh value, or revert with `OracleStale`. A stale feed cannot trap funds: removing liquidity never reads the oracle, and once `settle_all` has frozen the settlement rate, redemption and yield claims no longer need it.
+A value is fresh when it is at most 3,600 seconds (one hour) old by the ledger clock. Mint, recombine, claim yield, every swap, single-sided liquidity, the first liquidity deposit, and the observation that freezes the YT yield index at maturity all require a fresh value, or revert with `OracleStale`. A stale feed pauses these operations but leaves exits open: unwrapping SY and removing liquidity never read the oracle, and once one fresh value has been taken at or after maturity (by `settle_all` or the first redemption), redemption and yield claims no longer need it. Until that first fresh value, PT and YT cannot be redeemed.
 
 On Testnet, the app's keeper pushes the value with the oracle's admin key. More in [The oracle](/how-it-works/oracle).
 
@@ -64,6 +66,6 @@ At or after maturity, the issuer settles what is still held with `finalize_recor
 - **Flash-redeem cannot leave the pool short.** Selling YT reverts with `InsufficientLiquidity` if the recombined SY does not cover the PT the pool gives up.
 - **Spot price is not an oracle.** A trade can move `pt_price` and `implied_rate` within a ledger.
 
-`MarketConfig` caps the fees: 1 % tokenization, 50 % YT fee, 5 % swap fee tier. See [Fees](/how-it-works/fees).
+`MarketConfig` caps the fees: 1 % tokenization, 50 % YT fee, 5 % swap Fee Tier, with the effective swap fee capped at 10 %. See [Fees](/how-it-works/fees).
 
 **Next:** [Developers](/technical/developers). Related: [Risks](/guide/risks), [Compliance](/how-it-works/compliance).
