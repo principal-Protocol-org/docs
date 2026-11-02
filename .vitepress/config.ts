@@ -103,6 +103,15 @@ export default defineConfig({
         actions.push({ theme: 'alt', text: 'Launch app ↗', link: app })
       }
     }
+
+    // The landing's split coin, at rest. Set here, not in index.md: Pages CMS would drop the key on save
+    if (isHome && frontmatter.hero) {
+      frontmatter.hero.image ??= {
+        light: '/hero-coin-light.svg',
+        dark: '/hero-coin-dark.svg',
+        alt: 'One token, split into a fixed half and a variable half',
+      }
+    }
   },
 
   head: [

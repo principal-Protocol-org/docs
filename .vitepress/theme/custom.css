@@ -127,6 +127,11 @@ h1, h2, h3,
 :focus-visible { outline-color: var(--focus); }
 .dark .vp-doc a:not(.header-anchor):hover { color: var(--coupon); }
 
+/* Nav on sidebar pages: VitePress paints only the content area, and the right gutter would show the grey ground */
+@media (min-width: 960px) {
+  .VPNav .VPNavBar.has-sidebar:not(.home) { background-color: var(--vp-nav-bg-color); }
+}
+
 /* Images */
 .vp-doc img { display: block; margin: 24px auto; border-radius: 12px; max-width: 100%; height: auto; }
 

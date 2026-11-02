@@ -65,7 +65,7 @@ Avoid, because the rich-text editor does not keep it or the site does not suppor
 - raw HTML;
 - Mermaid diagrams (draw an SVG and upload it instead).
 
-Link to other pages with absolute paths without the base, for example `/guide/core-concepts` or `/using-the-app/trade`. Do not link to the app from a page: its address differs between the production and Testnet sites. Point readers to the **Launch app** button at the top of the site. The "Launch app" button on the home page and in the nav is added by the site; do not add it in the hero buttons.
+Link to other pages with absolute paths without the base, for example `/guide/core-concepts` or `/using-the-app/trade`. Do not link to the app from a page: its address differs between the production and Testnet sites. Point readers to the **Launch app** button at the top of the site. The "Launch app" button on the home page and in the nav is added by the site; do not add it in the hero buttons. The coin illustration next to the home title is added by the site too.
 
 ### Wording
 
@@ -88,7 +88,7 @@ pnpm preview    # serves the built site
 
 ## How it is built
 
-- `.vitepress/config.ts`: `base: '/docs/'`, `cleanUrls`, `lastUpdated`, local search, sitemap, canonical and Open Graph tags, the nav, the footer, the "Launch app" button, and a markdown rule that renders each section page's `title` as its H1 (skipped when the body has one).
+- `.vitepress/config.ts`: `base: '/docs/'`, `cleanUrls`, `lastUpdated`, local search, sitemap, canonical and Open Graph tags, the nav, the footer, the "Launch app" button, the home hero image (`public/hero-coin-light.svg`, `hero-coin-dark.svg`), and a markdown rule that renders each section page's `title` as its H1 (skipped when the body has one).
 - `.vitepress/sidebar.ts`: reads each section directory at build time with `gray-matter`. Label: `sidebarTitle`, else `title`. Order: numeric `order` ascending; pages without one come after, by label.
 - `.vitepress/site.ts`: the origin per environment.
 - `.vitepress/theme/`: the landing's theme (fonts, colours, logo), light by default.
