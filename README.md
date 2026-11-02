@@ -118,14 +118,14 @@ The code wins over any document. The pages describe the contracts of `org/princi
 
 Before go-live, the developer checks:
 
-- [ ] Pages CMS: an invited collaborator without a GitHub account can edit and save a page, and the save is a commit by `pages-cms[bot]`.
-- [ ] Rich-text round trip: open a page with a table, a code block and an image, save without changes, diff. If any of them changes, switch `body` to a Markdown code field and update this file.
+- [ ] Pages CMS: an invited collaborator without a GitHub account can edit and save a page, and the save is a commit by `pages-cms[bot]`. (Someone signed in with GitHub commits in their own name.)
+- [x] Rich-text round trip: open a page with a table, a code block and an image, save without changes, diff. If any of them changes, switch `body` to a Markdown code field and update this file. Done 2026-11-02 on `how-it-works/maturity.md`: table, inline code, code blocks and image kept; only layout changes (folded `description`, table separator padding, blank lines, no final newline).
 - [ ] A page's filename does not change when its title is edited in Pages CMS.
-- [ ] The Vercel project builds and serves `/docs/...` on its own domain.
+- [x] The Vercel project builds and serves `/docs/...` on its own domain. Done 2026-11-02 (`principalmarket-docs.vercel.app`). On that host a path under `/docs` with a trailing slash (`/docs/guide/`) answers 404, the same path at the root answers 200: the dApp proxy targets the root.
 - [ ] Once `feat/tranche-1-mvp` is merged into `main` in `org/principal`: every GitHub link in the site answers 200 (VitePress checks internal links only).
 - [ ] Each figure in the pages is checked against the code (done for the first draft at `be2a1a5`; repeat after protocol changes).
 - [ ] Home page round trip: in Pages CMS, save the home page once without changes, then diff (`layout`, hero buttons, feature cards).
-- [ ] "Last updated" on the first Vercel build after a few saves: if pages show a wrong date (a shallow clone gives older pages the clone's oldest commit date), set `lastUpdated: false` or make the build fetch the full history.
+- [ ] "Last updated" on a Vercel build once the history is longer (matched git on the first builds, 2026-11-02): if pages show a wrong date (a shallow clone gives older pages the clone's oldest commit date), set `lastUpdated: false` or make the build fetch the full history.
 - [ ] The Testnet docs: choose how `testnet.principalmarket.fi/docs` is built (below).
 
 ### Open decision: the Testnet docs
