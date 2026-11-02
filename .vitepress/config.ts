@@ -20,6 +20,7 @@ export default defineConfig({
   cleanUrls: true,
   lastUpdated: true,
   // Light unless the visitor chose dark (VitePress's own 'auto' would follow the OS)
+  // VitePress 1.6.4 types initialValue as 'dark', but the runtime accepts 'light' (head script: localStorage || initialValue)
   appearance: { initialValue: 'light' },
   srcExclude: ['README.md', 'AGENTS.md', 'CLAUDE.md', '.claude/**'],
 
@@ -32,6 +33,12 @@ export default defineConfig({
       .replace(/\.md$/, '')
     const { frontmatter } = pageData
     const isHome = pageData.relativePath === 'index.md'
+
+    if (isHome) {
+      // Home title would otherwise render "Principal | Principal"
+      pageData.titleTemplate = false
+      pageData.title = 'Principal: fixed income for tokenized real-world assets'
+    }
 
     frontmatter.head ??= []
     frontmatter.head.push(

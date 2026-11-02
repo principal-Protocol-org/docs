@@ -77,6 +77,19 @@
   --vp-c-warning-2: var(--coupon-ink);
   --vp-c-warning-3: var(--coupon);
   --vp-c-warning-soft: var(--coupon-wash);
+  --vp-c-important-1: var(--par);
+  --vp-c-important-2: var(--par);
+  --vp-c-important-3: var(--par);
+  --vp-c-important-soft: color-mix(in srgb, var(--par) 10%, transparent);
+  --vp-c-caution-1: var(--negative);
+  --vp-c-caution-2: var(--negative);
+  --vp-c-caution-3: var(--negative);
+  --vp-c-caution-soft: color-mix(in srgb, var(--negative) 12%, transparent);
+
+  --vp-c-default-1: var(--line-strong);
+  --vp-c-default-2: color-mix(in srgb, var(--line-strong) 45%, var(--surface));
+  --vp-c-default-3: color-mix(in srgb, var(--line-strong) 25%, var(--surface));
+  --vp-c-default-soft: var(--surface-sunk);
 
   --vp-button-brand-bg: var(--par);
   --vp-button-brand-text: var(--on-par);
@@ -87,7 +100,6 @@
 
   --vp-code-block-bg: var(--surface-sunk);
   --vp-code-copy-code-bg: var(--surface);
-  --vp-c-focus: var(--focus);
   --vp-nav-logo-height: 26px;
 
   --vp-home-hero-name-color: var(--par);
@@ -103,10 +115,17 @@ h1, h2, h3,
 }
 .vp-doc h1, .vp-doc h2, .vp-doc h3 { font-weight: 500; }
 .vp-doc h2 { border-top-color: var(--line); }
-.vp-doc a { text-decoration-color: color-mix(in srgb, var(--par) 40%, transparent); }
+.vp-doc a:not(.header-anchor) {
+  text-decoration-color: color-mix(in srgb, var(--par) 65%, transparent);
+  text-underline-offset: 3px;
+}
+.vp-doc a:not(.header-anchor):hover {
+  color: var(--coupon-ink);
+  text-decoration-color: currentColor;
+}
 .vp-doc :not(pre) > code { color: var(--vp-c-text-1); }
-.VPHero .name { -webkit-text-fill-color: var(--par); }
 :focus-visible { outline-color: var(--focus); }
+.dark .vp-doc a:not(.header-anchor):hover { color: var(--coupon); }
 
 /* Images */
 .vp-doc img { display: block; margin: 24px auto; border-radius: 12px; max-width: 100%; height: auto; }
