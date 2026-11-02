@@ -27,7 +27,7 @@ The writer edits every page in a browser, without GitHub, with [Pages CMS](https
 2. Invite the writer by email in Pages CMS (collaborators). The writer needs no GitHub account.
 3. The writer opens `app.pagescms.org`, picks the repository and sees the home page and the four sections, defined in `.pages.yml`.
 
-Each save is a commit by `pages-cms[bot]` on `main`. A push to `main` deploys to production on Vercel.
+Each save is a commit by `pages-cms[bot]` on `main` (a GitHub sign-in commits in the user's own name). A push to `main` deploys to production on Vercel. The repository is public on purpose: on a private repository Vercel blocks every push whose commit author is not a member of the Vercel team, and `pages-cms[bot]` is not one.
 
 ### Edit a page
 
@@ -120,7 +120,7 @@ The code wins over any document. The pages describe the contracts of `org/princi
 
 Before go-live, the developer checks:
 
-- [ ] Pages CMS: an invited collaborator without a GitHub account can edit and save a page, and the save is a commit by `pages-cms[bot]`. (Someone signed in with GitHub commits in their own name.)
+- [ ] Pages CMS: an invited collaborator without a GitHub account can edit and save a page, the save is a commit by `pages-cms[bot]`, and its Vercel deployment is Ready.
 - [x] Rich-text round trip: open a page with a table, a code block and an image, save without changes, diff. If any of them changes, switch `body` to a Markdown code field and update this file. Done 2026-11-02 on `how-it-works/maturity.md`: table, inline code, code blocks and image kept; only layout changes (folded `description`, table separator padding, blank lines, no final newline).
 - [ ] A page's filename does not change when its title is edited in Pages CMS.
 - [x] The Vercel project builds and serves `/docs/...` on its own domain. Done 2026-11-02 (`principalmarket-docs.vercel.app`). On that host a path under `/docs` with a trailing slash (`/docs/guide/`) answers 404, the same path at the root answers 200: the dApp proxy targets the root.
