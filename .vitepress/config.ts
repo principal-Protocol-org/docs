@@ -1,5 +1,6 @@
 import { defineConfig } from 'vitepress'
 
+import { SECTIONS, sidebar } from './sidebar'
 import { appUrl, docsUrl, siteOrigin } from './site'
 
 const origin = siteOrigin()
@@ -56,12 +57,11 @@ export default defineConfig({
 
   themeConfig: {
     nav: [
-      { text: 'Guide', link: '/guide/' },
-      { text: 'Using the app', link: '/using-the-app/' },
-      { text: 'How it works', link: '/how-it-works/' },
-      { text: 'Technical', link: '/technical/' },
+      ...SECTIONS.map(({ dir, text }) => ({ text, link: `/${dir}/` })),
       { text: 'Launch app', link: app },
     ],
+
+    sidebar: sidebar(),
 
     socialLinks: [{ icon: 'github', link: 'https://github.com/principal-Protocol-org' }],
 
