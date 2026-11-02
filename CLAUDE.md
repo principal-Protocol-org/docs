@@ -45,4 +45,6 @@ vercel.json             outputDirectory, cleanUrls, /docs/:path* rewrite
 
 **GitHub links** point to `https://github.com/principal-Protocol-org/principal/blob/main/...`. Some files exist only on `feat/tranche-1-mvp` until it is merged, so they answer 404 until then.
 
+**Commits.** Author and committer are `remyghislain <cedric+1@smartt.dev>`, with no `Co-Authored-By:` or `Claude-Session:` trailer.
+
 **Diagrams** are static SVG in `public/images/`, in the brand colours, readable at 12 px or more. Mermaid is not used.
