@@ -17,7 +17,7 @@ SY, PT and YT are explained in [Core concepts](/guide/core-concepts), and wrappi
 
 ## Deposit
 
-The form is titled **Deposit**: "Wrap USDY into SY, the token the pool trades and PT + YT are minted from." Enter the **USDY to deposit**. The preview shows the **SY received**. A **Market (indicative)** block adds the **SY exchange rate** (USDY per SY), **Your deposit cap left**, and the room left in each circuit breaker that is on. Click **Review Deposit**.
+The form is titled **Deposit**: "Wrap USDY into SY, the token the pool trades and PT + YT are minted from." Enter the **USDY to deposit**. The preview shows the **SY received**. A **Market (indicative)** block adds the **SY exchange rate** (USDY per SY), **Your deposit cap left**, and the room left in each circuit breaker that is on. On the Testnet market these limits are currently off, so the cap reads "No cap" and no circuit-breaker row shows; the market page's Safety card shows the live values. Click **Review Deposit**.
 
 ## Withdraw
 
@@ -31,7 +31,9 @@ The dialog is titled **Split USDY → PT + YT**, and the form inside it **Mint P
 - **Tokenization fee**: "Kept by the market from the SY, rounded up."
 - **Deposited as SY first**: the transaction deposits your USDY, then mints from that SY.
 
-The market block adds the oracle rate, the tokenization fee rate, your deposit cap and the circuit breakers. Splitting counts twice against a circuit breaker: once for the deposit, once for the mint. Click **Review Mint PT + YT**.
+Once the app has simulated it as your account, the preview shows the exact PT and YT, the fee and the **Minimum PT received (and as much YT)**.
+
+The market block adds the oracle rate, the tokenization fee rate, your deposit cap and, when a circuit breaker is on, the room left in it; a split counts twice against it: once for the deposit, once for the mint. Click **Review Mint PT + YT**.
 
 Splitting starts from USDY only. If you hold SY, the form says so and suggests using it to buy PT or YT, add liquidity, or withdraw it.
 

@@ -4,11 +4,11 @@ description: "Buy and sell PT and YT in a market's Trade panel, review every ste
 order: 3
 ---
 
-The **Trade** panel of a market page has three tabs: **PT**, **YT** and **LP**. This page covers PT and YT; [Add and remove liquidity](/using-the-app/liquidity) covers LP. Each tab has a **Buy** / **Sell** toggle. For which to use when, see [Strategies](/guide/strategies).
+The **Trade** panel of a market page has three tabs: **PT**, **YT** and **LP**. This page covers PT and YT, which each have a **Buy** / **Sell** toggle. [Add and remove liquidity](/using-the-app/liquidity) covers LP, whose sides are **Deposit** / **Withdraw**. For which to use when, see [Strategies](/guide/strategies).
 
 ## USDY or SY
 
-Every **You pay** field has a **Pay with** choice, and every sale a **Receive as** choice: **USDY**, the default, or **USDY** with an **SY** badge, its SY version.
+Every buy has a **Pay with** choice under **You pay**, and every sale a **Receive as** choice under **You receive (preview)**: **USDY**, the default, or **USDY** with an **SY** badge, its SY version.
 
 The pool trades SY, so paying or receiving in USDY adds steps: the app turns USDY into SY first, or SY back into USDY at the end. Each step is a transaction you sign. The **Signatures** row of the details gives the count, and its info tip lists the steps.
 
@@ -42,7 +42,7 @@ The pool trades SY, so paying or receiving in USDY adds steps: the app turns USD
 - **Spends at most**: the most the trade may cost at your slippage tolerance.
 - **At maturity**: "YT worth 0".
 
-Paying in USDY, a buy also shows **Moves**, **Spends** and **Comes back**. To buy YT today the app mints PT + YT from a larger amount and sells the PT straight back, so your USDY balance must cover what is moved, not only what you spend. **Max** takes this into account. The mechanism is in [Pricing and the AMM](/how-it-works/pricing-and-amm).
+A buy also shows **Moves**, **Spends** and **Comes back (step N)**, N being the step that hands the rest back to you. To buy YT the app mints PT + YT from a larger amount and sells the PT straight back, so your balance must cover what is moved, not only what you spend. This holds whether you pay in USDY or in SY. **Max** takes this into account. The mechanism is in [Pricing and the AMM](/how-it-works/pricing-and-amm).
 
 **Sell YT** sells YT before maturity; the fixed APY falls.
 
@@ -57,7 +57,7 @@ The dialog, **Review route: Buy PT**, says how many signatures the trade takes a
 - **Deadline** or **Valid until**: when the transaction can no longer land.
 - **Technical details**: the contract call and the transaction hash, folded away.
 
-Each later step says "Its minimum is set from a fresh quote once step 1 is confirmed, not from this review." Click **Sign step 1 of 2** and approve in Varial. Once a step is confirmed, the next is prepared from what it actually produced, and you sign it the same way. The amount fields clear once a step reaches the network. At the end the panel reads "Route complete".
+Each later step says its minimum "is set from a fresh quote once step N is confirmed, not from this review", N being the step before it. Click **Sign step 1 of 2** and approve in Varial. Once a step is confirmed, the next is prepared from what it actually produced, and you sign it the same way. The amount fields clear once a step reaches the network. At the end the panel reads "Route complete".
 
 A step left unsigned for 60 seconds expires and the route stops. **Cancel** before step 1 drops the route; nothing was sent.
 

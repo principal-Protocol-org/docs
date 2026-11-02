@@ -10,10 +10,9 @@ order: 6
 
 The Portfolio shows one card per market where you hold something. If you hold nothing, it says "You hold nothing in any market yet." and links to the markets.
 
-Each card starts with your balances: **USDY**, **SY**, **PT**, **YT** and **LP**. Then, depending on what you hold:
+Each card starts with your balances: **USDY**, **SY**, **PT**, **YT** and **LP**. Every card also shows the market's **Oracle rate**, whether it is fresh or stale (older than 1 hour), and when it was updated. Depending on what you hold, it adds:
 
 - **LP**: your share of the pool, as **PT** and **SY**, and the **Estimated value of your share** in USDY.
-- **Oracle rate**, whether it is fresh or stale (older than 1 hour), and when it was updated.
 - **YT**: your **Pending yield (net of the YT fee)**. Its tip gives the gross yield and the fee.
 - **PT**: a **Fixed return if held to maturity** block, with the **Face value at maturity (USD)**, the **Current value (USD, at the pool price)**, the **Projected fixed return at maturity**, the **Fixed APY from now**, and what your PT **Redeems for** in USDY, marked indicative until the market settles.
 - **PT or YT**: an entry line from your history, such as the fixed APY you locked when you bought PT, or the rate at your mint.
@@ -34,7 +33,7 @@ Once the maturity date has passed, the **Redeem at maturity** shortcut opens the
 2. Read the preview: **From PT** and **From YT (net of the YT fee)**, and under **Settlement**, the **Settlement rate**.
 3. Click **Review Redeem at maturity**, then sign. It is one transaction.
 
-If the market has not settled yet, the first redemption settles it for everyone, and the form says so. While the rate can still move, it also warns that the PT amount depends on the oracle rate when your transaction lands, and can only be lower than shown. A redemption sets no minimum. See [Maturity](/how-it-works/maturity).
+If the market has not settled yet, the first redemption settles it for everyone, at the oracle rate of that moment, and the form says so. Until the market is settled, redeeming therefore needs a fresh oracle price, as Claim yield does: if the oracle has not been updated in the last hour, signing stays off until the next update. While the rate can still move, it also warns that the PT amount depends on the oracle rate when your transaction lands, and can only be lower than shown. A redemption sets no minimum. See [Maturity](/how-it-works/maturity).
 
 ## History
 
@@ -42,6 +41,6 @@ If the market has not settled yet, the first redemption settles it for everyone,
 
 The table has five columns: **Time** (UTC), **Action**, **Details**, **Status** and **Transaction**, whose shortened hash links to stellar.expert. A transaction you just sent from this browser shows as **Pending** until the network events include it, or **Not found — expired** if its time window closed first.
 
-A multi-step route is one row, such as "Buy PT · 2 steps", with a **Steps** list you can open to see each step's status and hash. Its status reads **Completed**, **Returned to USDY**, **Waiting for the network**, **Interrupted** or **Stopped**. When a stopped route still holds your funds, the row says what you hold and offers **Continue**, which reopens the route on its market page where you left it. The app keeps routes in your browser, so Continue appears in the browser you used.
+A multi-step route is one row, such as "Buy PT · 2 steps", with a **Steps** list you can open to see each step's status and hash. Its status reads **Completed**, **Returned to USDY**, **Waiting for the network**, **Interrupted** or **Stopped**. When an **Interrupted** or **Waiting for the network** route still holds your funds, the row says what you hold and offers **Continue**, which reopens the route on its market page where you left it. The app keeps routes in your browser, so Continue appears in the browser you used.
 
 Next: [How it works](/how-it-works/), for the mechanics behind these screens, or [Risks](/guide/risks) before you trade.
