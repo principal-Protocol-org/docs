@@ -1,0 +1,223 @@
+media:
+  input: public/images
+  output: /images
+
+content:
+  - name: home
+    label: Home page
+    description: The landing page of the documentation site.
+    type: file
+    path: index.md
+    format: yaml-frontmatter
+    fields:
+      - name: layout
+        label: Layout
+        type: string
+        default: home
+        hidden: true
+      - name: hero
+        label: Hero
+        description: The large banner at the top. The "Launch app" button is added automatically; do not add it here.
+        type: object
+        fields:
+          - name: name
+            label: Name
+            type: string
+          - name: text
+            label: Headline
+            type: string
+          - name: tagline
+            label: Tagline
+            type: text
+          - name: actions
+            label: Buttons
+            description: Buttons under the tagline. The "Launch app" button is added automatically; do not add it here.
+            type: object
+            list: true
+            fields:
+              - name: theme
+                label: Style
+                description: Brand is the filled button; Alt is the outlined one.
+                type: select
+                options:
+                  values:
+                    - { name: brand, label: Brand }
+                    - { name: alt, label: Alt }
+              - name: text
+                label: Text
+                type: string
+              - name: link
+                label: Link
+                description: A path such as /guide/ or a full URL.
+                type: string
+      - name: features
+        label: Feature cards
+        description: The cards shown below the hero.
+        type: object
+        list: true
+        fields:
+          - name: title
+            label: Title
+            type: string
+          - name: details
+            label: Details
+            type: text
+          - name: link
+            label: Link
+            description: A path such as /guide/ or a full URL.
+            type: string
+      - name: body
+        label: Body
+        type: rich-text
+
+  - name: guide
+    label: Guide
+    description: Pages at /guide/
+    type: collection
+    path: guide
+    format: yaml-frontmatter
+    filename:
+      template: '{primary}.md'
+      field: create
+    view:
+      primary: title
+      fields: [title, order]
+      sort: [order, title]
+      default:
+        sort: order
+        order: asc
+    fields:
+      - name: title
+        label: Title
+        type: string
+        required: true
+      - name: sidebarTitle
+        label: Sidebar title
+        description: Optional. Shorter label for the sidebar.
+        type: string
+      - name: description
+        label: Description
+        description: One or two sentences for search engines and link previews.
+        type: text
+        required: true
+      - name: order
+        label: Order
+        description: Position in the sidebar; 1 is the section's first page.
+        type: number
+      - name: body
+        label: Page
+        type: rich-text
+
+  - name: using-the-app
+    label: Using the app
+    description: Pages at /using-the-app/
+    type: collection
+    path: using-the-app
+    format: yaml-frontmatter
+    filename:
+      template: '{primary}.md'
+      field: create
+    view:
+      primary: title
+      fields: [title, order]
+      sort: [order, title]
+      default:
+        sort: order
+        order: asc
+    fields:
+      - name: title
+        label: Title
+        type: string
+        required: true
+      - name: sidebarTitle
+        label: Sidebar title
+        description: Optional. Shorter label for the sidebar.
+        type: string
+      - name: description
+        label: Description
+        description: One or two sentences for search engines and link previews.
+        type: text
+        required: true
+      - name: order
+        label: Order
+        description: Position in the sidebar; 1 is the section's first page.
+        type: number
+      - name: body
+        label: Page
+        type: rich-text
+
+  - name: how-it-works
+    label: How it works
+    description: Pages at /how-it-works/
+    type: collection
+    path: how-it-works
+    format: yaml-frontmatter
+    filename:
+      template: '{primary}.md'
+      field: create
+    view:
+      primary: title
+      fields: [title, order]
+      sort: [order, title]
+      default:
+        sort: order
+        order: asc
+    fields:
+      - name: title
+        label: Title
+        type: string
+        required: true
+      - name: sidebarTitle
+        label: Sidebar title
+        description: Optional. Shorter label for the sidebar.
+        type: string
+      - name: description
+        label: Description
+        description: One or two sentences for search engines and link previews.
+        type: text
+        required: true
+      - name: order
+        label: Order
+        description: Position in the sidebar; 1 is the section's first page.
+        type: number
+      - name: body
+        label: Page
+        type: rich-text
+
+  - name: technical
+    label: Technical
+    description: Pages at /technical/
+    type: collection
+    path: technical
+    format: yaml-frontmatter
+    filename:
+      template: '{primary}.md'
+      field: create
+    view:
+      primary: title
+      fields: [title, order]
+      sort: [order, title]
+      default:
+        sort: order
+        order: asc
+    fields:
+      - name: title
+        label: Title
+        type: string
+        required: true
+      - name: sidebarTitle
+        label: Sidebar title
+        description: Optional. Shorter label for the sidebar.
+        type: string
+      - name: description
+        label: Description
+        description: One or two sentences for search engines and link previews.
+        type: text
+        required: true
+      - name: order
+        label: Order
+        description: Position in the sidebar; 1 is the section's first page.
+        type: number
+      - name: body
+        label: Page
+        type: rich-text
