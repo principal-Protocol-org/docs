@@ -1,2 +1,4 @@
 allowBuilds:
   esbuild: true
+# Resolve only versions published at least 14 days ago (minutes).
+minimumReleaseAge: 20160
