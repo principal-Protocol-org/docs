@@ -1,9 +1,9 @@
 ---
 title: Maturity
-description: "What PT and YT pay at maturity, how the single settlement rate is fixed, and how redemption works."
+description: What PT and YT pay at maturity, how the single settlement rate is
+  fixed, and how redemption works.
 order: 4
 ---
-
 Every market has a maturity date, fixed when the market is created. The Testnet market matures on 31 January 2027 at 00:45 UTC. At maturity, trading closes and PT and YT become redeemable for the underlying token. The first index update at or after maturity fixes one final rate for everyone. This page explains what each one pays and how.
 
 ![Before maturity PT rises toward par while YT's price falls toward zero as its future yield runs out; at maturity PT redeems for the principal's value and YT's earned yield stays claimable](/images/maturity-payout.svg)
@@ -53,11 +53,13 @@ In round numbers: you split USDY worth 100 USDC into a 3-month market, and USDY 
 
 The exact version (no fees): 100 SY split at a rate of 1.05 gives 105 PT + 105 YT. The settlement rate is 1.10.
 
+
 | Leg | Formula | Underlying tokens |
-|---|---|---|
+| ----- | ------------------------- | ------------------------------------------------- |
 | PT | `105 / 1.10` | 95.4545 |
 | YT | `105 × (1/1.05 − 1/1.10)` | 4.5455 |
-| Total | | 100, the SY split (less one raw unit of rounding) |
+| Total |  | 100, the SY split (less one raw unit of rounding) |
+
 
 ## How redemption works
 
