@@ -24,7 +24,7 @@ Charged when you split SY into PT + YT, before the notional is computed:
 fee_shares = ceil(n × tokenization_fee_bps / 10_000)
 ```
 
-It is rounded up, so a non-zero fee is never zero. It applies to every split: the Split quick action and the first step of buying YT both split SY. At 5 bps, splitting 100 SY withholds 0.05 SY (see [Tokenization](/how-it-works/)).
+It is rounded up, so a non-zero fee rate never rounds down to a zero fee. It applies to every split: the Split quick action (which wraps your USDY into SY first) and the first step of buying YT both split SY. At 5 bps, splitting 100 SY withholds 0.05 SY (see [Tokenization](/how-it-works/)).
 
 ## YT fee
 
@@ -58,7 +58,7 @@ Buying YT sells PT into the pool, so it pays the swap fee on that sale.
 |---|---|---|---|---|---|---|---|
 | Fee rate | 0.1000% | 0.0493% | 0.0247% | 0.00822% | 0.00192% | 0.000274% | 0 |
 
-A 1,000 SY trade 90 days before maturity pays 0.2466 SY of fee; the same trade a week out pays 0.0192 SY. Trading back toward par near maturity is almost free.
+A 1,000 SY trade 90 days before maturity pays 0.2466 SY of fee; the same trade a week out pays 0.0192 SY. Trades close to maturity pay almost no swap fee.
 
 ## What costs nothing
 
@@ -83,6 +83,8 @@ On the Testnet market the protocol share is 2,000 bps: **20% to Principal** and 
 
 - Principal's share is paid to the treasury address in the market's configuration.
 - The **market creator** is the underlying asset's current issuer authority. For a Stellar asset that is the asset contract's `admin()`, read when the fee is paid out, so if the issuer changes its admin key the new key receives the fees with nothing to update. A SEP-57 token has no admin, so its market names an explicit payee.
+
+On Testnet the test USDY's asset-contract admin is Principal's admin key, so both shares go to Principal: the 20% to its treasury key, the 80% to its admin key.
 
 The shares build up in the PrincipalManager (tokenization and YT fees) and in the pool (swap fees). Anyone can trigger the payout with `claim_protocol_fees` or `claim_creator_fees`; the recipient is fixed by the configuration, so calling them cannot redirect anything.
 

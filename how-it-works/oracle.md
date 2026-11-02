@@ -4,7 +4,7 @@ description: "The reference rate behind every Principal calculation: what it mea
 order: 6
 ---
 
-Every number on the previous pages depends on one input: the **reference rate**, the USDC value of one token of the underlying asset. Each market reads it from an OracleAdapter contract, which is shared infrastructure that several markets can use. This page explains what that contract stores, where its value comes from, and the two checks that protect the market from a bad or stale value.
+Every number on the previous pages depends on one input: the **reference rate**, the USDC value of one token of the underlying asset. Each market reads it from an OracleAdapter contract, which is shared infrastructure: every market on the same underlying asset can read the same one. This page explains what that contract stores, where its value comes from, and the two checks that protect the market from a bad or stale value.
 
 ## What the rate is
 
@@ -22,7 +22,7 @@ For an asset like USDY the token count in your wallet stays the same while each 
 
 The contract does not fetch a price itself. Only its admin can publish a value, with `set_reference_value`. Who runs that admin key decides where the number comes from.
 
-For a real USDY market, Principal's design takes the value from RedStone's USDY/USD feed (a SEP-40 price feed on Stellar), carried to the OracleAdapter by a relay.
+For a production USDY market, Principal's design feeds the OracleAdapter from RedStone's USDY/USD feed (a SEP-40 price feed on Stellar) through a relay. That relay is a design only: it is not part of the contracts and does not run today.
 
 **The Testnet market does not use RedStone.** Its underlying is a test USDY, "USDY (test)", issued by a test account Principal holds, not by Ondo. Its oracle is fed by Principal's own keeper: the value started at 1.0 when the market was created and the keeper pushes a new one about every 30 minutes, growing at about 5% a year. Yields you see on Testnet come from that test value, not from USDY's real yield.
 
@@ -40,7 +40,7 @@ Why the value may never fall: the settlement math assumes it. YT earns only when
 
 ## Check 2: the rate must be fresh
 
-The contracts ask the oracle whether its value is **fresh**, meaning published within the last 3,600 seconds (one hour), measured against the ledger's own clock, which no caller can set.
+The contracts ask the oracle whether its value is **fresh**, meaning its timestamp (set by the admin, never ahead of the ledger clock) is at most 3,600 seconds (one hour) old by the ledger's own clock, which no caller can set.
 
 A stale oracle blocks every operation that prices against the rate:
 
@@ -64,7 +64,7 @@ If the feed stops after maturity but one fresh value was taken at or after matur
 ## Limits
 
 - The value is trusted as published: one admin key, one source. The contracts do not combine several feeds.
-- The pool's own PT price and implied rate are not an oracle. A large trade can move them within a block.
+- The pool's own PT price and implied rate are not an oracle. A large trade can move them within a single ledger.
 
 For the controls around the oracle and what an operator can do, see [Safety controls](/technical/security). For what an oracle failure means for your position, see [Risks](/guide/risks).
 

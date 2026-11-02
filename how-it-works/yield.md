@@ -38,7 +38,7 @@ total              N / r₀  =  the SY you split
 
 So PT and YT together never claim more than the SY backing them, whatever the rate was at minting and however many times it moved.
 
-**Example** (from Principal's yield guide, no fees). You split 100 SY at a rate of 1.05 and receive 105 PT + 105 YT. At maturity the rate is 1.10. PT pays `105 / 1.10 = 95.4545` tokens and YT pays `105 × (1/1.05 − 1/1.10) = 4.5454` tokens: 100 in total, less one raw unit of rounding.
+**Example** (from Principal's yield guide, no fees). You split 100 SY at a rate of 1.05 and receive 105 PT + 105 YT. At maturity the rate is 1.10. PT pays `105 / 1.10 = 95.4545` tokens and YT pays `105 × (1/1.05 − 1/1.10) = 4.5455` tokens: 100 in total, less one raw unit of rounding.
 
 ## When the index moves
 
@@ -78,9 +78,9 @@ fee    = 10% of gross                   ≈ 0.4543
 paid   = gross − fee                    ≈ 4.0889 underlying tokens
 ```
 
-## Yield stops at maturity
+## Yield stops at settlement
 
-The first index update at or after maturity moves the index one last time, using a fresh oracle value, and then freezes it. The rate it froze at is the market's settlement rate, used for both PT and YT. Nothing accrues after that. See [Maturity](/how-it-works/maturity).
+The first index update at or after maturity moves the index one last time, using a fresh oracle value, and then freezes it. That update can come from `settle_all`, `update_yield_index`, a redemption, a claim or a YT transfer. It may happen some time after maturity, and yield accrues until it does. The rate the index froze at is the market's settlement rate, used for both PT and YT. Nothing accrues after that. See [Maturity](/how-it-works/maturity).
 
 ## Rounding
 

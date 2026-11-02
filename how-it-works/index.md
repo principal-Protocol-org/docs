@@ -8,7 +8,7 @@ Principal turns one yield-bearing asset into two tokens: one that pays a fixed v
 
 ## Units
 
-Every amount in the contracts is an integer at a scale of 10,000,000 (`SCALE = 1e7`), so `1.0` is stored as `10_000_000`. The test USDY, PT and YT on Testnet all use 7 decimals.
+Rates are integers at a scale of 10,000,000 (`SCALE = 1e7`), so a rate of `1.0` is stored as `10_000_000`. Token amounts are integers in the token's smallest unit: the test USDY, SY, PT and YT on Testnet all use 7 decimals.
 
 The **reference rate** `r` is the USDC value of one underlying token, from the market's oracle. A rate of 1.05 USDC per token is stored as `10_500_000`. See [Oracle](/how-it-works/oracle) for where it comes from.
 
@@ -39,7 +39,7 @@ Here `n` is the SY you split and `fee_bps` is the market's tokenization fee (see
 
 **Example** (from Principal's yield guide). You split 100 SY when the rate is 1.05. With no fee you receive 105 PT and 105 YT. With a 5 bps tokenization fee, 0.05 SY is withheld and you receive 104.9475 PT and 104.9475 YT.
 
-Splitting needs three things: the market has not matured, the oracle value is fresh (updated within the last hour), and your account is allowed to hold the underlying. The SY you split stays in the PrincipalManager contract as the backing for your PT and YT.
+Splitting needs the market to be open (not matured, not paused), a fresh oracle value (updated within the last hour), and an account that passes the [compliance checks](/how-it-works/compliance): authorized on the underlying and on the allow-list. The SY you split stays in the PrincipalManager contract as the backing for your PT and YT.
 
 ## What PT and YT are claims on
 
@@ -48,7 +48,7 @@ PT and YT are both counted in notional (USDC), but they pay out in the underlyin
 - **PT** pays its notional, converted into underlying at the final rate: `PT ÷ r_final` tokens at maturity.
 - **YT** collects the growth of the underlying behind that notional: `N × (1/r₀ − 1/r_final)` tokens over the market's life, where `r₀` is the rate when it was minted.
 
-Added together, the two claims come back to exactly the SY you split, whatever the rates. [Yield](/how-it-works/yield) shows why, and [Maturity](/how-it-works/maturity) shows the payout.
+Added together, before fees, the two claims come back to the SY you split, whatever the rates (rounding can only take a raw unit or two off). [Yield](/how-it-works/yield) shows why, and [Maturity](/how-it-works/maturity) shows the payout.
 
 ## Step 3: recombine PT + YT
 
@@ -74,8 +74,8 @@ Recombining charges no fee. It needs a fresh oracle and is closed once the marke
 | Remove liquidity | Yes | Yes |
 | Redeem PT and YT | No | Yes |
 
-Every row also requires that your account passes the compliance checks, and most are refused while the market is paused (removing liquidity after maturity is the exception).
+Every row also requires that your account passes the compliance checks, and most are refused while the market's contracts are paused (after maturity, removing liquidity ignores the pool's pause but still needs the SY wrapper unpaused).
 
-In the app, wrapping, unwrapping, splitting and recombining are the [Quick actions](/using-the-app/quick-actions).
+In the app these are the [Quick actions](/using-the-app/quick-actions) **Deposit USDY → SY**, **Withdraw SY → USDY**, **Split USDY → PT + YT** (which wraps your USDY into SY first) and **Recombine PT + YT**.
 
 **Next:** [Yield](/how-it-works/yield), how YT earns and how you claim it.
