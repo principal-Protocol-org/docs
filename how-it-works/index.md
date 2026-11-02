@@ -1,9 +1,81 @@
 ---
-title: How it works
-description: "How Principal splits yield and principal."
+title: Tokenization
+description: "How Principal wraps a yield-bearing asset into SY, splits SY into PT and YT, and puts them back together."
 order: 1
 ---
 
-# How it works
+Principal turns one yield-bearing asset into two tokens: one that pays a fixed value at maturity (PT) and one that collects the yield until then (YT). It does this in three moves: wrap the asset into SY, split SY into PT + YT, and, if you change your mind before maturity, recombine them. This page shows the arithmetic the contracts run for each move.
 
-This section is written in a later task.
+## Units
+
+Every amount in the contracts is an integer at a scale of 10,000,000 (`SCALE = 1e7`), so `1.0` is stored as `10_000_000`. The test USDY, PT and YT on Testnet all use 7 decimals.
+
+The **reference rate** `r` is the USDC value of one underlying token, from the market's oracle. A rate of 1.05 USDC per token is stored as `10_500_000`. See [Oracle](/how-it-works/oracle) for where it comes from.
+
+## Step 1: wrap the underlying into SY
+
+SY is a share in the wrapper's pool of the underlying asset. You deposit the underlying and receive SY shares:
+
+```
+shares = amount × SCALE / exchange_rate
+exchange_rate = total_underlying × SCALE / total_shares
+```
+
+With no shares yet, the exchange rate is 1.0. For an asset like USDY, whose token count does not grow (its value does), deposits and withdrawals keep the exchange rate at 1.0: one SY is one underlying token. The asset's growth shows up in the reference rate instead.
+
+SY has no maturity. You can unwrap it back into the underlying at any time, as long as the wrapper is not paused and your account passes the [compliance checks](/how-it-works/compliance).
+
+## Step 2: split SY into PT + YT
+
+Splitting (`PrincipalManager.mint`) takes your SY, withholds the tokenization fee, and values what is left at the current reference rate. That value is the **notional**, in USDC, and you receive that many PT and that many YT:
+
+```
+fee_shares = ceil(n × fee_bps / 10_000)
+notional   = (n − fee_shares) × r / SCALE
+PT minted  = YT minted = notional
+```
+
+Here `n` is the SY you split and `fee_bps` is the market's tokenization fee (see [Fees](/how-it-works/fees)).
+
+**Example** (from Principal's yield guide). You split 100 SY when the rate is 1.05. With no fee you receive 105 PT and 105 YT. With a 5 bps tokenization fee, 0.05 SY is withheld and you receive 104.9475 PT and 104.9475 YT.
+
+Splitting needs three things: the market has not matured, the oracle value is fresh (updated within the last hour), and your account is allowed to hold the underlying. The SY you split stays in the PrincipalManager contract as the backing for your PT and YT.
+
+## What PT and YT are claims on
+
+PT and YT are both counted in notional (USDC), but they pay out in the underlying token.
+
+- **PT** pays its notional, converted into underlying at the final rate: `PT ÷ r_final` tokens at maturity.
+- **YT** collects the growth of the underlying behind that notional: `N × (1/r₀ − 1/r_final)` tokens over the market's life, where `r₀` is the rate when it was minted.
+
+Added together, the two claims come back to exactly the SY you split, whatever the rates. [Yield](/how-it-works/yield) shows why, and [Maturity](/how-it-works/maturity) shows the payout.
+
+## Step 3: recombine PT + YT
+
+Before maturity you can burn equal amounts of PT and YT to get SY back (`PrincipalManager.recombine`). The SY is valued at the **current** rate:
+
+```
+shares_returned = amount × SCALE / r
+```
+
+**Example** (from the contracts' tests, no fees). You split 100 SY at a rate of 1.0 and receive 100 PT + 100 YT. Later the rate is 1.25. Recombining the 100 PT + 100 YT returns 80 SY. The other 20 SY back the yield your YT has already earned: it stays yours, and you collect it with a yield claim.
+
+Recombining charges no fee. It needs a fresh oracle and is closed once the market matures; after that you redeem instead.
+
+## Before and after maturity
+
+| Action | Before maturity | At or after maturity |
+|---|---|---|
+| Wrap or unwrap SY | Yes | Yes |
+| Split SY into PT + YT | Yes | No |
+| Recombine PT + YT | Yes | No (redeem instead) |
+| Claim YT yield | Yes | Yes |
+| Trade PT or YT in the pool, add liquidity | Yes | No |
+| Remove liquidity | Yes | Yes |
+| Redeem PT and YT | No | Yes |
+
+Every row also requires that your account passes the compliance checks, and most are refused while the market is paused (removing liquidity after maturity is the exception).
+
+In the app, wrapping, unwrapping, splitting and recombining are the [Quick actions](/using-the-app/quick-actions).
+
+**Next:** [Yield](/how-it-works/yield), how YT earns and how you claim it.
