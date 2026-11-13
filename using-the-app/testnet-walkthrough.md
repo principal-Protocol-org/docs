@@ -75,10 +75,10 @@ After a few seconds the form clears and a notice under it reads "You deposited 5
 Minting splits USDY into equal amounts of PT, the fixed leg, and YT, the yield leg. If the terms are new to you, [Core concepts](/guide/core-concepts) explains them.
 
 1. Click **Quick actions**, then **Split USDY → PT + YT**.
-2. Enter **300** in **USDY to mint with**. Once the figures read **Exact (simulated)**, the form shows **You receive** (about 299.86 PT and as much YT), the **Tokenization fee** and the **Minimum PT received (and as much YT)**. Because you hold SY from step 4, a line reminds you that minting starts from USDY.
+2. Enter **300** in **USDY to mint with**. Once the figures read **Exact (simulated)**, the form shows **You receive** (about 299.87 PT and as much YT), the **Tokenization fee** and the **Minimum PT received (and as much YT)**. Because you hold SY from step 4, a line reminds you that minting starts from USDY.
 3. Click **Review Mint PT + YT**.
 
-![The Split USDY to PT + YT dialog with 300 USDY entered: about 299.86 PT and 299.86 YT received, the tokenization fee, the minimum received and the Review Mint PT + YT button](/images/walkthrough/05-split.png)
+![The Split USDY to PT + YT dialog with 300 USDY entered: about 299.87 PT and 299.87 YT received, the tokenization fee, the minimum received and the Review Mint PT + YT button](/images/walkthrough/05-split.png)
 
 The review, **Review: Mint PT + YT**, shows **You give** (300 USDY), **You get at least** (the PT, "and the same amount of YT"), **Fees** (the network fee and the tokenization fee, already counted in the amounts) and a **Deadline**: if the transaction lands after it, the contract refuses it and only the network fee is spent.
 
@@ -121,7 +121,7 @@ A YT earns USDY's variable yield until maturity, then is worth 0.
 3. The details show the **Fixed APY** now → after (buying YT raises it), the **Break-even APY**, the **Leverage** (YT received per dollar spent, with no borrowing), **Price impact**, **Fees**, **Minimum received** and **At maturity**: "YT worth 0". Price impact counts the fees, which weigh heavily on so cheap a token, so it can read high even for a small budget.
 4. Click **Review Buy YT**.
 
-![The Trade panel on YT, Buy, with a 0.5 USDY budget: about 181 YT to receive, the Pay at most line, and the details from Fixed APY to Signatures, above the Review Buy YT button](/images/walkthrough/07-buy-yt.png)
+![The Trade panel on YT, Buy, with a 0.5 USDY budget: about 185 YT to receive, the Pay at most line, and the details from Fixed APY to Signatures, above the Review Buy YT button](/images/walkthrough/07-buy-yt.png)
 
 The review's **Step 1: you give** reads "0.5 USDY in; at most 0.5 SY of it is spent, the rest comes back as USDY in the same transaction". **Fees** lists the network fee, the tokenization fee and the swap fee: the pool mints PT and YT for you and sells the PT back to itself inside the one transaction.
 
