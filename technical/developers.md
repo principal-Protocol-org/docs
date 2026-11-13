@@ -19,7 +19,7 @@ Principal's contract source is public, under the Apache 2.0 license stated in it
 | [Contributing](https://github.com/principal-Protocol-org/principal/blob/main/docs/CONTRIBUTING.md) | Prerequisites, build and test commands, code style and the pull-request checklist. |
 | [Full technical documentation](https://github.com/principal-Protocol-org/principal/tree/main/docs) | Everything else: the protocol specification, architecture and call sequences, yield math and fees, AMM design, compliance (SAC, SEP-8, SEP-57), security, market creation and deployment. |
 
-Some of these documents are on the contracts' feature branch and answer 404 on `main` until it is merged. A few conventions help when you read them. Amounts are raw `i128` integers in the token's smallest unit (seven decimals for the Testnet tokens), and rates are USDC per unit of the underlying at `SCALE = 10_000_000`. Errors surface as `Error(Contract, #n)`; when one contract calls another and the callee reverts, the code you see is the callee's.
+A few conventions help when you read them. Amounts are raw `i128` integers in the token's smallest unit (seven decimals for the Testnet tokens), and rates are USDC per unit of the underlying at `SCALE = 10_000_000`. Errors surface as `Error(Contract, #n)`; when one contract calls another and the callee reverts, the code you see is the callee's.
 
 ## Build and test
 
