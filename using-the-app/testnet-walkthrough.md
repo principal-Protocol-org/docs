@@ -32,7 +32,7 @@ Click your address to open its menu: your full address, **Copy address**, **Get 
 
 ![The address menu under the connected wallet button: the full address, then Copy address, Get test tokens and Disconnect](/images/walkthrough/02-address-menu.png)
 
-If the button turns red and reads **Wrong network**, Varial is not on Testnet: change its network, and the app picks up the change within a few seconds.
+If the button turns red and reads **Wrong network · switch your wallet to Testnet**, Varial is not on Testnet: change its network, and the app picks up the change within a few seconds.
 
 ## 3. Get test tokens
 
@@ -90,13 +90,13 @@ Click **Sign transaction** and approve in Varial. The notice reads "You minted �
 
 A PT redeems for $1 of USDY at maturity, so buying it below $1 fixes your return.
 
-**Buy PT.** The Trade panel opens on the **PT** tab, with **Buy** selected and **USDY** under **Pay with**.
+**Buy PT.** The Trade panel opens on the **PT** tab, with **Buy** selected and **USDY** selected under **You pay**.
 
 1. Enter **200** in **You pay**. **You receive (preview)** shows the PT.
 2. Read the details once they are **Exact (simulated)**: **Value today**, **Fixed APY** now → after your trade (buying PT lowers it), **Your effective fixed APY**, **Price impact**, **Fees**, **Minimum received**, **At maturity** (your gain in USD) and **Signatures**: 1.
 3. Click **Review Buy PT**.
 
-![The Trade panel on PT, Buy, with 200 USDY entered: about 200.4 PT to receive, and the details from Value today to Signatures, above the Review Buy PT button](/images/walkthrough/06-buy-pt.png)
+![The Trade panel on PT, Buy, with 200 USDY entered: about 200.3 PT to receive, and the details from Value today to Signatures, above the Review Buy PT button](/images/walkthrough/06-buy-pt.png)
 
 The review, **Review route: Buy PT**, says the trade takes one signature. It lists **Step 1: you give** (200 USDY), **Step 1: you get at least** (the PT, at your slippage tolerance), **Fees** (the network fee, and the pool's swap fee, "already counted in the amounts above") and the **Deadline**.
 
@@ -104,7 +104,7 @@ The review, **Review route: Buy PT**, says the trade takes one signature. It lis
 
 Click **Sign step 1 of 1** and approve in Varial. Once the transaction reaches the network the amount clears, the panel reads "Route complete: 1 of 1 steps confirmed" and a notice says "Buy PT: all steps confirmed."
 
-**Sell PT.** Click **Sell**. Enter **100** in **You pay**, which is now in PT, and keep **USDY** under **You receive (preview)**. The details show the **Fixed APY**, which rises when you sell, the **Price impact**, the **Fees** and the **Minimum received**. Click **Review Sell PT**, then **Sign step 1 of 1**, and approve in Varial.
+**Sell PT.** Click **Sell**. Enter **100** in **You pay**, which is now in PT, and keep **USDY** under **You receive (preview)**. The details show the **Fixed APY**, which rises when you sell, the **Price impact**, the **Fees** and the **Minimum received**. Click **Review Sell PT**, then **Sign step 1 of 1**, and approve in Varial. As after the purchase, the amount clears, the panel reads "Route complete: 1 of 1 steps confirmed" and a notice says "Sell PT: all steps confirmed." The USDY is in your wallet.
 
 ![The Trade panel on PT, Sell, with 100 PT entered: the USDY to receive, the fixed APY rising, price impact, fees and minimum received, above the Review Sell PT button](/images/walkthrough/06-sell-pt.png)
 
@@ -121,15 +121,15 @@ A YT earns USDY's variable yield until maturity, then is worth 0.
 3. The details show the **Fixed APY** now → after (buying YT raises it), the **Break-even APY**, the **Leverage** (YT received per dollar spent, with no borrowing), **Price impact**, **Fees**, **Minimum received** and **At maturity**: "YT worth 0". Price impact counts the fees, which weigh heavily on so cheap a token, so it can read high even for a small budget.
 4. Click **Review Buy YT**.
 
-![The Trade panel on YT, Buy, with a 0.5 USDY budget: about 160 YT to receive, the Pay at most line, and the details from Fixed APY to Signatures, above the Review Buy YT button](/images/walkthrough/07-buy-yt.png)
+![The Trade panel on YT, Buy, with a 0.5 USDY budget: about 181 YT to receive, the Pay at most line, and the details from Fixed APY to Signatures, above the Review Buy YT button](/images/walkthrough/07-buy-yt.png)
 
 The review's **Step 1: you give** reads "0.5 USDY in; at most 0.5 SY of it is spent, the rest comes back as USDY in the same transaction". **Fees** lists the network fee, the tokenization fee and the swap fee: the pool mints PT and YT for you and sells the PT back to itself inside the one transaction.
 
 ![The Review route: Buy YT dialog: 0.5 USDY in with the rest returned in the same transaction, the least YT received, the network, tokenization and swap fees, and the Sign step 1 of 1 button](/images/walkthrough/07-buy-yt-review.png)
 
-Click **Sign step 1 of 1** and approve in Varial.
+Click **Sign step 1 of 1** and approve in Varial. The panel reads "Route complete: 1 of 1 steps confirmed" and a notice says "Buy YT: all steps confirmed." The YT is in your wallet, and the part of your budget the trade did not spend is back as USDY.
 
-**Sell YT.** Click **Sell**. Your YT balance now holds the YT from step 5 and from this purchase. Enter about half of it in **You pay**, keep **USDY** under **You receive (preview)**, and read the details: the **Fixed APY** falls, the **Price impact**, the **Fees** and the **Minimum received**. Click **Review Sell YT**, then **Sign step 1 of 1**, and approve in Varial.
+**Sell YT.** Click **Sell**. Your YT balance now holds the YT from step 5 and from this purchase. Enter about half of it in **You pay**, keep **USDY** under **You receive (preview)**, and read the details: the **Fixed APY** falls, the **Price impact**, the **Fees** and the **Minimum received**. Click **Review Sell YT**, then **Sign step 1 of 1**, and approve in Varial. The panel reads "Route complete: 1 of 1 steps confirmed" and a notice says "Sell YT: all steps confirmed."
 
 ![The Trade panel on YT, Sell, with about half of the YT balance entered: the USDY to receive, the fixed APY falling, price impact, fees and minimum received, above the Review Sell YT button](/images/walkthrough/07-sell-yt.png)
 
@@ -151,9 +151,9 @@ The review, **Review route: Add liquidity (keep YT)**, lists the 300 USDY you gi
 
 ![The Review route dialog for adding liquidity with Keep YT: one step, 300 USDY given, the least LP received, the fees, and the Sign step 1 of 1 button](/images/walkthrough/08-add-liquidity-review.png)
 
-Click **Sign step 1 of 1** and approve in Varial. You now hold LP tokens and YT. To put all your USDY in the pool and keep no YT, turn **Keep YT** off before you review: it is also one signature (200 USDY works, for example).
+Click **Sign step 1 of 1** and approve in Varial. The panel reads "Route complete: 1 of 1 steps confirmed" and a notice says "Add liquidity (keep YT): all steps confirmed." You now hold LP tokens and YT. To put all your USDY in the pool and keep no YT, turn **Keep YT** off before you review: it is also one signature (200 USDY works, for example).
 
-**Withdraw liquidity.** Click **Withdraw**. Enter about half of your LP in **You pay** and keep **USDY** under **You receive (preview)**: one call takes your liquidity out, sells the PT it returns and pays you USDY, one signature. The details show the **Fixed APY**, which rises as the PT is sold, the **Price impact** and **Fees** of that sale, your **Pool share** and the **Minimum received**. Click **Review Withdraw liquidity**, then **Sign step 1 of 1**, and approve in Varial.
+**Withdraw liquidity.** Click **Withdraw**. Enter about half of your LP in **You pay** and keep **USDY** under **You receive (preview)**: one call takes your liquidity out, sells the PT it returns and pays you USDY, one signature. The details show the **Fixed APY**, which rises as the PT is sold, the **Price impact** and **Fees** of that sale, your **Pool share** and the **Minimum received**. Click **Review Withdraw liquidity**, then **Sign step 1 of 1**, and approve in Varial. The panel reads "Route complete: 1 of 1 steps confirmed" and a notice says "Withdraw liquidity: all steps confirmed." The USDY is in your wallet, and the rest of your LP stays in the pool.
 
 ![The Trade panel on LP, Withdraw, with about half of the LP balance entered and USDY chosen to receive: the USDY to receive, the fixed APY, price impact, fees, pool share and minimum received](/images/walkthrough/08-withdraw-liquidity.png)
 
@@ -191,7 +191,7 @@ More in [Portfolio and history](/using-the-app/portfolio).
 
 The market matures on 11 February 2027 at 08:59:04 UTC. Until then there is nothing to redeem, and you leave a position by selling it, by recombining PT + YT (**Exit (recombine PT + YT)** on the Portfolio card) or by withdrawing liquidity.
 
-Before maturity, the Portfolio card shows what your PT will pay: the **Fixed return if held to maturity** block gives the **Face value at maturity (USD)**, the **Current value (USD, at the pool price)**, the **Projected fixed return at maturity**, the **Fixed APY from now**, and what your PT **Redeems for**, in USDY, marked indicative until the market settles.
+Before maturity, the Portfolio card shows what your PT will pay: the **Fixed return if held to maturity** block gives the **Face value at maturity (USD)**, the **Current value (USD, at the pool price)**, the **Projected fixed return at maturity**, the **Fixed APY from now**, and **Redeems for (USDY, indicative until settlement)**: what your PT pays out, which is final only once the market settles.
 
 ![The Fixed return if held to maturity block of the Portfolio card: face value at maturity, current value at the pool price, the projected fixed return, the fixed APY from now and what the PT redeems for, indicative until settlement](/images/walkthrough/11-held-to-maturity.png)
 
