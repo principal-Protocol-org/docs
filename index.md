@@ -22,6 +22,6 @@ features:
     details: Every SY, PT, YT and liquidity position checks the underlying issuer's own authorization, live. An account the issuer has not authorized cannot hold or trade them.
     link: /how-it-works/compliance
   - title: Try it on Testnet
-    details: Principal runs on Stellar Testnet with a test USDY market. Connect the Varial wallet (formerly Freighter), get test tokens and make your first trade.
+    details: Principal runs on Stellar Testnet with a test USDY market. Connect the Varial wallet (formerly Freighter), get test tokens and make your first trade. Every trade is one signature.
     link: /using-the-app/
 ---
