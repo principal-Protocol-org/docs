@@ -10,7 +10,7 @@ order: 6
 
 The Portfolio shows one card per market where you hold something. If you hold nothing, it says "You hold nothing in any market yet." and links to the markets.
 
-Each card starts with your balances: **USDY**, **SY**, **PT**, **YT** and **LP**. Every card also shows the market's **Oracle rate**, whether it is fresh or stale (older than 1 hour), and when it was updated. Depending on what you hold, it adds:
+Each card starts with your balances: **USDY**, **SY**, **PT**, **YT** and **LP**. Every card also shows the market's **Oracle rate**, whether it is fresh or stale (older than the oracle's freshness window, one hour on the Testnet market), and when it was updated. Depending on what you hold, it adds:
 
 - **LP**: your share of the pool, as **PT** and **SY**, and the **Estimated value of your share** in USDY.
 - **YT**: your **Pending yield (net of the YT fee)**. Its tip gives the gross yield and the fee.
@@ -23,7 +23,7 @@ Below sit the shortcuts that apply to you: **Claim yield**, **Exit (recombine PT
 
 A YT earns the asset's yield until maturity, and you collect it without selling the YT. Click **Claim yield**. The dialog reads "Collect the yield your YT has earned since your last claim, paid in USDY. You keep your YT." Under **Your yield (indicative)** it shows the **Pending yield (gross)**, the **YT fee**, and **You receive (net)**.
 
-Click **Review Claim yield**. The review says you get "Your pending yield, paid in USDY. This call sets no minimum." and lists the YT fee, "deducted from the yield before it is paid". Sign in Varial. Until the market is settled, claiming needs a fresh oracle price: if the oracle has not been updated in the last hour, signing stays off until the next update. How yield accrues is in [Yield](/how-it-works/yield).
+Click **Review Claim yield**. The review says you get "Your pending yield, paid in USDY. This call sets no minimum." and lists the YT fee, "deducted from the yield before it is paid". Sign in Varial. Until the market is settled, claiming needs a fresh oracle price: if the oracle has not been updated within its freshness window (one hour on the Testnet market), signing stays off until the next update. Claiming is also refused while Principal's manager contract is paused: the app says "PrincipalManager is paused: minting, buying and selling YT, recombining, claiming and redeeming are stopped until it is unpaused." How yield accrues is in [Yield](/how-it-works/yield).
 
 ## Redeem at maturity
 
@@ -33,7 +33,7 @@ Once the maturity date has passed, the **Redeem at maturity** shortcut opens the
 2. Read the preview: **From PT** and **From YT (net of the YT fee)**, and under **Settlement**, the **Settlement rate**.
 3. Click **Review Redeem at maturity**, then sign. It is one transaction.
 
-If the market has not settled yet, the first redemption settles it for everyone, at the oracle rate of that moment, and the form says so. Until the market is settled, redeeming can need a fresh oracle price, as Claim yield does: if the oracle has not been updated in the last hour and the yield index is not yet frozen, signing stays off until the next update. While the rate can still move, it also warns that the PT amount depends on the oracle rate when your transaction lands, and can only be lower than shown. A redemption sets no minimum. See [Maturity](/how-it-works/maturity).
+If the market has not settled yet, the first redemption settles it for everyone, at the oracle rate of that moment, and the form says so. Until the market is settled, redeeming can need a fresh oracle price, as Claim yield does: if the oracle has not been updated within its freshness window and the yield index is not yet frozen, signing stays off until the next update. The same manager pause refuses a redemption too. While the rate can still move, it also warns that the PT amount depends on the oracle rate when your transaction lands, and can only be lower than shown. A redemption sets no minimum. See [Maturity](/how-it-works/maturity).
 
 ## History
 
@@ -41,6 +41,6 @@ If the market has not settled yet, the first redemption settles it for everyone,
 
 The table has five columns: **Time** (UTC), **Action**, **Details**, **Status** and **Transaction**, whose shortened hash links to stellar.expert. A transaction you just sent from this browser shows as **Pending** until the network events include it, or **Not found — expired** if its time window closed first.
 
-A multi-step route is one row, such as "Buy PT · 2 steps", with a **Steps** list you can open to see each step's status and hash. Its status reads **Completed**, **Returned to USDY**, **Waiting for the network**, **Interrupted** or **Stopped**. When an **Interrupted** or **Waiting for the network** route still holds your funds, the row says what you hold and offers **Continue**, which reopens the route on its market page where you left it. The app keeps routes in your browser, so Continue appears in the browser you used.
+A trade or deposit you start in this browser is one row too, such as "Buy PT · 1 step", since each is a one-step route. The one-call trades also appear as a single event row; a flash Buy YT reads "Bought … YT for … SY". A route of several steps is one row, such as "Recombine · 2 steps" or, after maturity, "Withdraw liquidity · 3 steps", with a **Steps** list you can open to see each step's status and hash. Its status reads **Completed**, **Returned to USDY**, **Waiting for the network**, **Interrupted** or **Stopped**. When an **Interrupted** or **Waiting for the network** route still holds your funds, the row says what you hold and offers **Continue**, which reopens the route on its market page where you left it. The app keeps routes in your browser, so Continue appears in the browser you used.
 
 **Next:** [How it works](/how-it-works/), for the mechanics behind these screens, or [Risks](/guide/risks) before you trade.

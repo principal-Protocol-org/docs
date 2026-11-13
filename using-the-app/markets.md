@@ -5,7 +5,7 @@ description: "Read the market list and a market page: its stats, the fixed again
 order: 2
 ---
 
-**Markets**, the first link in the app's header, lists every market. Each market splits one yield-bearing asset into a principal token (PT) and a yield token (YT) with one maturity date. Click a market to open its page, where you trade. The terms used below are explained in [Core concepts](/guide/core-concepts).
+**Markets**, the first link in the app's header, lists every market; **Portfolio** and **History** follow it. Each market splits one yield-bearing asset into a principal token (PT) and a yield token (YT) with one maturity date. Click a market to open its page, where you trade. The terms used below are explained in [Core concepts](/guide/core-concepts).
 
 ## The market list
 
@@ -23,9 +23,9 @@ Each market row shows its name, a status badge, the maturity date with the days 
 
 Click the **YT** or **PT** chip to open the market page on that tab, with **Buy** selected. A market whose pool has no liquidity yet shows "No price yet". A matured or settled market shows "Matured" or "Settled" instead of a chip, since it can no longer be bought into.
 
-The status badge reads **Live**, **Paused** (the market's SY wrapper or pool, or risk control, is paused), **Matured** (the maturity date has passed), **Settled** (the settlement rate is recorded) or **Unavailable**. Time is read from the network's ledger, not from your computer's clock.
+The status badge reads **Live**, **Paused** (the market's SY wrapper, pool, risk control or Principal manager is paused), **Matured** (the maturity date has passed), **Settled** (the settlement rate is recorded) or **Unavailable**. While the app is still reading the network's clock, the badge, the days left and the chips read **Loading**. Time is read from the network's ledger, not from your computer's clock.
 
-When a figure cannot be read, the app shows **Unavailable**, with the reason behind an info tip. It never shows a guess or a zero in its place.
+A figure still waiting for its first read shows **Loading**. When a read has failed, the app shows **Unavailable**, with the reason behind an info tip. It never shows a guess or a zero in its place.
 
 ## The market page
 
@@ -52,9 +52,19 @@ Under the chart, a card has three tabs.
 
 **Compliance** has two parts. **Underlying asset** shows the issuer's settings for USDY: authorization required, authorization revocable, clawback enabled, and its administrator. **Your account**, once your wallet is connected, checks whether you can use this market: your account exists, you have a trustline to USDY, the issuer has authorized it, and Principal's permissioning allows your account, and allows it to hold this market's PT and YT. Each check reads **OK**, **Action needed**, **Blocked** or **Unavailable**, with the fix. Where the fix is the faucet, a **Get test tokens** button opens the dialog described in [Getting started](/using-the-app/). See [Compliance](/how-it-works/compliance).
 
-**Safety** shows whether the SY wrapper, the market pool and risk control are paused, whether the oracle is fresh ("updated within the last hour"), the room left in the protocol-wide and USDY circuit breakers (or "No limit (disabled)" when one is off), and the room left under your own deposit cap (or "No cap (disabled)"). On the Testnet market these limits are currently off, so those rows read disabled; the card always shows the live values. See [Safety controls](/technical/security).
+**Safety** lists, one row each:
 
-The Compliance and Safety tabs carry a small number: how many problems they report for you. Zero means nothing needs your attention. Compliance shows its number once your wallet is connected.
+- **SY wrapper**, **Market pool**, **Risk control** and **Principal manager**: each reads "Not paused" or "Paused: new actions are refused". A paused Principal manager also turns the market's badge to **Paused**.
+- **Oracle**: whether it is fresh, for example "Fresh (updated within the last 1 hour), updated 12 minutes ago". The freshness window is read from the oracle, not assumed; on the Testnet market it is one hour.
+- **Oracle deviation cap**: the most the oracle rate may rise in one update. On the Testnet market it is 10%.
+- **Oracle primary source** and **Oracle fallback source**: the shortened address of the account that feeds the rate, and of the backup source, or "None". The Testnet market has one primary source and no fallback.
+- **Oracle last rejected update**: "None", or why the oracle refused its latest update, with the value it was offered and how long ago. The reasons read "Moved more than the cap", "Lower than the current value", "Not newer than the current value", "Outside the value bounds" or "Fallback tried to change the value". A refused update leaves the rate where it was.
+- **Circuit breaker, protocol-wide** and **Circuit breaker, USDY**: the room left in each, or "No limit (disabled)" when one is off.
+- **Your deposit cap**: the room left under your own cap, or "No cap (disabled)".
+
+On the Testnet market the circuit breakers and the deposit cap are currently off, so those rows read disabled; the card always shows the live values. See [Oracle](/how-it-works/oracle) for how the rate is kept safe, and [Safety controls](/technical/security).
+
+The Compliance and Safety tabs carry a small number: how many problems they report for you. A pause of any of the four, a stale oracle and a used-up limit each count. Zero means nothing needs your attention. Compliance shows its number once your wallet is connected.
 
 ## The Trade panel
 

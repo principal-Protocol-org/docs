@@ -49,7 +49,7 @@ This USDY is a test token issued by Principal for Stellar Testnet, not Ondo's US
 The settings button (the sliders icon next to your wallet) opens **Transaction settings**:
 
 - **Slippage tolerance (bps)**: how much less than the quoted amount you accept before a transaction fails. 100 bps is 1%. The default is 50, and you can set 1 to 500.
-- **Deadline (seconds)**: a transaction not included by then is rejected. The default is 300, and you can set 60 to 1800. Every transaction is also valid for only 5 minutes from when the app prepares it, so a deadline above 300 seconds does not give you more time. Three calls take no deadline at all: turning USDY into SY (the **Deposit** quick action, also a step of some routes), **Claim yield** and **Redeem at maturity**.
+- **Deadline (seconds)**: a transaction not included by then is rejected. The default is 300, and you can set 60 to 1800. Every transaction is also valid for only 5 minutes from when the app prepares it, so a deadline above 300 seconds does not give you more time. Three calls take no deadline at all: turning USDY into SY (the **Deposit** quick action), **Claim yield** and **Redeem at maturity**.
 
 The app keeps both in your browser and uses them wherever a transaction takes a minimum or a deadline.
 
@@ -62,6 +62,8 @@ Every action in the app follows the same path:
 3. **Sign in Varial.** The dialog reads "Waiting for your wallet…" until you approve or reject.
 4. **Read the result.** A notice gives the outcome, the transaction hash and a **View on stellar.expert** link.
 
-Some actions take several transactions, one signature each: [Trade PT and YT](/using-the-app/trade) explains these routes and what happens when a step is refused. If a contract's data has expired on the network, the app first offers a restore: "Some contract data has expired — restore it first (one extra signature)."
+Every trade and every liquidity deposit is one signature on Testnet. A few actions still take several transactions, one signature each: recombining PT + YT to USDY, taking liquidity out as SY before maturity, and withdrawing liquidity after maturity. [Quick actions](/using-the-app/quick-actions) and [Add and remove liquidity](/using-the-app/liquidity) say how many signatures each takes, and [Trade PT and YT](/using-the-app/trade) explains the route dialog and what happens when a step is refused. If a contract's data has expired on the network, the app first offers a restore: "Some contract data has expired — restore it first (one extra signature)."
+
+A wallet that holds a role on a market, or that is the test asset's issuer authority, also sees a **Manage** link in the header. It opens the manager view, which is described in the page "Manage and create markets". Most readers never see it.
 
 **Next:** [Markets and the market page](/using-the-app/markets). New to PT and YT? Read [Core concepts](/guide/core-concepts) first.

@@ -14,11 +14,7 @@ The details of both sides carry the row **LP earns: PT convergence**, with the t
 
 The card reads **Add liquidity**: "Deposit USDY into the pool for LP tokens." Enter what you pay under **You pay**.
 
-The **Keep YT** switch is on by default. With it on, part of your USDY is split into PT + YT, the PT and the rest go into the pool at its ratio, and you keep the YT. You get LP tokens and YT. It takes three signatures:
-
-1. Mint PT + YT from the part to split.
-2. Deposit the rest of your USDY as SY.
-3. Add the PT and the SY to the pool.
+The **Keep YT** switch is on by default. With it on, part of your USDY is split into PT + YT, the PT and the rest go into the pool at its ratio, and you keep the YT. You get LP tokens and YT. It takes one signature: a single Router call deposits all your USDY as SY, mints PT + YT from part of it and adds the PT and the rest to the pool.
 
 The details show:
 
@@ -33,13 +29,27 @@ The details show:
 
 Click **Review Add liquidity (keep YT)**.
 
-Turning Keep YT off ("LP only", all your USDY into the pool) is not offered in this release. The app says so under the switch, and the review button stays off. Paying in SY turns Keep YT off and disables the switch, with the reason under it: to add liquidity, pay in USDY with Keep YT on.
+Keep YT signs the PT and SY amounts as fixed numbers. If the oracle rate rises between your review and the transaction, a little PT can stay in your wallet, and your holdings show it. If the pool or the oracle moves too far, the call fails: only the network fee is lost, and the panel names the cause.
+
+### LP only
+
+Turn **Keep YT** off to put all your USDY into the pool and keep no YT. Under the switch the app says "LP only: all your USDY goes into the pool and you keep no YT." It is also one signature. The pool buys the PT it needs with part of your payment, so the details differ:
+
+- **Fixed APY**: now → after. The pool buys PT, so the fixed APY falls a little.
+- **Price impact**: that PT purchase against the pool's spot price, swap fee included.
+- **Fees**: the pool's swap fee on the part swapped into PT. There is no tokenization fee, since no YT is minted.
+- **Pool share** and **Minimum received**.
+- **Refunded to your wallet**: the SY the pool did not use. The few raw units of PT it bought and did not use stay in the pool.
+
+Choose LP only when you want the pool's earnings and no YT exposure. Keep YT instead if you also want the YT's variable yield. Click **Review Add liquidity**.
+
+Paying in SY works too, and turns Keep YT off: the switch is disabled with the reason "Keep YT needs USDY: it splits USDY into PT + YT with the Router, which takes USDY. Pay in USDY to keep the YT." Adding liquidity from SY is one signature as well.
 
 ## Withdraw
 
 The card reads **Withdraw liquidity**: "Withdraw your LP for USDY or its SY. The PT you get back is sold into the pool." Enter the LP to withdraw and choose **Receive as** USDY or SY.
 
-Before maturity the route removes your liquidity as PT and SY, sells the PT for SY, and, if you receive USDY, turns the SY into USDY. That is three signatures to USDY, two to SY. The details show:
+Before maturity your liquidity comes out as PT and SY, and the PT is sold for SY. If you receive USDY, that is one signature: one Router call removes the liquidity, sells the PT and pays out USDY. If you receive SY, it is two signatures: remove the liquidity, then sell the PT. A very large share can fail in the USDY exit, where receiving SY (two signatures) works, because the one-call exit sells the PT into the pool after your liquidity has left it. The details show:
 
 - **Fixed APY** now → after: selling the PT back raises the fixed APY.
 - **Price impact** of the PT sale, swap fee included.
@@ -56,7 +66,7 @@ Withdrawing stays open. Your PT is then redeemed instead of sold: the details sh
 
 ## Review and sign
 
-Deposits and withdrawals are reviewed and signed one step at a time, like trades. If a step is refused or fails, the route stops and tells you what you hold. Both are described in [Trade PT and YT](/using-the-app/trade).
+Deposits and withdrawals are reviewed and signed like trades: one signature each, except the withdrawals that still take several steps (two to SY before maturity; three to USDY and two to SY after it), which are signed one step at a time. If a step is refused or fails, the route stops and tells you what you hold. Both are described in [Trade PT and YT](/using-the-app/trade).
 
 Your LP position, its share of the pool's PT and SY and its estimated value appear in the [Portfolio](/using-the-app/portfolio).
 
