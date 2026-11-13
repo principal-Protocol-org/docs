@@ -13,9 +13,10 @@ The **Manage** link in the header appears only for a wallet that holds a role on
 
 - **Issuer**: the asset's issuer authority. It creates markets on its asset.
 - **Creator**: the market creator its config records, which for a market on a Stellar asset is the asset's issuer authority. It claims the creator fees.
-- **Protocol admin**: it claims the protocol's fees and can change the protocol share and the treasury.
+- **Protocol admin**: it claims the protocol's fees and can change the protocol share and the treasury (not from the app).
 - **Contract admin (pool, SY wrapper, manager)**: the admin of one of the market's own contracts. It can pause that contract.
-- **Router admin**, **RiskControl admin** and **Permissioning admin**: the admins of the shared contracts. They sign steps 4 and 5 of the wizard.
+
+The admins of the shared contracts (Router, RiskControl, Permissioning) are not roles the view lists; they sign steps 4 and 5 of the wizard from its link.
 
 You only see the actions your role can sign. If you connect the wrong wallet, the refusal says who can: "Only {who} can {can}. You are connected as {short}, which is not {who}. Connect {who}'s wallet to sign this."
 
@@ -55,7 +56,7 @@ The button shows the action the contract allows: **Pause** while it is running a
 
 ### Markets being created
 
-A market that has been deployed and is not yet in the market list appears under **Markets being created**, as a row with the pool's shortened address and a **Resume at step {N}** button, which opens the wizard where the market stands. If the app cannot reach the registry, it says "Markets started from other browsers could not be read from the registry right now. Their wizard links still open them."
+A market that has been deployed and is not yet in the market list appears under **Markets being created**, as a row with the pool's shortened address and a **Resume at step {N}** button, which opens the wizard where the market stands. When the app cannot read a market's progress, the row reads "A market in progress" with an **Open** button. If the app cannot reach the registry, it says "Markets started from other browsers could not be read from the registry right now. Their wizard links still open them."
 
 In the **All** view, a **Not listed** section shows the markets that failed the registry's checks. Each reads "Not listed because {reason}", with what to fix. If there are none, it says "Every market the registry knows is listed."
 

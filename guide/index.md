@@ -38,7 +38,7 @@ The assets Principal targets are regulated. Their issuer can decide which accoun
 
 Each market also checks a second allow-list, shared across markets, which only its admin can change. This check always runs: an account must be on it too, and an account that was never added is refused. It can only narrow access, never widen it. On Testnet, the test asset's issuer account runs it, and **Get test tokens** in the app adds your account.
 
-The asset's issuer authority (the admin of its Stellar Asset Contract) creates each market on its asset and sets the market's fees; the app's **Manage** view, described in [Manage and create markets](/using-the-app/manage-markets), is where it does that. On Testnet that authority is Principal's admin key, a different account from the issuer account that runs the allow-list above. If it freezes an account, that account's positions in Principal are frozen too, and the issuer can recover them. [Compliance](/how-it-works/compliance) explains how this works, and [Risks](/guide/risks) what it means for you.
+The asset's issuer authority (the admin of its Stellar Asset Contract) creates each market on its asset and sets the market's fees; the app's **Manage** view, described in [Manage and create markets](/using-the-app/manage-markets), is where it does that. On Testnet that authority is Principal's admin key, a different account from the issuer account that runs the allow-list above. If the issuer freezes an account, that account's positions in Principal are frozen too, and the issuer's authority can recover them. [Compliance](/how-it-works/compliance) explains how this works, and [Risks](/guide/risks) what it means for you.
 
 ## Who it is for
 

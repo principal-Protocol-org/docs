@@ -39,7 +39,7 @@ Here `n` is the SY you split and `fee_bps` is the market's tokenization fee (see
 
 **Example.** You split 100 SY when the rate is 1.05. With no fee you receive 105 PT and 105 YT. With a 5 bps tokenization fee, 0.05 SY is withheld and you receive 104.9475 PT and 104.9475 YT.
 
-Splitting needs the market to be open (not matured, and the PrincipalManager not paused), a fresh oracle value (updated within the oracle's freshness window, one hour on the Testnet market, see [Oracle](/how-it-works/oracle)), and an account that passes the [compliance checks](/how-it-works/compliance): authorized on the underlying and on the allow-list. The circuit breaker also applies: `mint` reports the value being tokenized to RiskControl, and a deposit over a set limit fails. The SY you split stays in the PrincipalManager contract as the backing for your PT and YT.
+Splitting needs the market to be open (not matured, and neither the PrincipalManager nor risk control paused), a fresh oracle value (updated within the oracle's freshness window, one hour on the Testnet market, see [Oracle](/how-it-works/oracle)), and an account that passes the [compliance checks](/how-it-works/compliance): authorized on the underlying and on the allow-list. The circuit breaker also applies: `mint` reports the value being tokenized to RiskControl, and a deposit over a set limit fails. The SY you split stays in the PrincipalManager contract as the backing for your PT and YT.
 
 The app's Buy YT does not make you split SY yourself: the pool splits its own SY inside one call, and you pay only the net cost (see [Pricing and the AMM](/how-it-works/pricing-and-amm)).
 

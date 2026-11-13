@@ -57,7 +57,7 @@ On Testnet, the issuer of USDY (test) and the market's administrator are Princip
 
 ## Pauses and limits
 
-The market's administrator can pause its contracts, and so can the manager contract (PrincipalManager), whose pause stops minting, buying and selling YT, recombining, claiming and redeeming. While paused, the market refuses new deposits, splits, recombining, trades, yield claims and redemptions. Withdrawing liquidity is blocked by the pool's pause before maturity, not after it, though the SY it pays out still needs the SY wrapper unpaused. Seizure of a frozen account's positions by the issuer keeps working during a pause; redeeming seized PT and YT at maturity waits until the market is unpaused.
+The market's administrator can pause its contracts, and the manager contract (PrincipalManager) has a pause of its own, which stops minting, buying and selling YT, recombining, claiming and redeeming. While paused, the market refuses new deposits, splits, recombining, trades, yield claims and redemptions. Withdrawing liquidity is blocked by the pool's pause before maturity, not after it, though the SY it pays out still needs the SY wrapper unpaused. Seizure of a frozen account's positions by the issuer keeps working during a pause; redeeming seized PT and YT at maturity waits until the market is unpaused.
 
 A protocol-wide pause, set in the risk-control contract, stops every deposit and mint in every market. Its admin or any registered pauser can set it, and only the admin can lift it. In the app it stops Deposit and Split, buying PT paid in USDY, buying YT, and adding liquidity paid in USDY or with Keep YT. Adding liquidity paid in SY, sales, withdrawals, recombining, claims and redemption continue.
 

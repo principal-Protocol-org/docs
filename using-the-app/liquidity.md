@@ -49,7 +49,7 @@ Paying in SY works too, and turns Keep YT off: the switch is disabled with the r
 
 The card reads **Withdraw liquidity**: "Withdraw your LP for USDY or its SY. The PT you get back is sold into the pool." Enter the LP to withdraw and choose **Receive as** USDY or SY.
 
-Before maturity your liquidity comes out as PT and SY, and the PT is sold for SY. If you receive USDY, that is one signature: one Router call removes the liquidity, sells the PT and pays out USDY. If you receive SY, it is two signatures: remove the liquidity, then sell the PT. A very large share can fail in the USDY exit, where receiving SY (two signatures) works, because the one-call exit sells the PT into the pool after your liquidity has left it. The details show:
+Before maturity your liquidity comes out as PT and SY, and the PT is sold for SY. If you receive USDY, that is one signature: one Router call removes the liquidity, sells the PT and pays out USDY. If you receive SY, it is two signatures: remove the liquidity, then sell the PT. A very large share can fail in the USDY exit, because its PT sale runs inside the same call. Receiving SY removes your liquidity at the first signature, so you hold PT and SY even if the second step, the same PT sale, is refused; you can then sell the PT in smaller pieces or keep it to maturity. The details show:
 
 - **Fixed APY** now → after: selling the PT back raises the fixed APY.
 - **Price impact** of the PT sale, swap fee included.

@@ -70,9 +70,9 @@ A step left unsigned for 60 seconds expires and the route stops. **Cancel** befo
 
 ## When a step is refused or fails
 
-A one-step trade that you reject or that fails sends nothing, or costs only the network fee. Your amounts stay, so you can correct them and try again. When a step of a longer route is refused or fails, the route stops. The panel shows **Step n of m**, the reason, and what the confirmed steps left you, such as "You hold … SY". Then:
+If you reject the signature or cancel, nothing was sent and your amounts stay. If the transaction fails on the network, only the network fee was charged; the amounts have cleared, and the panel shows **Step 1 of 1**, the reason and **Continue**, as it does for a longer route. When a step of a longer route is refused or fails, the route stops. The panel shows **Step n of m**, the reason, and what the confirmed steps left you, such as "You hold … SY". Then:
 
-- **You rejected the signature, cancelled the review, or it expired.** Nothing was sent. **Continue** prepares the step again with a fresh quote.
+- **You rejected the signature, canceled the review, or it expired.** Nothing was sent. **Continue** prepares the step again with a fresh quote.
 - **The step failed on-chain.** Only the network fee was charged. **Continue** tries again.
 - **The result is not known yet.** The route waits and never sends the step twice. Click **Check again**.
 - **Back to USDY** turns leftover SY into USDY in one signature. It appears only when SY is all the route left you; otherwise the panel says what else to do.

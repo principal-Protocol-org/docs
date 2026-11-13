@@ -65,7 +65,7 @@ At or after maturity, the issuer settles what is still held with `finalize_recor
 ## Pool safety rules
 
 - **Minimum output.** Every swap and liquidity call reverts with `SlippageExceeded` below the minimum you set. The flash Buy YT has two guards: it reverts if fewer than your `min_yt_out` YT would be minted or the net cost would exceed your `max_net_cost`. `Router` flows that trade or move liquidity also revert with `DeadlineExpired` after their `deadline`.
-- **Rounding favours the pool.** Swap fees round up and every curve result is padded against the trader. The tokenization fee also rounds up, and PT redemption rounds down.
+- **Rounding favors the pool.** Swap fees round up and every curve result is padded against the trader. The tokenization fee also rounds up, and PT redemption rounds down.
 - **Reserves never empty.** A swap cannot leave either reserve below 1,000 raw units, and the first liquidity deposit locks 1,000 LP in the pool for good.
 - **Opening price at or below par.** The first deposit must price PT at or below par. The check rounds the SY value up, so it is the stricter test.
 - **Donations cannot skew LP.** LP is priced from the pool's recorded reserves, never from its token balances.

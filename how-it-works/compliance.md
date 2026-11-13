@@ -50,7 +50,7 @@ Every market also checks a second list, kept in the shared Permissioning contrac
 
 This check always runs: an account that is not on the list is refused. It can only narrow access: you need the issuer's authorization **and** a place on the list.
 
-Each token has its own entry, and an action needs only the entries of the tokens it moves to you: Buy YT needs the YT entry, LP only needs no PT entry (the PT dust stays in the pool), a two-sided add and every liquidity exit need the PT entry (they send PT to you), and Keep YT needs both.
+Each token has its own entry, and an action needs only the entries of the tokens it moves to you: Buy YT needs the YT entry, LP only needs no PT entry (the PT dust stays in the pool), a two-sided add (you send PT) and every liquidity exit (it sends PT to you) need the PT entry, and Keep YT needs both.
 
 On Testnet, the app's "Get test tokens" action authorizes your account on the test USDY and adds it to the allow-list, for your account and for each market's PT and YT (see [Getting started](/using-the-app/)). The test USDY has authorization required, revocable and clawback enabled, so these controls are live.
 

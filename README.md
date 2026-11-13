@@ -125,7 +125,7 @@ Before go-live, the developer checks:
 - [ ] A page's filename does not change when its title is edited in Pages CMS.
 - [x] The Vercel project builds and serves `/docs/...` on its own domain. Done 2026-11-02 (`principalmarket-docs.vercel.app`). On that host a path under `/docs` with a trailing slash (`/docs/guide/`) answers 404, the same path at the root answers 200: the dApp proxy targets the root.
 - [ ] Once `feat/tranche-1-mvp` is merged into `main` in `org/principal`: every GitHub link in the site answers 200 (VitePress checks internal links only).
-- [x] Each figure in the pages is checked against the code. Done 2026-11-13 at principal `665bb67` and the dApp `testnet` head; the market settings were read live on chain that day (fees 5 / 1000 / 10 bps, protocol share 20%, oracle window 3600 s, deviation cap 1000 bps, one primary source, no fallback, no value bounds, time stretch 4 years). Repeat after protocol changes.
+- [x] Each figure in the pages is checked against the code. Done 2026-11-13 at principal `665bb67` and the dApp `testnet` head (`64fe030`); the market settings were read live on chain that day (fees 5 / 1000 / 10 bps, protocol share 20%, oracle window 3600 s, deviation cap 1000 bps, one primary source, no fallback, no value bounds, time stretch 4 years). Repeat after protocol changes.
 - [ ] After the update is published, check the Safety tab and flash copy on the live site: the copy is quoted from source and was not seen in a browser.
 - [ ] When the Testnet market is redeployed again, re-read the maturity date and every address-dependent statement.
 - [ ] Check that the Manage page's role statements match the keys of the deployment in use.

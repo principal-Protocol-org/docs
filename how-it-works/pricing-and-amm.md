@@ -19,7 +19,7 @@ x^a + y^a = k          a = 1 − τ / S
 - `y` is the PT reserve.
 - `τ` is the time left to maturity, and `S` is the pool's **time stretch**, a setting fixed when the pool is created (1 to 20 years). This Testnet market's pool uses 4 years.
 
-A trade keeps `k` constant: put SY in, and the equation gives the PT that comes out. The contract solves it in closed form, in 18-decimal integer arithmetic, rounding in the pool's favour.
+A trade keeps `k` constant: put SY in, and the equation gives the PT that comes out. The contract solves it in closed form, in 18-decimal integer arithmetic, rounding in the pool's favor.
 
 ## PT price and the implied rate
 
@@ -82,7 +82,7 @@ Nothing is borrowed in the sense of a debt: no loan is recorded and nothing can 
 The call is guarded:
 
 - it fails with `SlippageExceeded` if you would get less YT than `min_yt_out` or the net cost would be above `max_net_cost`;
-- it fails with `InsufficientLiquidity` if the PT sale would return at least `sy_in` (PT at or above par), so a buyer never gets a free mint paid for by liquidity providers, or if the mint does not match the quote;
+- it fails with `InsufficientLiquidity` if the PT sale would return at least `sy_in` (PT at or above par, net of the swap fee), so a buyer never gets a free mint paid for by liquidity providers, or if the mint does not match the quote;
 - its size is bounded by the pool's SY reserve, because the PT sale cannot take the reserve below its minimum;
 - it needs a fresh oracle value, an open pool, and an account that passes the pool's [compliance checks](/how-it-works/compliance).
 
@@ -98,7 +98,7 @@ The pool does this inside its own call because Soroban does not let a contract b
 
 ## Safety rules
 
-- Rounding always favours the pool.
+- Rounding always favors the pool.
 - Prices come from the pool's own recorded reserves, so tokens sent straight to the pool change nothing.
 - Every swap needs a fresh oracle value (see [Oracle](/how-it-works/oracle)).
 - A large trade can move the spot price within a single ledger, so it is not an oracle.
@@ -111,6 +111,6 @@ The pool's own `add_liquidity` takes PT and SY at the pool's ratio and charges n
 
 - **LP only** (`Router.add_liquidity_single_underlying`, or `add_liquidity_single_sy` on the pool): the pool swaps part of your SY into PT on the curve (swap fee, price impact), adds both, refunds the SY it did not use and keeps the few raw units of PT dust in its reserve. It needs a seeded pool and a fresh oracle.
 - **Keep YT** (`Router.add_liquidity_keep_yt`): it wraps your USDY, splits part of it, and adds the PT and SY at the pool's ratio. The YT is yours. Leftover PT or SY stays in your wallet. It pays the tokenization fee on the part it splits.
-- **Withdraw to USDY** (`Router.remove_liquidity_to_underlying`): it removes your liquidity, sells only the PT it gained into the pool and unwraps only the SY it gained. It works before maturity only, needs a fresh oracle and pays the swap fee on that PT sale. A very large share can fail here where receiving SY (two signatures) does not, because the PT is sold into the pool as it stands after your removal.
+- **Withdraw to USDY** (`Router.remove_liquidity_to_underlying`): it removes your liquidity, sells only the PT it gained into the pool and unwraps only the SY it gained. It works before maturity only, needs a fresh oracle and pays the swap fee on that PT sale. A very large share can fail here, because the PT sale runs inside the same call into the pool as it stands after your removal. Receiving SY removes your liquidity at the first signature, so you hold PT and SY even if the second step, the same PT sale, is refused; you can then sell the PT in smaller pieces or keep it to maturity.
 
 **Next:** [Maturity](/how-it-works/maturity), what PT and YT pay at the end. For liquidity in the app, see [Add and remove liquidity](/using-the-app/liquidity).

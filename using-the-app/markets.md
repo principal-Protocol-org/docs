@@ -57,7 +57,7 @@ Under the chart, a card has three tabs.
 - **SY wrapper**, **Market pool**, **Risk control** and **Principal manager**: each reads "Not paused" or "Paused: new actions are refused". A paused Principal manager also turns the market's badge to **Paused**.
 - **Oracle**: whether it is fresh, for example "Fresh (updated within the last 1 hour), updated 12 minutes ago". The freshness window is read from the oracle, not assumed; on the Testnet market it is one hour.
 - **Oracle deviation cap**: the most the oracle rate may rise in one update. On the Testnet market it is 10%.
-- **Oracle primary source** and **Oracle fallback source**: the shortened address of the account that feeds the rate, and of the backup source, or "None". The Testnet market has one primary source and no fallback.
+- **Oracle primary source** and **Oracle fallback source**: the shortened id of the source that feeds the rate (a 32-byte identifier, not an account), and of the backup source, or "None". The Testnet market has one primary source and no fallback.
 - **Oracle last rejected update**: "None", or why the oracle refused its latest update, with the value it was offered and how long ago. The reasons read "Moved more than the cap", "Lower than the current value", "Not newer than the current value", "Outside the value bounds" or "Fallback tried to change the value". A refused update leaves the rate where it was.
 - **Circuit breaker, protocol-wide** and **Circuit breaker, USDY**: the room left in each, or "No limit (disabled)" when one is off.
 - **Your deposit cap**: the room left under your own cap, or "No cap (disabled)".
