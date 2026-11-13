@@ -114,7 +114,7 @@ Both landings, `principalmarket.fi` and `testnet.principalmarket.fi`, proxy `/do
 
 ## Where the facts come from
 
-The code wins over any document. The pages describe the contracts of `org/principal` at commit `be2a1a5` (the `sourceCommit` of the deployed Testnet manifest) and the dApp's `testnet` branch. Where the protocol documents and the code disagree, the pages follow the code. Every number (fees, limits, contract counts) must trace to the code or the manifest. The wallet is Varial (formerly Freighter).
+The code wins over any document. The pages describe the contracts of `org/principal` at commit `665bb67` (the `sourceCommit` of the deployed Testnet manifest) and the dApp's `testnet` branch. The Testnet market is `testnet-usdy-1802336344`. Where a page gives a Testnet value (oracle window, deviation cap, fees, protocol share, time stretch), it says it is this market's setting. Where the protocol documents and the code disagree, the pages follow the code. Every number (fees, limits, contract counts) must trace to the code or the manifest. The wallet is Varial (formerly Freighter).
 
 ## Still to verify
 
@@ -125,7 +125,10 @@ Before go-live, the developer checks:
 - [ ] A page's filename does not change when its title is edited in Pages CMS.
 - [x] The Vercel project builds and serves `/docs/...` on its own domain. Done 2026-11-02 (`principalmarket-docs.vercel.app`). On that host a path under `/docs` with a trailing slash (`/docs/guide/`) answers 404, the same path at the root answers 200: the dApp proxy targets the root.
 - [ ] Once `feat/tranche-1-mvp` is merged into `main` in `org/principal`: every GitHub link in the site answers 200 (VitePress checks internal links only).
-- [ ] Each figure in the pages is checked against the code (done for the first draft at `be2a1a5`; repeat after protocol changes).
+- [x] Each figure in the pages is checked against the code. Done 2026-11-13 at principal `665bb67` and the dApp `testnet` head; the market settings were read live on chain that day (fees 5 / 1000 / 10 bps, protocol share 20%, oracle window 3600 s, deviation cap 1000 bps, one primary source, no fallback, no value bounds, time stretch 4 years). Repeat after protocol changes.
+- [ ] After the update is published, check the Safety tab and flash copy on the live site: the copy is quoted from source and was not seen in a browser.
+- [ ] When the Testnet market is redeployed again, re-read the maturity date and every address-dependent statement.
+- [ ] Check that the Manage page's role statements match the keys of the deployment in use.
 - [ ] Home page round trip: in Pages CMS, save the home page once without changes, then diff (`layout`, hero buttons, feature cards).
 - [ ] "Last updated" on a Vercel build once the history is longer (matched git on the first builds, 2026-11-02): if pages show a wrong date (a shallow clone gives older pages the clone's oldest commit date), set `lastUpdated: false` or make the build fetch the full history.
 - [x] The Testnet docs: one production build behind both landings, "Launch app" on the reading domain (below).
