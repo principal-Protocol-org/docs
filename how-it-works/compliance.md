@@ -26,9 +26,11 @@ The "may this account hold it?" check runs on every operation that creates, move
 - splitting, recombining, claiming yield and redeeming;
 - every pool trade, adding and removing liquidity, and LP transfers.
 
+What counts as "your" check depends on who makes the call. In the app's Buy YT the PrincipalManager's mint is made by the pool, not by you, so the mint's check is on the pool. You are checked by the pool's trader check, by your SY transfer and by the YT sent to you.
+
 Because both sides are checked, an account the issuer has revoked cannot move its PT or YT to another wallet before the issuer recovers them.
 
-The issuer's authority is required for the other kind of action: creating a market, changing its fees, and recovering a frozen account's positions. On Testnet that authority is a Principal-held key (the test USDY's asset-contract admin); the issuer account itself runs authorization and the allow-list.
+The issuer's authority is required for the other kind of action: creating a market, changing its fees, and recovering a frozen account's positions. On Testnet that authority is a Principal-held key (the test USDY's asset-contract admin); the issuer account itself runs authorization and the allow-list. Market creation also needs the authorizations and allow-list entries a new market's contracts and treasury require; the wizard's permissions step lists them (see [Manage and create markets](/using-the-app/manage-markets)).
 
 ## SEP-8 regulated assets
 
@@ -47,6 +49,8 @@ The token's own compliance modules (transfer limits, country rules) run only whe
 Every market also checks a second list, kept in the shared Permissioning contract. Only its admin can change it; on Testnet that admin is the test USDY's issuer account. It has an account-level list plus a list per token, so PT and YT can have different audiences.
 
 This check always runs: an account that is not on the list is refused. It can only narrow access: you need the issuer's authorization **and** a place on the list.
+
+Each token has its own entry, and an action needs only the entries of the tokens it moves to you: Buy YT needs the YT entry, LP only needs no PT entry (the PT dust stays in the pool), a two-sided add and every liquidity exit need the PT entry (they send PT to you), and Keep YT needs both.
 
 On Testnet, the app's "Get test tokens" action authorizes your account on the test USDY and adds it to the allow-list, for your account and for each market's PT and YT (see [Getting started](/using-the-app/)). The test USDY has authorization required, revocable and clawback enabled, so these controls are live.
 

@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 570" width="960" height="570" role="img" aria-labelledby="flash-title flash-desc" font-family="'Hanken Grotesk', 'Helvetica Neue', Arial, sans-serif">
+  <title id="flash-title">Buying YT as a flash swap, in five steps</title>
+  <desc id="flash-desc">In one transaction, MarketPool.flash_mint_yt does five things. One, it pulls your maximum net cost in SY from your wallet. Two, it mints PT and YT from the full sy_in of the pool's own SY, less the tokenization fee. Three, it sells that PT to itself on the curve. Four, it refunds the maximum net cost minus the net cost. Five, it sends you the YT. The net cost is sy_in minus the SY the PT sale returns. The call fails if PT is at or above par or if the net cost is above your maximum.</desc>
+  <defs>
+    <marker id="flash-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#4a5668"/></marker>
+  </defs>
+  <rect x="0.5" y="0.5" width="959" height="569" rx="12" fill="#ffffff" stroke="#d3dae3"/>
+  <rect x="30" y="30" width="900" height="58" rx="10" fill="#ffffff" stroke="#7d8a9c" stroke-width="1.5"/>
+  <circle cx="68" cy="59" r="17" fill="#0f2a4a"/>
+  <text x="68" y="66" text-anchor="middle" font-size="20" font-weight="700" fill="#ffffff">1</text>
+  <text x="102" y="56" font-size="20" font-weight="700" fill="#0a1626">Pull your budget</text>
+  <text x="102" y="77" font-size="17" fill="#4a5668">The pool takes max_net_cost SY from your wallet.</text>
+  <rect x="660" y="40" width="258" height="38" rx="8" fill="#e8ecf1"/>
+  <text x="789" y="65" text-anchor="middle" font-size="17" font-weight="600" fill="#0a1626">You  →  MarketPool</text>
+  <line x1="68" y1="90" x2="68" y2="116" stroke="#4a5668" stroke-width="2.5" marker-end="url(#flash-arrow)"/>
+  <rect x="30" y="118" width="900" height="58" rx="10" fill="#ffffff" stroke="#7d8a9c" stroke-width="1.5"/>
+  <circle cx="68" cy="147" r="17" fill="#0f2a4a"/>
+  <text x="68" y="154" text-anchor="middle" font-size="20" font-weight="700" fill="#ffffff">2</text>
+  <text x="102" y="144" font-size="20" font-weight="700" fill="#0a1626">Mint from the pool's own SY</text>
+  <text x="102" y="165" font-size="17" fill="#4a5668">PT + YT from sy_in of the pool's SY, less the tokenization fee.</text>
+  <rect x="660" y="128" width="258" height="38" rx="8" fill="#e8ecf1"/>
+  <text x="789" y="153" text-anchor="middle" font-size="17" font-weight="600" fill="#0a1626">PrincipalManager.mint</text>
+  <line x1="68" y1="178" x2="68" y2="204" stroke="#4a5668" stroke-width="2.5" marker-end="url(#flash-arrow)"/>
+  <rect x="30" y="206" width="900" height="58" rx="10" fill="#ffffff" stroke="#7d8a9c" stroke-width="1.5"/>
+  <circle cx="68" cy="235" r="17" fill="#0f2a4a"/>
+  <text x="68" y="242" text-anchor="middle" font-size="20" font-weight="700" fill="#ffffff">3</text>
+  <text x="102" y="232" font-size="20" font-weight="700" fill="#0a1626">Sell the PT to the pool</text>
+  <text x="102" y="253" font-size="17" fill="#4a5668">The pool keeps the PT; reserves move as in a PT sale, swap fee paid.</text>
+  <rect x="660" y="216" width="258" height="38" rx="8" fill="#e8ecf1"/>
+  <text x="789" y="241" text-anchor="middle" font-size="17" font-weight="600" fill="#0a1626">inside MarketPool</text>
+  <line x1="68" y1="266" x2="68" y2="292" stroke="#4a5668" stroke-width="2.5" marker-end="url(#flash-arrow)"/>
+  <rect x="30" y="294" width="900" height="58" rx="10" fill="#ffffff" stroke="#7d8a9c" stroke-width="1.5"/>
+  <circle cx="68" cy="323" r="17" fill="#0f2a4a"/>
+  <text x="68" y="330" text-anchor="middle" font-size="20" font-weight="700" fill="#ffffff">4</text>
+  <text x="102" y="320" font-size="20" font-weight="700" fill="#0a1626">Refund the unused part</text>
+  <text x="102" y="341" font-size="17" fill="#4a5668">max_net_cost − net_cost goes back to your wallet.</text>
+  <rect x="660" y="304" width="258" height="38" rx="8" fill="#e8ecf1"/>
+  <text x="789" y="329" text-anchor="middle" font-size="17" font-weight="600" fill="#0a1626">MarketPool  →  You</text>
+  <line x1="68" y1="354" x2="68" y2="380" stroke="#4a5668" stroke-width="2.5" marker-end="url(#flash-arrow)"/>
+  <rect x="30" y="382" width="900" height="58" rx="10" fill="#ffffff" stroke="#7d8a9c" stroke-width="1.5"/>
+  <circle cx="68" cy="411" r="17" fill="#0f2a4a"/>
+  <text x="68" y="418" text-anchor="middle" font-size="20" font-weight="700" fill="#ffffff">5</text>
+  <text x="102" y="408" font-size="20" font-weight="700" fill="#0a1626">Send the YT</text>
+  <text x="102" y="429" font-size="17" fill="#4a5668">Only the YT is sent to you. You never hold the PT.</text>
+  <rect x="660" y="392" width="258" height="38" rx="8" fill="#b8862b"/>
+  <text x="789" y="417" text-anchor="middle" font-size="17" font-weight="600" fill="#0a1626">MarketPool  →  You</text>
+  <rect x="30" y="458" width="900" height="82" rx="10" fill="rgba(15,42,74,0.08)"/>
+  <rect x="30" y="458" width="8" height="82" rx="4" fill="#0f2a4a"/>
+  <text x="58" y="490" font-size="19" font-weight="700" fill="#0a1626">net_cost = sy_in − sy_back, taken out of your budget</text>
+  <text x="58" y="518" font-size="17" fill="#4a5668">Fails if PT is at or above par, or if net_cost is above your maximum.</text>
+</svg>

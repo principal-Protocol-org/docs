@@ -42,7 +42,7 @@ So PT and YT together never claim more than the SY backing them, whatever the ra
 
 ## When the index moves
 
-Anyone can call `update_yield_index`. It reads the oracle, requires a fresh value (updated within the last hour), and lowers the index only if the rate has risen since the last update. Splitting SY calls it before crediting your new YT, so a new position never earns a rise that happened before it existed.
+Anyone can call `update_yield_index`. It reads the oracle, requires a fresh value (updated within the oracle's own freshness window, one hour on the Testnet market), and lowers the index only if the rate has risen since the last update. Splitting SY calls it before crediting your new YT, so a new position never earns a rise that happened before it existed.
 
 ## What a transfer does
 
@@ -80,7 +80,7 @@ paid   = gross − fee                    ≈ 4.0889 underlying tokens
 
 ## Yield stops at settlement
 
-The first index update at or after maturity moves the index one last time, using a fresh oracle value, and then freezes it. That update can come from `settle_all`, `update_yield_index`, a redemption, a claim or a YT transfer. It may happen some time after maturity, and yield accrues until it does. The rate the index froze at is the market's settlement rate, used for both PT and YT. Nothing accrues after that. See [Maturity](/how-it-works/maturity).
+The first index update at or after maturity moves the index one last time, using a fresh oracle value, and then freezes it. That update can come from `settle_all`, `update_yield_index`, a redemption, a claim, a YT transfer or a compliance seizure of YT. It may happen some time after maturity, and yield accrues until it does. The rate the index froze at is the market's settlement rate, used for both PT and YT. Nothing accrues after that. See [Maturity](/how-it-works/maturity).
 
 ## Rounding
 

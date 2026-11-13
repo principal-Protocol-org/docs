@@ -39,7 +39,9 @@ Here `n` is the SY you split and `fee_bps` is the market's tokenization fee (see
 
 **Example.** You split 100 SY when the rate is 1.05. With no fee you receive 105 PT and 105 YT. With a 5 bps tokenization fee, 0.05 SY is withheld and you receive 104.9475 PT and 104.9475 YT.
 
-Splitting needs the market to be open (not matured, not paused), a fresh oracle value (updated within the last hour), and an account that passes the [compliance checks](/how-it-works/compliance): authorized on the underlying and on the allow-list. The SY you split stays in the PrincipalManager contract as the backing for your PT and YT.
+Splitting needs the market to be open (not matured, and the PrincipalManager not paused), a fresh oracle value (updated within the oracle's freshness window, one hour on the Testnet market, see [Oracle](/how-it-works/oracle)), and an account that passes the [compliance checks](/how-it-works/compliance): authorized on the underlying and on the allow-list. The circuit breaker also applies: `mint` reports the value being tokenized to RiskControl, and a deposit over a set limit fails. The SY you split stays in the PrincipalManager contract as the backing for your PT and YT.
+
+The app's Buy YT does not make you split SY yourself: the pool splits its own SY inside one call, and you pay only the net cost (see [Pricing and the AMM](/how-it-works/pricing-and-amm)).
 
 ## What PT and YT are claims on
 
@@ -71,10 +73,12 @@ Recombining charges no fee. It needs a fresh oracle and is closed once the marke
 | Recombine PT + YT | Yes | No (redeem instead) |
 | Claim YT yield | Yes | Yes |
 | Trade PT or YT in the pool, add liquidity | Yes | No |
-| Remove liquidity | Yes | Yes |
+| Remove liquidity (the pool's `remove_liquidity`) | Yes | Yes |
 | Redeem PT and YT | No | Yes |
 
 Every row also requires that your account passes the compliance checks, and most are refused while the market's contracts are paused (after maturity, removing liquidity ignores the pool's pause but still needs the SY wrapper unpaused).
+
+The app's one-call withdraw to USDY also sells the PT it receives, so it is for before maturity only. After maturity the app removes the liquidity, redeems, then unwraps (see [Maturity](/how-it-works/maturity)).
 
 In the app these are the [Quick actions](/using-the-app/quick-actions) **Deposit USDY → SY**, **Withdraw SY → USDY**, **Split USDY → PT + YT** (which wraps your USDY into SY first) and **Recombine PT + YT**.
 

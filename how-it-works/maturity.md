@@ -4,13 +4,13 @@ description: What PT and YT pay at maturity, how the single settlement rate is
   fixed, and how redemption works.
 order: 4
 ---
-Every market has a maturity date, fixed when the market is created. The Testnet market matures on 31 January 2027 at 00:45 UTC. At maturity, trading closes and PT and YT become redeemable for the underlying token. The first index update at or after maturity fixes one final rate for everyone. This page explains what each one pays and how.
+Every market has a maturity date, fixed when the market is created. The Testnet market matures on 11 February 2027 at 08:59 UTC. At maturity, trading closes and PT and YT become redeemable for the underlying token. The first index update at or after maturity fixes one final rate for everyone. This page explains what each one pays and how.
 
 ![Before maturity PT rises toward par while YT's price falls toward zero as its future yield runs out; at maturity PT redeems for the principal's value and YT's earned yield stays claimable](/images/maturity-payout.svg)
 
 ## The settlement rate
 
-At or after maturity, anyone can call `PrincipalManager.settle_all`. Unless the YT index is already frozen, it needs a fresh oracle value (updated within the last hour), uses it to move the index one last time and freezes it. It then records the frozen rate as the market's **settlement rate**. If nobody calls it, the first redemption does the same thing.
+At or after maturity, anyone can call `PrincipalManager.settle_all`. Unless the YT index is already frozen, it needs a fresh oracle value (updated within the oracle's freshness window, one hour on the Testnet market), uses it to move the index one last time and freezes it. It then records the frozen rate as the market's **settlement rate**. If nobody calls it, the first redemption does the same thing.
 
 From then on:
 
@@ -69,14 +69,16 @@ You redeem with `PrincipalManager.redeem` (or `Router.redeem_at_maturity`, which
 2. burns your PT and pays its value in the underlying token;
 3. brings the YT index up to date, burns your YT, and pays its yield, less the YT fee.
 
-Redemption pays the underlying token itself to your wallet, not SY. It is refused before maturity, while the market is paused, and if your account does not pass the [compliance checks](/how-it-works/compliance).
+Redemption pays the underlying token itself to your wallet, not SY. It is refused before maturity, while the PrincipalManager is paused, and if your account does not pass the [compliance checks](/how-it-works/compliance). A paused PrincipalManager therefore holds redemption until it is unpaused; the market page's Safety tab shows that pause in its **Principal manager** row.
 
 ## Liquidity providers at maturity
 
-Swaps close at maturity, and the pool's price stops mattering. Removing liquidity stays open after maturity, even if the pool is paused, and needs no oracle. You receive your share of the pool's PT and SY, then redeem the PT at par like any other PT.
+Swaps close at maturity, and the pool's price stops mattering. The pool's `remove_liquidity` stays open after maturity, even if the pool is paused, and needs no oracle, as long as the SY wrapper is not paused. You receive your share of the pool's PT and SY, then redeem the PT at par like any other PT.
+
+The app's one-call withdraw to USDY sells the PT, so it closes at maturity. After maturity the app removes, redeems, then unwraps: three signatures to USDY, two to SY.
 
 ## Leaving before maturity
 
-You do not have to wait. Before maturity you can sell PT or YT in the pool, recombine equal amounts of PT and YT into SY (see [Tokenization](/how-it-works/)), or claim YT yield as it accrues. In the app, redemption and claims are on the [Portfolio and history](/using-the-app/portfolio) page.
+You do not have to wait. Before maturity you can sell PT or YT in the pool, recombine equal amounts of PT and YT into SY (see [Tokenization](/how-it-works/)), or claim YT yield as it accrues. In the app, claims are on the [Portfolio and history](/using-the-app/portfolio) page, and redemption is a form in the market's PT tab, which the Portfolio shortcut opens.
 
 **Next:** [Fees](/how-it-works/fees), every fee a market charges and who receives it.
