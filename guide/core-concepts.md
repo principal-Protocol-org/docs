@@ -42,7 +42,7 @@ Each market has one maturity date, fixed when the market is created. Until then 
 
 ## LP (liquidity position)
 
-Each market has one pool, which trades PT against SY. Liquidity providers deposit PT and SY at the pool's ratio and receive an LP position: their share of the pool, recorded by the pool itself rather than issued as a separate token (the app calls it your LP tokens). In the app you pay USDY: part of it is split into PT and YT, the PT and the rest (as SY) go into the pool, and you keep the YT. YT has no pool of its own. Buying YT splits SY and sells the PT into the pool in one transaction; selling YT does the reverse. See [Pricing and the AMM](/how-it-works/pricing-and-amm).
+Each market has one pool, which trades PT against SY. Liquidity providers deposit PT and SY at the pool's ratio and receive an LP position: their share of the pool, recorded by the pool itself rather than issued as a separate token (the app calls it your LP tokens). In the app you can pay USDY or SY. With **Keep YT** on (USDY only), part of your USDY is split into PT and YT, the PT and the rest (as SY) go into the pool, and you keep the YT. With Keep YT off ("LP only"), all of your USDY or SY goes into the pool and you keep no YT. YT has no pool of its own. Buying YT is a flash swap: the pool mints PT and YT from its own SY and sells the PT back to itself, so you pay only the net cost, all in one transaction; selling YT does the reverse. See [Pricing and the AMM](/how-it-works/pricing-and-amm).
 
 ## Fixed APY and implied yield
 

@@ -24,7 +24,7 @@ You swap SY, or the underlying asset, for PT in the pool, and hold it to maturit
 
 ## Take a view on yield: buy YT
 
-The app splits your SY into PT and YT, sells the PT into the pool and leaves you the YT, all in one transaction. You can claim the yield as it accrues, or let it build up.
+In one transaction, the pool mints PT and YT from its own SY, sells the PT back to itself and sends you the YT. You pay only the net cost. You can claim the yield as it accrues, or let it build up.
 
 **Example.** At about 0.04 per YT, 1,000 dollars buy about 25,000 YT, a leverage of 25x. What they collect depends on what the asset earns over the year:
 
@@ -37,7 +37,7 @@ The app splits your SY into PT and YT, sells the PT into the pool and leaves you
 
 These figures are in dollars. For this purchase the app's **Break-even APY** reads about 4.17%: the rate at which your YT does as well as simply holding the asset, which would have earned too.
 
-**What the trade moves.** To buy these 25,000 YT, your wallet must hold about 25,000 dollars' worth of SY or USDY at the start, not only the 1,000 you spend. The trade splits that whole amount into PT and YT and sells the 25,000 PT straight back, so about 24,000 comes back to you and about 1,000 is spent. The trade form shows this as **Moves**, **Spends** and **Comes back**, and **Max** allows for it. The tokenization fee is charged on the whole amount split and the swap fee on the whole PT sale, so together they are larger than the 1,000 suggests.
+**What the trade needs.** The amount you type is a budget: the most the trade may spend. Your wallet needs only that budget, and only the cost leaves it. The form reads "Pay at most … · expected … · about … back in the same transaction", the rest of the budget comes back to you in the same transaction, and **Max** is your whole balance. The tokenization fee is charged on the whole amount the pool mints for you and the swap fee on the whole PT sale, so together they are larger than the 1,000 suggests. A purchase is also limited by the pool's SY reserve: the pool's internal PT sale must leave at least 1,000 raw units of SY in it, so a very large purchase is refused.
 
 **What you gain.** A large exposure to the asset's yield for a small net outlay, with no borrowing.
 
@@ -49,7 +49,7 @@ These figures are in dollars. For this purchase the app's **Break-even APY** rea
 
 ## Earn as a liquidity provider
 
-You pay USDY. The app splits part of it into PT and YT, puts the PT and the rest (as SY) into the pool at its current ratio, and gives you an LP position plus the YT. Adding SY alone is not available in this release.
+The app offers two modes, each in one signature. With **Keep YT** (USDY only), it splits part of your USDY into PT and YT, puts the PT and the rest (as SY) into the pool at its current ratio, and gives you an LP position plus the YT. With **LP only** (USDY or SY), all of your payment goes into the pool and you keep no YT: there is no YT decay to carry, but the pool's swap fee applies to the part it swaps into PT, and the price moves a little.
 
 **Where your return comes from.** The PT in the pool rises toward par as maturity approaches, with no trading needed. The SY in the pool is the underlying, so its dollar value moves with the asset. In the worked example in [Pricing and the AMM](/how-it-works/pricing-and-amm), a pool 180 days from maturity prices PT at 0.99376. With no trades at all, the price reaches 0.99997 by day 179 and par at maturity, while the implied yield stays at about 1.27% a year. Time alone raises the value of the PT you hold in the pool.
 
@@ -58,8 +58,8 @@ You pay USDY. The app splits part of it into PT and YT, puts the PT and the rest
 **What you risk.**
 
 - When the market's implied yield moves, traders rebalance the pool, and you end up holding more of whichever side lost value, as in any AMM.
-- You also hold the YT from the split, which loses value as maturity nears (see the YT strategy above).
-- You can withdraw before or after maturity. Before maturity, the app sells the PT you take out back into the pool, which pays the swap fee and moves the price; after maturity it redeems that PT instead. A pause of the pool blocks withdrawals before maturity, not after it; a pause of the SY wrapper, or of redemptions, still holds them up after maturity. See [Risks](/guide/risks).
+- With Keep YT, you also hold the YT from the split, which loses value as maturity nears (see the YT strategy above). LP only keeps no YT.
+- You can withdraw before or after maturity. Before maturity, the app sells the PT you take out back into the pool, which pays the swap fee, moves the price and needs a fresh oracle price and an unpaused pool; after maturity it redeems that PT instead. A pause of the pool blocks withdrawals before maturity, not after it; a pause of the SY wrapper, or of redemptions, still holds them up after maturity. See [Risks](/guide/risks).
 
 ## Sell your future yield: split, then sell YT
 
@@ -76,6 +76,6 @@ You split SY into PT and YT, sell the YT, and keep the PT.
 
 ## Fees in every strategy
 
-Splitting SY costs the tokenization fee, and buying YT includes a split of the whole amount moved. Adding liquidity in the app includes a split, so it pays the tokenization fee on that part. Yield paid to YT holders carries the YT fee. Every pool trade pays a swap fee that falls to zero at maturity. Each market shows its current fees on its page, under **Details**. [Fees](/how-it-works/fees) explains how each one is computed.
+Splitting SY costs the tokenization fee, and buying YT includes a split of the whole amount the pool mints for you. Adding liquidity with Keep YT includes a split, so it pays the tokenization fee on that part; LP only pays the swap fee on the part swapped into PT and no tokenization fee, because no YT is minted. Yield paid to YT holders carries the YT fee. Every pool trade pays a swap fee that falls to zero at maturity. Each market shows its current fees on its page, under **Details**. [Fees](/how-it-works/fees) explains how each one is computed.
 
 **Next:** [Supported assets](/guide/supported-assets), then [Risks](/guide/risks). To do each of these in the app, see [Trade PT and YT](/using-the-app/trade), [Add and remove liquidity](/using-the-app/liquidity) and [Quick actions](/using-the-app/quick-actions).

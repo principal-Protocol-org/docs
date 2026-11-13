@@ -28,7 +28,7 @@ You deposit the asset and receive SY, a standardized wrapper around it. You then
 
 Before maturity, equal amounts of PT and YT can be recombined into SY. After maturity, each token is redeemed on its own.
 
-Each market has one pool, where PT trades against SY. YT trades through the same pool: buying YT splits SY and sells the PT in one transaction, and selling YT does the reverse. If you know Pendle, this is the same PT/YT model, built for Stellar and for regulated assets.
+Each market has one pool, where PT trades against SY. YT trades through the same pool: buying YT has the pool mint PT and YT from its own SY and sell the PT back to itself, so you pay only the difference, all in one transaction, and selling YT does the reverse. If you know Pendle, this is the same PT/YT model, built for Stellar and for regulated assets.
 
 [Core concepts](/guide/core-concepts) defines each of these pieces.
 
@@ -38,13 +38,13 @@ The assets Principal targets are regulated. Their issuer can decide which accoun
 
 Each market also checks a second allow-list, shared across markets, which only its admin can change. This check always runs: an account must be on it too, and an account that was never added is refused. It can only narrow access, never widen it. On Testnet, the test asset's issuer account runs it, and **Get test tokens** in the app adds your account.
 
-The asset's issuer creates each market on its asset and sets the market's fees. If it freezes an account, that account's positions in Principal are frozen too, and the issuer can recover them. [Compliance](/how-it-works/compliance) explains how this works, and [Risks](/guide/risks) what it means for you.
+The asset's issuer authority (the admin of its Stellar Asset Contract) creates each market on its asset and sets the market's fees; the app's **Manage** view is where it does that. On Testnet that authority is Principal's admin key, a different account from the issuer account that runs the allow-list above. If it freezes an account, that account's positions in Principal are frozen too, and the issuer can recover them. [Compliance](/how-it-works/compliance) explains how this works, and [Risks](/guide/risks) what it means for you.
 
 ## Who it is for
 
 - **Holders of a yield-bearing RWA, and treasuries,** who want a known return at a known date. They buy PT, or split their asset and sell the YT.
 - **Traders, vault managers and funds** who want exposure to future yield. They buy or sell YT.
-- **Liquidity providers** who put PT and SY in a market's pool.
+- **Liquidity providers** who put PT and SY in a market's pool. The app takes USDY or SY and adds them in one signature.
 
 [Strategies](/guide/strategies) walks through each of these with an example.
 
