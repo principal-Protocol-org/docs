@@ -6,7 +6,7 @@ order: 1
 
 The Principal app runs on Stellar Testnet. Everything in it uses test assets with no real value, and a banner at the top of every app page says so: "Stellar Testnet — test assets only, no real value."
 
-This page takes you from an empty browser to a wallet that holds test USDY and can use every market.
+This page takes you from an empty browser to a wallet that holds test USDY and can use every market. For a guided run through the app with screenshots, from connecting to redeeming, see the [Testnet walkthrough](/using-the-app/testnet-walkthrough).
 
 ## Install Varial
 
