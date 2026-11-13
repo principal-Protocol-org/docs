@@ -11,7 +11,7 @@ This file is for the maintainers and the writer. It is not part of the site (`RE
 | Section (nav) | Directory | What it covers |
 | --- | --- | --- |
 | Guide | `guide/` | What Principal is, core concepts, strategies, supported assets, risks |
-| Using the app | `using-the-app/` | Getting started, markets, trade, liquidity, quick actions, portfolio |
+| Using the app | `using-the-app/` | Getting started, markets, trade, liquidity, quick actions, portfolio, manage and create markets |
 | How it works | `how-it-works/` | Tokenization, yield, pricing and the AMM, maturity, fees, oracle, compliance |
 | Technical | `technical/` | Architecture, safety controls, developers (links to GitHub) |
 

@@ -64,6 +64,6 @@ Every action in the app follows the same path:
 
 Every trade and every liquidity deposit is one signature on Testnet. A few actions still take several transactions, one signature each: recombining PT + YT to USDY, taking liquidity out as SY before maturity, and withdrawing liquidity after maturity. [Quick actions](/using-the-app/quick-actions) and [Add and remove liquidity](/using-the-app/liquidity) say how many signatures each takes, and [Trade PT and YT](/using-the-app/trade) explains the route dialog and what happens when a step is refused. If a contract's data has expired on the network, the app first offers a restore: "Some contract data has expired — restore it first (one extra signature)."
 
-A wallet that holds a role on a market, or that is the test asset's issuer authority, also sees a **Manage** link in the header. It opens the manager view, which is described in the page "Manage and create markets". Most readers never see it.
+A wallet that holds a role on a market, or that is the test asset's issuer authority, also sees a **Manage** link in the header. It opens the manager view, which is described in [Manage and create markets](/using-the-app/manage-markets). Most readers never see it.
 
 **Next:** [Markets and the market page](/using-the-app/markets). New to PT and YT? Read [Core concepts](/guide/core-concepts) first.
