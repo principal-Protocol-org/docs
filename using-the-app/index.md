@@ -66,4 +66,6 @@ Every trade and every liquidity deposit is one signature on Testnet. A few actio
 
 A wallet that holds a role on a market, or that is the test asset's issuer authority, also sees a **Manage** link in the header. It opens the manager view, which is described in [Manage and create markets](/using-the-app/manage-markets). Most readers never see it.
 
+The header's **Dashboard** link opens the public dashboard, which needs no wallet: the protocol's totals, oracle, risk limits, compliance tools and history, each figure with the contract call behind it. [Public dashboard](/using-the-app/dashboard) explains its views and how to check a figure yourself.
+
 **Next:** [Markets and the market page](/using-the-app/markets). New to PT and YT? Read [Core concepts](/guide/core-concepts) first.
