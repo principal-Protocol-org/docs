@@ -62,7 +62,7 @@ Under the chart, a card has three tabs.
 - **Circuit breaker, protocol-wide** and **Circuit breaker, USDY**: the room left in each, or "No limit (disabled)" when one is off.
 - **Your deposit cap**: the room left under your own cap, or "No cap (disabled)".
 
-On the Testnet market the circuit breakers and the deposit cap are currently off, so those rows read disabled; the card always shows the live values. See [Oracle](/how-it-works/oracle) for how the rate is kept safe, and [Safety controls](/technical/security).
+On the Testnet market, the protocol-wide circuit breaker allows 1,000,000 USDY of deposits and mints in each window of about 24 hours, while the USDY breaker and the deposit cap are off, so those two rows read disabled. The card always shows the live values. See [Oracle](/how-it-works/oracle) for how the rate is kept safe, and [Safety controls](/technical/security).
 
 The Compliance and Safety tabs carry a small number: how many problems they report for you. A pause of any of the four, a stale oracle and a used-up limit each count. Zero means nothing needs your attention. Compliance shows its number once your wallet is connected.
 
