@@ -4,7 +4,7 @@ description: "Set up the Varial wallet on Stellar Mainnet or Testnet, connect it
 order: 1
 ---
 
-The Principal app runs on two Stellar networks, as two apps: the Mainnet app at `principalmarket.fi/app` and the Testnet app at `testnet.principalmarket.fi/app`. **Launch app** at the top of this site opens the app of the domain you read these docs on. A banner at the top of every app page says which network it runs on:
+The Principal app runs on two Stellar networks, Mainnet and Testnet, as two apps, each on its own site. **Launch app** at the top of this site opens the app of the site you read these docs on. A banner at the top of every app page says which network it runs on:
 
 - **Mainnet**: "Stellar Mainnet · These markets use mock assets issued by Principal for testing." Each market's asset follows the price of a real asset and is not that asset (see [Supported assets](/guide/supported-assets)). Network fees are paid in real XLM.
 - **Testnet**: "Stellar Testnet — test assets only, no real value." Everything there uses test assets with no real value.
