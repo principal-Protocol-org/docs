@@ -14,7 +14,7 @@ Each card starts with your balances: **USDY**, **SY**, **PT**, **YT** and **LP**
 
 - **LP**: your share of the pool, as **PT** and **SY**, and the **Estimated value of your share** in USDY.
 - **YT**: your **Pending yield (net of the YT fee)**. Its tip gives the gross yield and the fee.
-- **PT**: a **Fixed return if held to maturity** block, with the **Face value at maturity (USD)**, the **Current value (USD, at the pool price)**, the **Projected fixed return at maturity**, the **Fixed APY from now**, and what your PT **Redeems for** in USDY, marked indicative until the market settles.
+- **PT**: a **Fixed return if held to maturity** block, with the **Face value at maturity (USD)** (on Mainnet, **Face value at maturity (USD, at the oracle's price)**), the **Current value (USD, at the pool price)**, the **Projected fixed return at maturity**, the **Fixed APY from now**, and what your PT **Redeems for** in USDY, marked indicative until the market settles.
 - **PT or YT**: an entry line from your history, such as the fixed APY you locked when you bought PT, or the rate at your mint.
 
 Below sit the shortcuts that apply to you: **Claim yield**, **Exit (recombine PT + YT)**, **Sell PT** and **Sell YT** before maturity or **Redeem at maturity** after it, **Withdraw liquidity**, and **Open market**. The Sell and Withdraw links open the market page on the right tab and side. Exit opens the Recombine form described in [Quick actions](/using-the-app/quick-actions).

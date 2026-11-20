@@ -21,7 +21,7 @@ The pool trades SY, so paying or receiving in USDY needs a conversion. The app d
 
 ## The PT tab
 
-**Buy PT**: "Each PT redeems for $1 of USDY at maturity, so buying it below $1 fixes your return in USD." Enter what you pay; **You receive (preview)** shows the PT. The details add:
+**Buy PT**: "Each PT redeems for $1 of USDY at maturity, so buying it below $1 fixes your return in USD." On Mainnet it reads, for example, "Each PT redeems at maturity for $1 of MOCKUSTRY, priced by this market's oracle at maturity. Buying it below $1 fixes your return at that price." Enter what you pay; **You receive (preview)** shows the PT. The details add:
 
 - **Value today**: what that PT is worth at the pool's price now.
 - **Fixed APY**: the pool's fixed APY now → once your trade lands. Buying PT raises its price, so the fixed APY falls.
@@ -29,7 +29,7 @@ The pool trades SY, so paying or receiving in USDY needs a conversion. The app d
 - **Price impact**: your price against the pool's spot price, swap fee included.
 - **Fees**: the pool's swap fee.
 - **Minimum received**: the least you accept, at your slippage tolerance.
-- **At maturity**: your gain in USD, fixed whatever USDY's price does.
+- **At maturity**: your gain in USD, fixed whatever USDY's price does. On Mainnet it is in USD at the oracle's price at maturity: the oracle's price never goes down, so if the asset's market price ends lower, what you receive is worth less than this.
 
 **Sell PT** sells PT before maturity. Its details show Fixed APY, Price impact, Fees and Minimum received; selling lowers the PT price, so the fixed APY rises.
 

@@ -14,13 +14,14 @@ You swap SY, or the underlying asset, for PT in the pool, and hold it to maturit
 
 **Example.** You spend 960 dollars' worth of SY and receive 1,000 PT. At maturity they redeem for 1,000 dollars' worth of the underlying, whatever the asset earned in between: a fixed 4.17% for the year.
 
-**What you gain.** A known dollar amount on a known date. Rates can rise or fall in the meantime; your payout at maturity does not change.
+**What you gain.** A known dollar amount on a known date, at the market oracle's price at maturity. Rates can rise or fall in the meantime; your payout at maturity does not change.
 
 **What you risk.**
 
 - If the asset earns more than 4.17%, the extra goes to YT holders.
 - If you sell before maturity, you get the pool's price on that day. If the market's implied yield has risen since you bought, that price is lower.
 - You are paid in the underlying, so you keep the asset's own risks and its issuer's controls. See [Risks](/guide/risks).
+- The oracle's price never goes down. If the asset's market price ends lower, as it can for some of the Mainnet mock assets, the underlying you receive is worth less than the dollar amount at that market price. See [Oracle risk](/guide/risks#oracle-risk).
 
 ## Take a view on yield: buy YT
 

@@ -13,7 +13,7 @@ hero:
       link: /how-it-works/
 features:
   - title: Lock in a fixed yield
-    details: Buy a Principal Token (PT) below par and redeem it at maturity for a known dollar value of the underlying asset, whatever the asset earns in between.
+    details: Buy a Principal Token (PT) below par and redeem it at maturity for a known dollar value of the underlying asset, priced by the market's oracle, whatever the asset earns in between.
     link: /guide/strategies
   - title: Trade future yield
     details: A Yield Token (YT) collects the asset's yield until maturity. Buy it to take a view on that yield, or sell yours to get paid for it now.

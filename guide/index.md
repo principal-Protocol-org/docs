@@ -23,7 +23,7 @@ Principal is built to add that market on top of such assets, as their issuers al
 
 You deposit the asset and receive SY, a standardized wrapper around it. You then split SY into PT and YT, both tied to one maturity date.
 
-- **PT is the principal.** At maturity, each PT pays one dollar's worth of the underlying asset. Before maturity it normally trades below one dollar, and buying it at that discount fixes your yield.
+- **PT is the principal.** At maturity, each PT pays one dollar's worth of the underlying asset, priced by the market's oracle at maturity. Before maturity it normally trades below one dollar, and buying it at that discount fixes your yield at that price. The oracle's price never goes down, so if the asset's market price ends lower, as it can for some of the Mainnet mock assets, the underlying you receive is worth less than one dollar per PT at that market price. [Risks](/guide/risks#oracle-risk) explains why.
 - **YT is the yield.** It collects what the asset earns from the moment you hold it until maturity, and you can claim it as it accrues, without waiting for maturity. At maturity it stops earning; you then redeem it for any yield it has not paid out yet.
 
 Before maturity, equal amounts of PT and YT can be recombined into SY. After maturity, each token is redeemed on its own.
