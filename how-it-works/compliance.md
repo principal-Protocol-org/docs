@@ -30,7 +30,7 @@ What counts as "your" check depends on who makes the call. In the app's Buy YT t
 
 Because both sides are checked, an account the issuer has revoked cannot move its PT or YT to another wallet before the issuer recovers them.
 
-The issuer's authority is required for the other kind of action: creating a market, changing its fees, and recovering a frozen account's positions. On Testnet that authority is a Principal-held key (the test USDY's asset-contract admin); the issuer account itself runs authorization and the allow-list. Market creation also needs the authorizations and allow-list entries a new market's contracts and treasury require; the wizard's permissions step lists them (see [Manage and create markets](/using-the-app/manage-markets)).
+The issuer's authority is required for the other kind of action: creating a market, changing its fees, and recovering a frozen account's positions. On Testnet that authority is a Principal-held key (the test USDY's asset-contract admin); the issuer account itself runs authorization and the allow-list. On Mainnet, Principal issued the mock assets, so their issuer authority is Principal's too, and the app does not offer market creation there. Market creation also needs the authorizations and allow-list entries a new market's contracts and treasury require; the wizard's permissions step lists them (see [Manage and create markets](/using-the-app/manage-markets)).
 
 ## SEP-8 regulated assets
 
@@ -46,13 +46,15 @@ The token's own compliance modules (transfer limits, country rules) run only whe
 
 ## The allow-list
 
-Every market also checks a second list, kept in the shared Permissioning contract. Only its admin can change it; on Testnet that admin is the test USDY's issuer account. It has an account-level list plus a list per token, so PT and YT can have different audiences.
+Every market also checks a second list, kept in the shared Permissioning contract. Only its admin can change it; on Testnet that admin is the test USDY's issuer account, and on Mainnet the protocol team holds it. It has an account-level list plus a list per token, so PT and YT can have different audiences.
 
 This check always runs: an account that is not on the list is refused. It can only narrow access: you need the issuer's authorization **and** a place on the list.
 
 Each token has its own entry, and an action needs only the entries of the tokens it moves to you: Buy YT needs the YT entry, LP only needs no PT entry (the PT dust stays in the pool), a two-sided add (you send PT) and every liquidity exit (it sends PT to you) need the PT entry, and Keep YT needs both.
 
 On Testnet, the app's "Get test tokens" action authorizes your account on the test USDY and adds it to the allow-list, for your account and for each market's PT and YT (see [Getting started](/using-the-app/)). The test USDY has authorization required, revocable and clawback enabled, so these controls are live.
+
+On Mainnet there is no "Get test tokens". You add a trustline to the market's asset yourself, with the **Add trustline** button on the market page, then ask the protocol team for access: they add your account to the allow-list, for your account and for the market's PT and YT, by hand. The market page's **Request access** card shows your address to send and what is still missing. The Mainnet mock assets have revocable authorization and clawback enabled, but do not require authorization: a trustline is authorized as soon as you add it.
 
 ## If your account is frozen
 

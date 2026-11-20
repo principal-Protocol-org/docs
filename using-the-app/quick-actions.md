@@ -13,7 +13,7 @@ The **Quick actions** button sits on the heading row of a market's Trade panel. 
 | Split USDY → PT + YT | "Split USDY into equal amounts of PT and YT." | 1 |
 | Recombine PT + YT | "Give back equal amounts of PT and YT for USDY or SY, before maturity." | 2 to USDY, 1 to SY |
 
-SY, PT and YT are explained in [Core concepts](/guide/core-concepts), and wrapping and splitting in [Tokenization](/how-it-works/).
+On Mainnet the entries name the market's own asset, such as **Deposit MOCKGILTS → SY**, and this page's USDY stands for it. SY, PT and YT are explained in [Core concepts](/guide/core-concepts), and wrapping and splitting in [Tokenization](/how-it-works/).
 
 ## Deposit
 

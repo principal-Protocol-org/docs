@@ -6,7 +6,7 @@ order: 1
 
 Principal is a yield-tokenization protocol for regulated real-world assets (RWAs) on Stellar. It takes an asset that earns a variable yield, such as a tokenized US Treasury note, and splits it into two tokens you can hold or trade separately: a **Principal Token (PT)** with a fixed return at maturity, and a **Yield Token (YT)** that collects the variable yield until then.
 
-Principal runs on Stellar Testnet today, with a test asset. Nothing you hold there has real value. [Supported assets](/guide/supported-assets) lists what is available.
+Principal runs on two Stellar networks. On Mainnet, its markets use mock assets that Principal issues for testing: each follows the price of a real asset and is not that asset. On Testnet, its market uses a test asset, and nothing you hold there has real value. [Supported assets](/guide/supported-assets) lists what is available on each.
 
 ## The problem
 
@@ -36,16 +36,16 @@ Each market has one pool, where PT trades against SY. YT trades through the same
 
 The assets Principal targets are regulated. Their issuer can decide which accounts may hold them, freeze them, or claw balances back, depending on the asset. Principal keeps no copy of the issuer's list: every SY, PT, YT and liquidity position checks the issuer's own authorization on the underlying asset, live, for the sender and for the receiver. If the issuer has not authorized your account for the asset, you cannot hold or trade its PT or YT either.
 
-Each market also checks a second allow-list, shared across markets, which only its admin can change. This check always runs: an account must be on it too, and an account that was never added is refused. It can only narrow access, never widen it. On Testnet, the test asset's issuer account runs it, and **Get test tokens** in the app adds your account.
+Each market also checks a second allow-list, shared across markets, which only its admin can change. This check always runs: an account must be on it too, and an account that was never added is refused. It can only narrow access, never widen it. On Testnet, the test asset's issuer account runs it, and **Get test tokens** in the app adds your account. On Mainnet, the protocol team runs it and adds accounts on request.
 
-The asset's issuer authority (the admin of its Stellar Asset Contract) creates each market on its asset and sets the market's fees; the app's **Manage** view, described in [Manage and create markets](/using-the-app/manage-markets), is where it does that. On Testnet that authority is Principal's admin key, a different account from the issuer account that runs the allow-list above. If the issuer freezes an account, that account's positions in Principal are frozen too, and the issuer's authority can recover them. [Compliance](/how-it-works/compliance) explains how this works, and [Risks](/guide/risks) what it means for you.
+The asset's issuer authority (the admin of its Stellar Asset Contract) creates each market on its asset and sets the market's fees; the app's **Manage** view, described in [Manage and create markets](/using-the-app/manage-markets), is where it does that. On Testnet that authority is Principal's admin key, a different account from the issuer account that runs the allow-list above. On Mainnet, Principal issues the mock assets, so it holds their issuer authority, and the app does not offer market creation there: the protocol team creates the markets it lists. If the issuer freezes an account, that account's positions in Principal are frozen too, and the issuer's authority can recover them. [Compliance](/how-it-works/compliance) explains how this works, and [Risks](/guide/risks) what it means for you.
 
 ## Who it is for
 
 - **Holders of a yield-bearing RWA, and treasuries,** who want a known return at a known date. They buy PT, or split their asset and sell the YT.
 - **Traders, vault managers and funds** who want exposure to future yield. They buy or sell YT.
-- **Liquidity providers** who put PT and SY in a market's pool. The app takes USDY or SY and adds them in one signature.
+- **Liquidity providers** who put PT and SY in a market's pool. The app takes the underlying asset or SY and adds them in one signature.
 
 [Strategies](/guide/strategies) walks through each of these with an example.
 
-**Next:** [Core concepts](/guide/core-concepts), then [Strategies](/guide/strategies). To try Principal on Testnet, go to [Getting started](/using-the-app/).
+**Next:** [Core concepts](/guide/core-concepts), then [Strategies](/guide/strategies). To try Principal, go to [Getting started](/using-the-app/).

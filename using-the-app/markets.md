@@ -9,9 +9,9 @@ order: 2
 
 ## The market list
 
-Markets are grouped by asset. On Testnet there is one asset, **USDY (test)**, noted "Test token issued by Principal for Stellar Testnet, not Ondo's USDY". Its row shows how many markets it has, their total liquidity and TVL, the best YT leverage and the best fixed APY among its live markets. Click the row to show or hide its markets; with a single asset it opens by itself.
+Markets are grouped by asset. On Testnet there is one asset, **USDY (test)**, noted "Test token issued by Principal for Stellar Testnet, not Ondo's USDY". On Mainnet there are five mock assets, one market each, and each row carries a note such as "Mock asset issued by Principal for testing. It follows the price of USDY and is not USDY." (see [Supported assets](/guide/supported-assets)). An asset's row shows how many markets it has, their total liquidity and TVL, the best YT leverage and the best fixed APY among its live markets. Click the row to show or hide its markets; with a single asset it opens by itself.
 
-Each market row shows its name, a status badge, the maturity date with the days left, and these columns:
+Each market row shows its name, a status badge, the maturity date with the days left, and these columns. Amounts are in the market's own asset: USDY on Testnet, as below, and the mock asset on Mainnet.
 
 | Column | What it shows |
 |---|---|
@@ -50,7 +50,7 @@ Under the chart, a card has three tabs.
 
 **Details** lists the market's facts in two groups. **Oracle & maturity**: the oracle rate, when the oracle was last updated, the maturity date, and the settlement rate once there is one. **Pool & fees**: PT and YT outstanding, the PT price at the pool's spot price, the pool's PT and SY reserves, and the tokenization fee, YT fee and swap fee. The swap fee "decreases to 0 at maturity". See [Fees](/how-it-works/fees) and [Oracle](/how-it-works/oracle).
 
-**Compliance** has two parts. **Underlying asset** shows the issuer's settings for USDY: authorization required, authorization revocable, clawback enabled, and its administrator. **Your account**, once your wallet is connected, checks whether you can use this market: your account exists, you have a trustline to USDY, the issuer has authorized it, and Principal's permissioning allows your account, and allows it to hold this market's PT and YT. Each check reads **OK**, **Action needed**, **Blocked** or **Unavailable**, with the fix. Where the fix is the faucet, a **Get test tokens** button opens the dialog described in [Getting started](/using-the-app/). See [Compliance](/how-it-works/compliance).
+**Compliance** has two parts. **Underlying asset** shows the issuer's settings for USDY: authorization required, authorization revocable, clawback enabled, and its administrator. **Your account**, once your wallet is connected, checks whether you can use this market: your account exists, you have a trustline to USDY, the issuer has authorized it, and Principal's permissioning allows your account, and allows it to hold this market's PT and YT. Each check reads **OK**, **Action needed**, **Blocked** or **Unavailable**, with the fix. On Testnet, where the fix is the faucet, a **Get test tokens** button opens the dialog described in [Getting started](/using-the-app/). On Mainnet there is no faucet: a missing trustline has an **Add trustline** button, and a **Request access** card under the checks shows your address and what is still missing, to send to the protocol team (see [Get access on Mainnet](/using-the-app/#get-access-on-mainnet)). See [Compliance](/how-it-works/compliance).
 
 **Safety** lists, one row each:
 
@@ -59,10 +59,10 @@ Under the chart, a card has three tabs.
 - **Oracle deviation cap**: the most the oracle rate may rise in one update. On the Testnet market it is 10%.
 - **Oracle primary source** and **Oracle fallback source**: the shortened id of the source that feeds the rate (a 32-byte identifier, not an account), and of the backup source, or "None". The Testnet market has one primary source and no fallback.
 - **Oracle last rejected update**: "None", or why the oracle refused its latest update, with the value it was offered and how long ago. The reasons read "Moved more than the cap", "Lower than the current value", "Not newer than the current value", "Outside the value bounds" or "Fallback tried to change the value". A refused update leaves the rate where it was.
-- **Circuit breaker, protocol-wide** and **Circuit breaker, USDY**: the room left in each, or "No limit (disabled)" when one is off.
+- **Circuit breaker, protocol-wide** and **Circuit breaker, USDY** (named after the market's asset): the room left in each, or "No limit (disabled)" when one is off.
 - **Your deposit cap**: the room left under your own cap, or "No cap (disabled)".
 
-On the Testnet market, the protocol-wide circuit breaker allows 10,000,000 USDY of deposits and mints in each window of about 24 hours, while the USDY breaker and the deposit cap are off, so those two rows read disabled. The card always shows the live values. See [Oracle](/how-it-works/oracle) for how the rate is kept safe, and [Safety controls](/technical/security).
+On the Testnet market, the protocol-wide circuit breaker allows 10,000,000 USDY of deposits and mints in each window of about 24 hours, while the USDY breaker and the deposit cap are off, so those two rows read disabled. On Mainnet the window slides: deposits count less as they age, so room frees up gradually instead of all at once. The card always shows the live values. See [Oracle](/how-it-works/oracle) for how the rate is kept safe, and [Safety controls](/technical/security).
 
 The Compliance and Safety tabs carry a small number: how many problems they report for you. A pause of any of the four, a stale oracle and a used-up limit each count. Zero means nothing needs your attention. Compliance shows its number once your wallet is connected.
 

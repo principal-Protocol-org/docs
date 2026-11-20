@@ -1,11 +1,11 @@
 ---
 title: Public dashboard
 sidebarTitle: Dashboard
-description: "Follow the Principal protocol's state and history on Testnet without a wallet, and check any figure against the contracts yourself."
+description: "Follow the Principal protocol's state and history on Mainnet or Testnet without a wallet, and check any figure against the contracts yourself."
 order: 9
 ---
 
-The public dashboard shows what Principal's contracts answer right now, and what has happened on them: the markets' totals, the oracle, the risk limits and pauses, the compliance tools, and every protocol event. It is part of the Testnet app, and anyone can open it.
+The public dashboard shows what Principal's contracts answer right now, and what has happened on them: the markets' totals, the oracle, the risk limits and pauses, the compliance tools, and every protocol event. It is part of the app on each network, Mainnet and Testnet, shows that network's contracts, and anyone can open it.
 
 You do not need a wallet. No dashboard page asks for one, reads one or signs anything, so you can follow the protocol without connecting.
 
@@ -19,14 +19,14 @@ To open it, click **Launch app** at the top of this site, then **Dashboard** in 
 
 The protocol at a glance.
 
-- **Protocol totals**: the **TVL**, which is the USDY held by every market's SY wrapper plus the USDY held by its RecoveryEscrow; the **TVL in USD**, the TVL times the oracle value; the number of **Markets**; and **Pool liquidity**, each pool's PT and SY valued at the pool price.
-- **Safety**: the **RiskControl capacity** left in the current window (or "No limit (disabled)"), the **Wrap-and-mint capacity** (half of it, because depositing USDY and minting PT and YT from it count against the same limit twice), the **Pauses** (or "None paused"), the **Oracle** (whether its value is fresh, and how long until operations block without an update), and the **Open alerts**.
+- **Protocol totals**: the **TVL**, which is the underlying asset held by every market's SY wrapper plus what its RecoveryEscrow holds (USDY on Testnet; on Mainnet, where the markets use five different assets, the sum is in underlying units); the **TVL in USD**, each market's TVL times its own oracle value, added up; the number of **Markets**; and **Pool liquidity**, each pool's PT and SY valued at the pool price.
+- **Safety**: the **RiskControl capacity** left in the current window (or "No limit (disabled)"), the **Wrap-and-mint capacity** (half of it, because depositing USDY and minting PT and YT from it count against the same limit twice), the **Pauses** (or "None paused"), the **Oracles** (how many are fresh, for example "1 of 1 fresh" on Testnet, naming any that are not, with an **Each oracle** link), and the **Open alerts**.
 - **Latest compliance events**: the five newest seizures and allow-list changes.
 - **Event index**: how far the history goes, explained in [Where the history comes from](#where-the-history-comes-from).
 
 ### Markets
 
-Every market in the registry, one row each: the PT and YT **Supply**, the pool's PT and SY **Reserves**, the **LP supply**, the **Liquidity**, the **TVL**, and the unclaimed **Protocol fees** and **Creator fees**. **Totals** over every market sit above the list.
+Every market the app lists, one row each: the PT and YT **Supply**, the pool's PT and SY **Reserves**, the **LP supply**, the **Liquidity**, the **TVL**, and the unclaimed **Protocol fees** and **Creator fees**. **Totals** over every market sit above the list.
 
 Open a market for its own page:
 
@@ -38,11 +38,13 @@ Open a market for its own page:
 
 ### Oracle
 
-The OracleAdapter that gives every market its reference value. See [The oracle](/how-it-works/oracle) for how it works.
+The OracleAdapters that give the markets their reference value: one per market on Mainnet, one for the Testnet market. See [The oracle](/how-it-works/oracle) for how it works.
 
+- **Oracles**: one row per oracle, with its asset, its **State**, the time until operations block (**Blocks in**) and its **Update path**. Click one to see it in detail in the panels below; the first is shown by default.
 - **Reference value**: the **Value**, its **Timestamp**, its **Freshness** and the **Time until operations block**. Both are counted on the network's ledger clock, not your computer's, so a wrong clock on your side does not change them.
 - **Policy**: **Max stale** (how old the value may be), **Deviation cap** (how far one update may move it) and **Value bounds**. On the Testnet market's oracle these are one hour, 1,000 bps (10%) and none.
 - **Sources**: who may set the value. Each source is a 32-byte id, the hash of a readable name.
+- **Feed**: the price feed the oracle reads, on the Mainnet oracles: the **Feed contract**, the **Asset key** it asks the feed for, the **Minimum interval between feed updates**, the **Feed price** (the feed's latest price, converted to the oracle's 7 decimals), the **Feed tick age**, and the **Stored value against feed**, how far the oracle's value is from the feed's price. An oracle with no feed set reads "No feed source set: updated by push only." The Testnet market's oracle has no feed in its code, so the panel says it is not supported.
 - **Update path**: whether the current value was pushed by the oracle's admin or read from a price feed. The Testnet market's oracle has no view for this, so the panel says it is not supported by this oracle's code; the update history still lists every value set.
 - **Last rejection**: the latest update the oracle refused, and why.
 - **Rejection history** and **Update history**: every refused and every accepted update, newest first, each with its transaction.
@@ -54,8 +56,8 @@ The OracleAdapter that gives every market its reference value. See [The oracle](
 
 RiskControl, the protocol's circuit breaker and pause switch. See [Risks](/guide/risks) for what they protect.
 
-- **Circuit breaker**: the **Limit** on deposits per window, the **Volume in this window** and what remains.
-- **Window**: when the current window started, how long it lasts, and its state.
+- **Circuit breaker**: the **Limit** on deposits per window, the **Volume in this window** (**Volume counted now** on Mainnet) and what remains.
+- **Window**: when the current window started, how long it lasts, and its state. On Testnet the window is fixed: it is open through a given ledger, then lapses, and the next deposit opens a new one. On Mainnet, which runs a newer version of the contracts, it slides, and its state reads "Sliding window of N ledgers: used volume decays as older deposits leave it", N being its length: room frees up gradually and the window never resets.
 - **Per-asset limits**: one limit per underlying asset, in the same window.
 - **Pauses**: whether RiskControl and each market's SY wrapper, manager and pool are paused. A paused contract refuses deposits and mints.
 - **Pausers**: the accounts allowed to pause, each checked live.
@@ -66,7 +68,7 @@ RiskControl, the protocol's circuit breaker and pause switch. See [Risks](/guide
 
 The tools behind Principal's compliance rules. See [Compliance](/how-it-works/compliance) for the full picture.
 
-- **Underlying asset**: who administers USDY on the network (**Administrator**), and what its issuer may do (**Authorization required**, **Authorization revocable**, **Clawback enabled**).
+- **Underlying asset**: for each market's asset (USDY on Testnet, the five mock assets on Mainnet), who administers it on the network (**Administrator**), and what its issuer may do (**Authorization required**, **Authorization revocable**, **Clawback enabled**).
 - **Permissioning**: how many times accounts were added to and removed from the allow-list.
 - **RecoveryEscrow records**: each seizure. The account, what was taken (SY shares, LP, PT and YT), what it was turned into, and the seizure and settlement transactions. When the network has archived a record, it is shown from the event index and marked **Archived**.
 - **Reconciliation**: the escrow's own record count compared with the seizures in the event index. They should match.
@@ -97,6 +99,8 @@ The command is a simulation: it signs nothing, sends nothing and needs no accoun
 ```bash
 stellar contract invoke --network testnet --id CDYGBFGO7KD446CDTGJ7M4OWUXC7UPBGPVM5CUWP2NSNX2CKK2TYYIPS --source-account GAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWHF --send=no -- get_reference_value
 ```
+
+That is the Testnet command. On Mainnet, the command gives the RPC endpoint and the network passphrase (`--rpc-url` and `--network-passphrase`) in place of `--network testnet`.
 
 The answer is the raw value as of the newest ledger. If the figure changed since the dashboard read it, the panel's **Ledger** says which ledger its own answer came from.
 

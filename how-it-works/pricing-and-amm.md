@@ -86,7 +86,7 @@ The call is guarded:
 - its size is bounded by the pool's SY reserve, because the PT sale cannot take the reserve below its minimum;
 - it needs a fresh oracle value, an open pool, and an account that passes the pool's [compliance checks](/how-it-works/compliance).
 
-The older `Router.swap_sy_for_yt` still exists in the contracts: it splits your own SY and sells the PT, so you must hold the full amount. The app does not use it on Testnet.
+The older `Router.swap_sy_for_yt` still exists in the contracts: it splits your own SY and sells the PT, so you must hold the full amount. The app does not use it, on either network.
 
 ## Selling YT: flash-redeem
 

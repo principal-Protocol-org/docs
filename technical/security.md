@@ -4,7 +4,7 @@ description: "The pause switches, the deposit circuit breaker, the oracle's poli
 order: 2
 ---
 
-This page lists the safety controls in Principal's contracts, who can use each one and what it stops, all enforced by the contracts deployed on Stellar Testnet.
+This page lists the safety controls in Principal's contracts, who can use each one and what it stops, all enforced by the contracts deployed on Stellar Testnet. Stellar Mainnet runs a newer version of the same contracts; where its controls differ, this page says so.
 
 ## Pause
 
@@ -24,7 +24,7 @@ This page lists the safety controls in Principal's contracts, who can use each o
 
 `RiskControl` limits how much underlying can be deposited within a window: a protocol-wide limit across all assets, and a limit per asset. A limit of `0` switches that limit off. A deposit or mint that would exceed either limit reverts (`CircuitBreakerTripped` or `AssetLimitTripped`) inside its own transaction.
 
-The window is counted in ledger sequence numbers, which advance by exactly one per ledger and, unlike a timestamp, cannot be nudged by a validator. The default is 17,280 ledgers, about 24 hours at roughly 5 seconds per ledger; the admin can change it and the limits, and each change emits an event.
+The window is counted in ledger sequence numbers, which advance by exactly one per ledger and, unlike a timestamp, cannot be nudged by a validator. The default is 17,280 ledgers, about 24 hours at roughly 5 seconds per ledger; the admin can change it and the limits, and each change emits an event. On Testnet the window is fixed: once it has run its length, the next counted deposit starts a new one from zero. On Mainnet it slides: the volume counted adds the previous window's volume, decaying to zero as the current window advances, so room frees up gradually and deposits made on both sides of a window's end cannot use the limit twice.
 
 `SYWrapper.deposit` and `PrincipalManager.mint` report to `RiskControl` themselves, so direct calls are limited like `Router` calls, and a one-step deposit-and-split counts at both. The one-call flows count the same way: the flash counts the full `sy_in` through the mint, not the net cost; the USDY flash counts its budget at the wrapper and `sy_in` at the manager; Keep YT counts its deposit and its mint; LP only in USDY and Buy PT in USDY count the deposit. Only registered contracts may report, so no outsider can use up the allowance. `SYWrapper` also caps what one address can have deposited, net of withdrawals; a cap of `0` means no cap.
 
@@ -44,6 +44,8 @@ The market page's **Safety** tab shows **Oracle deviation cap**, **Oracle primar
 A value is fresh when it is at most `max_stale_seconds` old by the ledger clock, a window the oracle owns and its admin can change; the contracts read it through `is_available()`. On this Testnet market it is 3,600 seconds (one hour), and the Safety tab shows "Fresh (updated within the last 1 hour)". Mint, recombine, claim yield, every swap, the flash Buy YT, Keep YT, single-sided liquidity, the one-call liquidity withdrawal to USDY, the first liquidity deposit, and the observation that freezes the YT yield index at maturity all require a fresh value, or revert with `OracleStale`. A stale feed pauses these operations but leaves exits open: unwrapping SY and a plain `remove_liquidity` never read the oracle, and once one fresh value has been taken at or after maturity (by `settle_all` or the first redemption), redemption and yield claims no longer need it. Until that first fresh value, PT and YT cannot be redeemed.
 
 On Testnet, the app's keeper pushes the value with the oracle's admin key.
+
+On Mainnet, an oracle can also read a SEP-40 price feed through `sync_from_feed`, which anyone may call. The feed's price, converted to 7 decimals, goes through the same checks as a pushed value, plus a minimum interval between two accepted feed updates (`feed_min_interval_seconds`, 300 seconds unless the admin sets another), and a bad feed price is refused and recorded, never reverted. The app's keeper calls it with a key that holds no role on the oracle. The Mainnet oracles record every rejection as a `ref_rej` event but keep only `oob`, `decrease`, `deviate` and `fb_value` in `last_rejection()`.
 
 ## Compliance recovery
 

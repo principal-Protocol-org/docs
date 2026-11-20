@@ -8,9 +8,9 @@ The **Trade** panel of a market page has three tabs: **PT**, **YT** and **LP**. 
 
 ## USDY or SY
 
-Every buy has a **Pay with** choice under **You pay**, and every sale a **Receive as** choice under **You receive (preview)**: **USDY**, the default, or **USDY** with an **SY** badge, its SY version.
+Every buy has a **Pay with** choice under **You pay**, and every sale a **Receive as** choice under **You receive (preview)**: **USDY**, the default, or **USDY** with an **SY** badge, its SY version. On Mainnet the choice names the market's own asset, such as **MOCKUSTRY**, and this page's USDY stands for it.
 
-The pool trades SY, so paying or receiving in USDY needs a conversion. On Testnet the app does it inside the trade: one call to the Router turns your USDY into SY, trades, and pays you in USDY, so every trade is one signature. The **Signatures** row of the details gives the count, and its info tip reads "This is one step, one signature: …" followed by what the step does.
+The pool trades SY, so paying or receiving in USDY needs a conversion. The app does it inside the trade, on both networks: one call to the Router turns your USDY into SY, trades, and pays you in USDY, so every trade is one signature. The **Signatures** row of the details gives the count, and its info tip reads "This is one step, one signature: …" followed by what the step does.
 
 | Action | In USDY | In SY |
 |---|---|---|

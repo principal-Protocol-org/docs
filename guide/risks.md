@@ -1,14 +1,18 @@
 ---
 title: Risks
-description: "What can go wrong when you use Principal: the contracts, the oracle, liquidity, YT decay, issuer controls, pauses and Testnet itself."
+description: "What can go wrong when you use Principal: the contracts, the oracle, liquidity, YT decay, issuer controls, pauses, and the test and mock assets of Testnet and Mainnet."
 order: 5
 ---
 
 Read this page before you use Principal. The controls that limit these risks are described in [Safety controls](/technical/security).
 
-## Testnet only
+## Testnet and Mainnet
 
-Principal runs on Stellar Testnet. Tokens there have no value. USDY (test) is a test asset issued by Principal, not by Ondo, and its dollar value comes from a test oracle that Principal's keeper raises on a schedule. The Testnet market is a test deployment: Principal can replace it with a new one.
+Principal runs on Stellar Testnet and on Stellar Mainnet, and on both its markets are for testing.
+
+On Testnet, tokens have no value. USDY (test) is a test asset issued by Principal, not by Ondo, and its dollar value comes from a test oracle that Principal's keeper raises on a schedule. The Testnet market is a test deployment: Principal can replace it with a new one.
+
+On Mainnet, the markets use mock assets that Principal issued for testing. Each one follows the price of a real asset through its market's oracle, and is not that asset. Network fees there are paid in real XLM. These markets can be replaced with new ones too.
 
 ## Smart-contract risk
 
@@ -16,14 +20,14 @@ Principal is a set of new Soroban contracts. They come with a large test suite, 
 
 ## Oracle risk
 
-Every market prices and settles with one reference rate, which the oracle's administrator pushes from a single key. Each update names a source: a primary one and, optionally, a fallback that may only refresh the timestamp. The oracle contract checks that:
+Every market prices and settles with one reference rate. On Testnet, the oracle's administrator pushes it from a single key. On Mainnet, each market's oracle can also take it from a price feed, a read anyone can trigger, so you rely on that feed's price as well. Each pushed update names a source: a primary one and, optionally, a fallback that may only refresh the timestamp. The oracle contract checks that:
 
 - the value never goes down;
 - each update carries a later timestamp than the one before, and none in the future;
 - a single update does not raise the value by more than a deviation cap (10% on this Testnet market), and, if set, stays within value bounds (none on this market);
 - a value counts as fresh for the oracle's own freshness window after its timestamp (one hour on this Testnet market, a setting rather than a constant).
 
-An update that fails one of these checks is refused and recorded, not reverted, and the **Safety** tab shows the last one. These checks cannot catch a value that is wrong but higher than the last one and within the cap. A settlement rate set too high pays PT holders fewer units of the underlying and YT holders more. And because the rate can never go down, the market cannot show a loss of value in the real asset.
+An update that fails one of these checks is refused and recorded, not reverted, and the **Safety** tab shows the last one. These checks cannot catch a value that is wrong but higher than the last one and within the cap. A settlement rate set too high pays PT holders fewer units of the underlying and YT holders more. And because the rate can never go down, the market cannot show a loss of value in the real asset. On Mainnet, where some mock assets follow prices that can fall, the oracle refuses a lower feed price and keeps its value, which can then go stale.
 
 If the oracle is not updated within its freshness window (one hour on this Testnet market), the market stops most actions until it is: splitting, recombining, trading, adding liquidity in the app, claiming yield, and the first redemption after maturity, which sets the settlement rate. The pool's own remove-liquidity call needs no oracle, but the app's withdraw before maturity does: it sells your PT, so it waits for a fresh price too. After maturity a withdraw needs none, and once the settlement rate is set, redemptions and claims no longer need the oracle.
 
@@ -49,11 +53,11 @@ The issuer's controls on the underlying asset reach every position in Principal.
 
 The issuer can then recover a frozen account's positions. SY is turned back into the underlying at once. An LP position is withdrawn: its SY part is turned into the underlying at once, and its PT part is held like other PT. PT and YT are held until maturity, then settled into the underlying. From there, the issuer can claw it back with the asset's own controls. Only accounts the issuer has already deauthorized can be targeted, and other holders are not affected.
 
-Each market also checks a shared allow-list, and every account must be on it. Only the list's admin can change it; on Testnet, that is the test asset's issuer account. If your account is removed from the list, the same actions are refused.
+Each market also checks a shared allow-list, and every account must be on it. Only the list's admin can change it; on Testnet, that is the test asset's issuer account, and on Mainnet, the protocol team. If your account is removed from the list, the same actions are refused.
 
 The issuer's authority (the asset contract's admin) also creates each market on its asset and sets its fees, up to fixed caps: 1% for the tokenization fee, 50% for the YT fee, 5% for the swap fee tier. A fee change takes effect at once, with no delay.
 
-On Testnet, the issuer of USDY (test) and the market's administrator are Principal's own test accounts: the issuer authority is Principal's admin key, and a separate issuer account runs the allow-list.
+On Testnet, the issuer of USDY (test) and the market's administrator are Principal's own test accounts: the issuer authority is Principal's admin key, and a separate issuer account runs the allow-list. On Mainnet, the mock assets' issuers and the markets' administrators are Principal's own keys too, held by the protocol team.
 
 ## Pauses and limits
 
@@ -61,10 +65,10 @@ The market's administrator can pause its contracts, and the manager contract (Pr
 
 A protocol-wide pause, set in the risk-control contract, stops every deposit and mint in every market. Its admin or any registered pauser can set it, and only the admin can lift it. In the app it stops Deposit and Split, buying PT paid in USDY, buying YT, and adding liquidity paid in USDY or with Keep YT. Adding liquidity paid in SY, sales, withdrawals, recombining, claims and redemption continue.
 
-A circuit breaker can limit total deposits over a window that resets on its own, across the protocol and per asset, and the wrapper can also cap each address's deposits. A deposit over a set limit fails. On the Testnet market these limits are currently off; the **Safety** tab on the market page shows the live values. The tab also shows whether the market is paused, including the manager pause, whether the oracle is fresh, and the oracle's deviation cap, sources and last rejected update.
+A circuit breaker can limit total deposits over a window, across the protocol and per asset (on Testnet the window resets on its own; on Mainnet it slides, so room frees up gradually as older deposits leave it), and the wrapper can also cap each address's deposits. A deposit over a set limit fails. On the Testnet market these limits are currently off; the **Safety** tab on the market page shows the live values. The tab also shows whether the market is paused, including the manager pause, whether the oracle is fresh, and the oracle's deviation cap, sources and last rejected update.
 
 ## The underlying asset
 
 PT and YT are claims on the underlying asset. If the asset loses value or its issuer fails, they lose value with it.
 
-**Next:** [Getting started](/using-the-app/), to try Principal on Testnet. See the controls in [Safety controls](/technical/security), and how the oracle and compliance work in [Oracle](/how-it-works/oracle) and [Compliance](/how-it-works/compliance).
+**Next:** [Getting started](/using-the-app/), to try Principal on Mainnet or Testnet. See the controls in [Safety controls](/technical/security), and how the oracle and compliance work in [Oracle](/how-it-works/oracle) and [Compliance](/how-it-works/compliance).

@@ -5,7 +5,7 @@ description: "The manager view and the seven-step wizard that creates a market: 
 order: 7
 ---
 
-The **Manage** view and the **New market** wizard are for the people who run a market, not for traders. Every action in them needs a role: the asset's issuer authority, the RiskControl or Router admin, or the Permissioning admin. The asset's issuer authority is the admin of the asset's Stellar Asset Contract, and the app calls it the "issuer". On Testnet Principal's own keys hold every one of these roles, so a reader cannot create a market today. This page shows what the issuer of a real asset does, and what you see if your wallet holds a role on a market.
+The **Manage** view and the **New market** wizard are for the people who run a market, not for traders. Every action in them needs a role: the asset's issuer authority, the RiskControl or Router admin, or the Permissioning admin. The asset's issuer authority is the admin of the asset's Stellar Asset Contract, and the app calls it the "issuer". On Testnet Principal's own keys hold every one of these roles, so a reader cannot create a market today. On Mainnet the app does not offer the wizard at all: the protocol team, which holds the mock assets' issuer keys, creates the markets the app lists. This page shows what the issuer of a real asset does, and what you see if your wallet holds a role on a market.
 
 ## Who sees what
 
@@ -26,7 +26,7 @@ Open **Manage** in the header. The page is headed "Manage" and says: "The market
 
 If your wallet holds no role, the list says "This wallet does not hold a role on any listed market. Roles are the asset issuer, the market creator, the protocol admin and the admin of a market's pool, SY wrapper or manager."
 
-If your wallet is an asset's issuer, a box reads "You are an asset's issuer, so you can create a market on it." with a **New market** button that opens the wizard.
+If your wallet is an asset's issuer, a box reads "You are an asset's issuer, so you can create a market on it." with a **New market** button that opens the wizard. On Mainnet there is no such box, no **Markets being created** list and no resume link, and the wizard's address shows a card instead: "New markets are created by the protocol team", with "On Mainnet a market needs the asset issuer's keys. Ask the protocol team to list a market." The rest of the manager view works as on Testnet.
 
 ### Market cards
 

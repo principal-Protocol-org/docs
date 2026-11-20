@@ -147,7 +147,8 @@ export default defineConfig({
     search: { provider: 'local' },
 
     footer: {
-      message: 'Principal runs on Stellar Testnet. Nothing in these docs is financial advice.',
+      message:
+        'Principal runs on Stellar Mainnet, with mock assets issued by Principal for testing, and on Stellar Testnet. Nothing in these docs is financial advice.',
       copyright: '© 2026 Principal Protocol',
     },
   },
