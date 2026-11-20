@@ -17,7 +17,7 @@ On Mainnet the entries name the market's own asset, such as **Deposit MOCKGILTS 
 
 ## Deposit
 
-The form is titled **Deposit**: "Wrap USDY into SY, the token the pool trades and PT + YT are minted from." Enter the **USDY to deposit**. The preview shows the **SY received**. A **Market (indicative)** block adds the **SY exchange rate** (USDY per SY), **Your deposit cap left**, and the room left in each circuit breaker that is on. On the Testnet market these limits are currently off, so the cap reads "No cap" and no circuit-breaker row shows; the **Safety** tab on the market page shows the live values. Click **Review Deposit**.
+The form is titled **Deposit**: "Wrap USDY into SY, the token the pool trades and PT + YT are minted from." Enter the **USDY to deposit**. The preview shows the **SY received**. A **Market (indicative)** block adds the **SY exchange rate** (USDY per SY), **Your deposit cap left**, and the room left in each circuit breaker that is on. On the Testnet market the protocol-wide breaker allows 10,000,000 USDY per window of about 24 hours, while the USDY breaker and the cap are off, so the cap reads "No cap" and only the **Circuit breaker, protocol-wide** row shows; the **Safety** tab on the market page shows the live values. Click **Review Deposit**.
 
 ## Withdraw
 

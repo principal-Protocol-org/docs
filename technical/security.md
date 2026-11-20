@@ -28,7 +28,7 @@ The window is counted in ledger sequence numbers, which advance by exactly one p
 
 `SYWrapper.deposit` and `PrincipalManager.mint` report to `RiskControl` themselves, so direct calls are limited like `Router` calls, and a one-step deposit-and-split counts at both. The one-call flows count the same way: the flash counts the full `sy_in` through the mint, not the net cost; the USDY flash counts its budget at the wrapper and `sy_in` at the manager; Keep YT counts its deposit and its mint; LP only in USDY and Buy PT in USDY count the deposit. Only registered contracts may report, so no outsider can use up the allowance. `SYWrapper` also caps what one address can have deposited, net of withdrawals; a cap of `0` means no cap.
 
-On the Testnet market these limits are currently off: both circuit-breaker limits and the per-address cap are set to `0`. The **Safety** tab on the market page shows the live values. The pause still applies.
+On the Testnet market the protocol-wide limit is 10,000,000 USDY per window of 17,280 ledgers (`get_cb_limit` returns `100000000000000`), while the per-asset limit and the per-address cap are set to `0`, so they are off. The **Safety** tab on the market page shows the live values. The pause still applies.
 
 ## Oracle policy and freshness
 

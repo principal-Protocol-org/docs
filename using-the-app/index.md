@@ -51,11 +51,11 @@ This USDY is a test token issued by Principal for Stellar Testnet, not Ondo's US
 
 ## Get access on Mainnet
 
-Mainnet has no faucet and no **Get test tokens**. A market's **Compliance** tab lists what your account still needs, and on Mainnet each fix is one of three:
+Mainnet has no faucet and no **Get test tokens**. A market's **Compliance** tab lists what your account still needs, and for a new account on Mainnet each fix is one of three:
 
 1. **XLM.** A new account does not exist on the network until it receives XLM, which also pays network fees and reserves. Send XLM to it from an exchange or another wallet, then reload.
 2. **A trustline to the market's asset.** Click **Add trustline** in the Compliance tab and sign the one transaction in Varial. Each market has its own asset, so each market needs its own trustline. The mock assets do not require the issuer's authorization: the trustline is authorized as soon as you add it.
-3. **Access from the protocol team.** The protocol team adds your account to Principal's allow-list, for your account and for the market's PT and YT, by hand. Under the checks, a **Request access** card shows your address, with a **Copy address** button, and what is still missing for this market. Send that address to the protocol team: the card says where, or reads "Ask the protocol team." while no contact is listed.
+3. **Access from the protocol team.** The protocol team adds your account to Principal's allow-list, for your account and for the market's PT and YT, by hand. Under the checks, a **Request access** card shows your address, with a **Copy address** button, and what is still missing for this market. Send that address to the protocol team: the card says where, or reads "Ask the protocol team." while no contact is listed. Ask the protocol team for the market's mock asset too.
 
 Each check turns **OK** once the network shows it. The Compliance tab explains each check; see [Markets and the market page](/using-the-app/markets).
 

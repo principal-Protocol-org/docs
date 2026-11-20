@@ -39,11 +39,11 @@ On Stellar Mainnet, Principal's markets use five assets that Principal issued fo
 
 Each asset has 7 decimals and one market, with its own oracle. Anyone can issue an asset with the same code on Stellar, so check the issuer above if your wallet shows more than one. The market page shows each market's maturity date with a countdown.
 
-Each market's oracle can read the real asset's price from a price feed on Stellar. [Oracle](/how-it-works/oracle) explains how, and why the oracle's value can differ from the feed's price for a while.
+Each market's oracle can be pointed at a price feed on Stellar that gives the real asset's price. An oracle without a feed is updated by its admin instead, and the dashboard's Oracle view shows no feed price for it. [Oracle](/how-it-works/oracle) explains how, and why the oracle's value can differ from the feed's price for a while.
 
 The mock assets keep the issuer controls a regulated asset has: their issuer can revoke an account's authorization and claw balances back, so Principal's compliance rules apply as they would on a real asset. They do not require authorization in advance: a trustline is authorized as soon as you add it. An account also needs a place on Principal's shared allow-list before it can hold SY, PT or YT, and on Mainnet the protocol team keeps that list.
 
-Mainnet has no **Get test tokens** and no faucet, and its network fees are paid in real XLM. To use a market, add a trustline to its asset (the market page has an **Add trustline** button), then ask the protocol team for access: the market page's **Request access** card shows your address to send and what is still missing. [Getting started](/using-the-app/) walks you through it. The app does not offer market creation on Mainnet: the protocol team creates the markets it lists.
+Mainnet has no **Get test tokens** and no faucet, and its network fees are paid in real XLM. To use a market, add a trustline to its asset (the market page has an **Add trustline** button), then ask the protocol team for access, and for the mock asset itself: the market page's **Request access** card shows your address to send and what is still missing. [Getting started](/using-the-app/) walks you through it. The app does not offer market creation on Mainnet: the protocol team creates the markets it lists.
 
 ## What the maturity date means
 
@@ -65,6 +65,6 @@ The Principal website lists two real assets as coming soon:
 | USDY | Ondo Finance | Coming soon |
 | BENJI | Franklin Templeton | Coming soon |
 
-Ondo's USDY, a tokenized note backed by US Treasuries, is the asset Principal targets first. It is not live on Principal yet: the Testnet market uses the test asset above, and the Mainnet market uses MOCKUSDY, which only follows its price. BENJI is listed, with no market yet.
+Ondo's USDY, a tokenized note backed by US Treasuries, is the asset Principal targets first. It is not live on Principal yet: the Testnet market uses the test asset above, and Mainnet's USDY-tracking market uses MOCKUSDY, which only follows its price. BENJI is listed, with no market yet.
 
 **Next:** [Risks](/guide/risks), what to know before you start. Then follow [Getting started](/using-the-app/) to connect a wallet and set up your account, or see the markets in [Markets](/using-the-app/markets).

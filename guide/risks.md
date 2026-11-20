@@ -20,7 +20,7 @@ Principal is a set of new Soroban contracts. They come with a large test suite, 
 
 ## Oracle risk
 
-Every market prices and settles with one reference rate. On Testnet, the oracle's administrator pushes it from a single key. On Mainnet, each market's oracle can also take it from a price feed, a read anyone can trigger, so you rely on that feed's price as well. Each pushed update names a source: a primary one and, optionally, a fallback that may only refresh the timestamp. The oracle contract checks that:
+Every market prices and settles with one reference rate. On Testnet, the oracle's administrator pushes it from a single key. On Mainnet, a market's oracle can also be pointed at a price feed, which anyone can then ask it to read, so where a feed is set you rely on that feed's price as well. Each pushed update names a source: a primary one and, optionally, a fallback that may only refresh the timestamp. The oracle contract checks that:
 
 - the value never goes down;
 - each update carries a later timestamp than the one before, and none in the future;
@@ -65,7 +65,7 @@ The market's administrator can pause its contracts, and the manager contract (Pr
 
 A protocol-wide pause, set in the risk-control contract, stops every deposit and mint in every market. Its admin or any registered pauser can set it, and only the admin can lift it. In the app it stops Deposit and Split, buying PT paid in USDY, buying YT, and adding liquidity paid in USDY or with Keep YT. Adding liquidity paid in SY, sales, withdrawals, recombining, claims and redemption continue.
 
-A circuit breaker can limit total deposits over a window, across the protocol and per asset (on Testnet the window resets on its own; on Mainnet it slides, so room frees up gradually as older deposits leave it), and the wrapper can also cap each address's deposits. A deposit over a set limit fails. On the Testnet market these limits are currently off; the **Safety** tab on the market page shows the live values. The tab also shows whether the market is paused, including the manager pause, whether the oracle is fresh, and the oracle's deviation cap, sources and last rejected update.
+A circuit breaker can limit total deposits over a window, across the protocol and per asset (on Testnet the window resets on its own; on Mainnet it slides: deposits in the current window count in full and the previous window's count less and less as the window advances, so room frees up gradually), and the wrapper can also cap each address's deposits. A deposit over a set limit fails. On the Testnet market the protocol-wide limit is 10,000,000 USDY per window of about 24 hours, while the per-asset limit and the per-address cap are off; the **Safety** tab on the market page shows the live values. The tab also shows whether the market is paused, including the manager pause, whether the oracle is fresh, and the oracle's deviation cap, sources and last rejected update.
 
 ## The underlying asset
 
