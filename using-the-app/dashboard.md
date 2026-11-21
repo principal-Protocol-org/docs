@@ -109,10 +109,10 @@ Every view except Activity, and each market's page, also has a **Copy evidence t
 ## Unavailable, Stale and Read across ledgers
 
 - **Unavailable** means the figure could not be read, and the dashboard does not guess. The reason is beside it. Its info button, then named for example "Why TVL is unavailable, and how to verify it", gives the command to try the read yourself. A total over several markets is Unavailable as soon as one market's figure is: the dashboard never shows a partial sum.
-- **Stale** means no new read has arrived for twice the refresh time, for example "Stale: no new read for over 30 s", while the last one still stands. This happens when your browser pauses a tab in the background. A refresh that fails does not leave the old value showing: the figure turns Unavailable, with the reason "the last refresh failed" and the error.
+- **Stale** means no new read has arrived for twice the refresh time, for example "Stale: no new read for over 30 s" for a live figure on Testnet, while the last one still stands. This happens when your browser pauses a tab in the background. A refresh that fails does not leave the old value showing: the figure turns Unavailable, with the reason "the last refresh failed" and the error.
 - **Read across ledgers** means a panel's figures were answered at different ledgers, for example "Read across ledgers 5720000–5720001". The network closes a ledger every few seconds and the dashboard reads several contracts at once, so their answers can come from neighboring ledgers. Each figure is still exact at its own ledger, which its info button shows.
 
-Each panel also says when it was read and how often it refreshes, for example "Ledger 5720001 · read 4s ago · Refreshes every 15 s". Live figures (the oracle, the risk limits, the pauses and a market's page) refresh every 15 seconds. Totals, the markets list and the history refresh every minute.
+Each panel also says when it was read and how often it refreshes, for example "Ledger 5720001 · read 4s ago · Refreshes every 15 s". Live figures (the oracle, the risk limits, the pauses and a market's page) refresh every 15 seconds on Testnet and every 60 seconds on Mainnet. Totals, the markets list and the history refresh every minute.
 
 ## Where the history comes from
 
