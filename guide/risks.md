@@ -25,11 +25,11 @@ Every market prices and settles with one reference rate. On Testnet, the oracle'
 - the value never goes down;
 - each update carries a later timestamp than the one before, and none in the future;
 - a single update does not raise the value by more than a deviation cap (10% on this Testnet market), and, if set, stays within value bounds (none on this market);
-- a value counts as fresh for the oracle's own freshness window after its timestamp (one hour on this Testnet market, a setting rather than a constant).
+- a value counts as fresh for the oracle's own freshness window after its timestamp (one hour on the Testnet market, 24 hours on Mainnet and 48 hours on MOCKGILTS: a setting, not a constant).
 
 An update that fails one of these checks is refused and recorded, not reverted, and the **Safety** tab shows the last one. These checks cannot catch a value that is wrong but higher than the last one and within the cap. A settlement rate set too high pays PT holders fewer units of the underlying and YT holders more. And because the rate can never go down, the market cannot show a loss of value in the real asset. On Mainnet, where some mock assets follow prices that can fall, the oracle refuses a lower feed price and keeps its value, which can then go stale.
 
-If the oracle is not updated within its freshness window (one hour on this Testnet market), the market stops most actions until it is: splitting, recombining, trading, adding liquidity in the app, claiming yield, and the first redemption after maturity, which sets the settlement rate. The pool's own remove-liquidity call needs no oracle, but the app's withdraw before maturity does: it sells your PT, so it waits for a fresh price too. After maturity a withdraw needs none, and once the settlement rate is set, redemptions and claims no longer need the oracle.
+If the oracle is not updated within its freshness window (one hour on Testnet, 24 or 48 hours on Mainnet), the market stops most actions until it is: splitting, recombining, trading, adding liquidity in the app, claiming yield, and the first redemption after maturity, which sets the settlement rate. The pool's own remove-liquidity call needs no oracle, but the app's withdraw before maturity does: it sells your PT, so it waits for a fresh price too. After maturity a withdraw needs none, and once the settlement rate is set, redemptions and claims no longer need the oracle.
 
 ## Liquidity and price impact
 
